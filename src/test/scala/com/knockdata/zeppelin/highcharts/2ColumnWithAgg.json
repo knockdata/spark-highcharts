@@ -3,143 +3,131 @@
     "data":[{
       "x":"divorced",
       "y":"entrepreneur",
-      "value":889.75
+      "value":-233
     },{
       "x":"married",
       "y":"admin.",
-      "value":1353.266917293233
+      "value":1492.939393939394
     },{
       "x":"divorced",
       "y":"technician",
-      "value":845.7865168539325
+      "value":2872.4285714285716
     },{
       "x":"divorced",
       "y":"self-employed",
-      "value":2572.0666666666666
+      "value":10924
     },{
       "x":"divorced",
       "y":"retired",
-      "value":1771.4651162790697
+      "value":2756.714285714286
     },{
       "x":"single",
       "y":"entrepreneur",
-      "value":2462.6
+      "value":-352
     },{
       "x":"single",
       "y":"technician",
-      "value":1329.686567164179
+      "value":1730.1612903225807
     },{
       "x":"single",
       "y":"self-employed",
-      "value":1089.2682926829268
+      "value":2043
     },{
       "x":"divorced",
       "y":"admin.",
-      "value":977.8115942028985
+      "value":1477.4444444444443
     },{
       "x":"married",
       "y":"management",
-      "value":1858.0825852782764
+      "value":1601.047619047619
     },{
       "x":"single",
       "y":"student",
-      "value":1689.162162162162
+      "value":2482.125
     },{
       "x":"married",
       "y":"unknown",
-      "value":1275.9333333333334
+      "value":920.5
     },{
       "x":"divorced",
       "y":"unemployed",
-      "value":842.9090909090909
+      "value":-249
     },{
       "x":"divorced",
       "y":"services",
-      "value":931.5645161290323
+      "value":867.75
     },{
       "x":"single",
       "y":"unemployed",
-      "value":1162.3548387096773
-    },{
-      "x":"divorced",
-      "y":"unknown",
-      "value":137
+      "value":321
     },{
       "x":"married",
       "y":"technician",
-      "value":1436.9197080291972
+      "value":1283.2608695652175
     },{
       "x":"single",
       "y":"blue-collar",
-      "value":1322.5402298850574
+      "value":733.5217391304348
     },{
       "x":"single",
       "y":"services",
-      "value":947.7226890756302
+      "value":555.2142857142857
     },{
       "x":"single",
       "y":"unknown",
-      "value":2664.285714285714
+      "value":1567
     },{
       "x":"married",
       "y":"student",
-      "value":468.3
-    },{
-      "x":"divorced",
-      "y":"housemaid",
-      "value":1166.2307692307693
-    },{
-      "x":"single",
-      "y":"housemaid",
-      "value":4695.333333333333
+      "value":260
     },{
       "x":"married",
       "y":"unemployed",
-      "value":1131.5866666666666
+      "value":1412.375
     },{
       "x":"single",
       "y":"retired",
-      "value":3425.6363636363635
+      "value":101
     },{
       "x":"married",
       "y":"services",
-      "value":1228.0254237288136
+      "value":1378.090909090909
     },{
       "x":"married",
       "y":"blue-collar",
-      "value":1064.3607503607504
+      "value":1219.0140845070423
     },{
       "x":"single",
       "y":"admin.",
-      "value":1111.4825174825176
+      "value":1552.75
     },{
       "x":"divorced",
       "y":"blue-collar",
-      "value":744.7974683544304
+      "value":895.9
     },{
       "x":"divorced",
       "y":"management",
-      "value":1432.3529411764705
+      "value":735.6363636363636
     },{
       "x":"married",
       "y":"housemaid",
-      "value":1759.4642857142858
+      "value":2536.090909090909
     },{
       "x":"single",
       "y":"management",
-      "value":1729.5290102389079
+      "value":1874.65625
     },{
       "x":"married",
       "y":"entrepreneur",
-      "value":1612.8257575757575
+      "value":1493
     },{
       "x":"married",
       "y":"self-employed",
-      "value":1350.9448818897638
+      "value":1440.1052631578948
     },{
       "x":"married",
       "y":"retired",
-      "value":2383.8579545454545
+      "value":1866
     }]
   }]
 }

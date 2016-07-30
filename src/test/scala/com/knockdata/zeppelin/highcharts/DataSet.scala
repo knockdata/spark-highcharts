@@ -107,7 +107,7 @@ object DataSet {
     }
     else {
       val bank = SparkEnv.sc.parallelize(
-        scala.io.Source.fromFile("src/test/resources/bank.csv").getLines().toSeq)
+        scala.io.Source.fromFile("src/test/resources/bankSample.csv").getLines().toSeq)
         .map{s => s.split(";")}.filter(s => s(0) != "\"age\"").map(
         s => Bank(s(0).toInt,
           s(1).replaceAll("\"", ""),
