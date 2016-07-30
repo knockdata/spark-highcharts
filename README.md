@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/knockdata/zeppelin-highcharts.svg?branch=master)](https://travis-ci.org/knockdata/zeppelin-highcharts)
+
 # Zeppelin Highcharts
 
 Highcharts support in Apache Zeppelin
