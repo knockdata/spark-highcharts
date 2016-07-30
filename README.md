@@ -1,46 +1,79 @@
-# zeppelin-highcharts
+# Zeppelin Highcharts
 
-Add Highcharts support into Apache Zeppelin
+Highcharts support in Apache Zeppelin
 
-The draft implementation has been finished. 
+**You need a valid license if you use Highcharts for commercial use**
 
-Now it is in verifing, wrapping up and cleaning the implemention.
-
-It will be open sourced after the basic work down.
-
-# Implemented Highchart demos
-
-In order to verify the implementation, create the same effect as on Highchart  demos.
-
-## Line Charts
-
-### Line Basic
-Implement the same with [highchart line basic demo](http://www.highcharts.com/demo/line-basic)
-![Line Basic](docs/LineBasic.png)
+Please contact [Highcharts](https://shop.highsoft.com/) for license related issues.
 
 
-## Area Charts
-###Area Basic
-Implement the same with [highchart area basic demo](http://www.highcharts.com/demo/area-basic)
-![Area Basic](docs/AreaBasic.png)
+## Get started
 
-## Column and Bar charts
-### Bar Basic
-Implement the same with [highchart bar basic demo](http://www.highcharts.com/demo/line-basic)
-![Bar Basic](docs/BarBasic.png)
+### Build the binary
 
+    git clone https://github.com/knockdata/zeppelin-highcharts.git
+    cd zeppelin-highcharts
+    mvn clean package -DskipTests
 
+### Add the binary to Zeppelin
 
-# Planed Features
+> Goto Zeppelin -> `Interpreters`
 
-* From scala to highcharts, Ongoing(Line Basic, Area Basic, Bar Basic working), wrap up, to be published
-* Spark frames/rdd -> highcharts
-* Dynamic update data
-* Animation 
-* Drill down 
-* Dynamic change chart type
-* Dashboard using highcharts
-* Theme support
+> Scroll down to find `spark`
 
-TODO
-double quote in json data
+> Click `Edit`
+ 
+![zeppelin-spark-interpreter-edit](docs/zeppelin-spark-interpreter-edit.png)
+
+> Scroll down to `Dependencies`
+
+> Edit the `artifact` with the correct jar file 
+
+> Click `Save`
+
+![zeppelin-spark-interpreter-edit](docs/zeppelin-spark-interpreter-add-jar.png)
+
+### Load Highcharts
+
+Paste the following code to a `Zeppelin` Paragraph and execute it 
+
+	%angular
+	<script type="text/javascript">
+	
+	$(function () {
+	
+	
+	$.getScript("http://code.highcharts.com/highcharts.js")
+	  .done(function( script, textStatus ) {
+	    console.log( "load http://code.highcharts.com/highcharts.js " + textStatus );
+	  })
+	  .fail(function(jqxhr, settings, exception ) {
+	     console.log("load http://code.highcharts.com/highcharts.js " + exception);
+	  });
+	 
+	
+	});
+	
+	</script>
+
+### Load the bank DataFrame 
+
+Just need execute `Zeppelin Tutorial NoteBook` 
+
+### Create your first chart with following code
+
+Paste the following code and execute it
+
+	%spark
+	import com.knockdata.zeppelin.highcharts._
+	import com.knockdata.zeppelin.highcharts.model._
+	
+	highcharts(bank)
+	  .series("x" -> "age", "y" -> avg(col("balance")))
+	  .orderBy(col("age")).plot()
+	  
+You will get the following graph
+
+![zeppelin-spark-basic-line-chart](docs/zeppelin-spark-basic-line-chart.png)
+
+[What Data to Render](docs/series.md)

@@ -9,6 +9,8 @@
 dist/*
 target/
 cache/*
+metastore_db
+
 lib_managed/
 src_managed/
 project/boot/

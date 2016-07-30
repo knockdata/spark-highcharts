@@ -24,6 +24,12 @@ import org.junit.Test
 class TestInit {
 
   @Test
+  def testInitBasic: Unit = {
+    Init.init("highcharts")
+  }
+
+
+  @Test
   def testInit: Unit = {
     Init.init()
   }

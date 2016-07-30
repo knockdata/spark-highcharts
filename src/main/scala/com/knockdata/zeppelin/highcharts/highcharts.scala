@@ -18,11 +18,19 @@
 package com.knockdata.zeppelin.highcharts
 
 import base.BaseModel
-import org.apache.spark.sql.DataFrame
+import org.apache.spark.sql.{DataFrame, Dataset, SQLContext}
 
 object highcharts {
   def apply(dataFrame: DataFrame): HighchartsHolder = {
     new HighchartsHolder((dataFrame))
+  }
+
+//  def apply(tableName: String)(implicit sqlContext: SQLContext): HighchartsHolder = {
+//    new HighchartsHolder(sqlContext.table(tableName))
+//  }
+
+  def apply(dataSet: Dataset): HighchartsHolder = {
+    new HighchartsHolder(dataSet.toDF())
   }
 
   def apply(dataFrame: DataFrame,

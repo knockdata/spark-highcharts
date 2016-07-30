@@ -91,8 +91,8 @@ class GenDemoMarkdown {
           append("")
           append("```scala")
           append("")
-          append("import com.rockiey.zeppelin.highcharts._")
-          append("import com.rockiey.zeppelin.highcharts.model._")
+          append("import com.knockdata.zeppelin.highcharts._")
+          append("import com.knockdata.zeppelin.highcharts.model._")
           append("")
 
         }

@@ -26,9 +26,6 @@ trait AbstractTestCase {
   val isDebug = java.lang.management.ManagementFactory.getRuntimeMXBean().
     getInputArguments().toString().indexOf("jdwp") >= 0
 
-  def println(msg: String): Unit = {
-    print
-  }
   def debug(msg: String) = {
     if (isDebug) {
       println(msg)

@@ -18,8 +18,8 @@ Then it drilldown to
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(DataSet.dfBank,
   List("name" -> "marital",
@@ -57,8 +57,8 @@ size(marital) + size(marital) * size(balance)
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 
 highcharts(DataSet.dfBank,
@@ -97,8 +97,8 @@ size(marital) + size(marital) * size(balance)
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 
 highcharts(DataSet.dfBank, "marital",

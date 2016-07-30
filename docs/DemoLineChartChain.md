@@ -15,8 +15,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank)
   .series("x" -> "age", "y" -> avg(col("balance")))
@@ -37,8 +37,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 
 highcharts(bank)
@@ -59,8 +59,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 
 highcharts(bank)
@@ -85,8 +85,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank).seriesCol("marital")
   .series("name" -> "age", "y" -> avg(col("balance")))
@@ -108,8 +108,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank).seriesCol("marital")
   .series("name" -> "age",
@@ -140,8 +140,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank).series("name" -> "job", "y" -> avg(col("balance")))
   .orderBy(col("job"))
@@ -168,8 +168,8 @@ linearGradient is not described in [Highcharts API](http://api.highcharts.com/hi
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 
 val options = new plotOptions.Area()
@@ -196,8 +196,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank).series("x" -> "age", "y" -> avg(col("balance")))
   .orderBy(col("age"))
@@ -208,8 +208,8 @@ highcharts(bank).series("x" -> "age", "y" -> avg(col("balance")))
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 TODO
 // TODO
@@ -228,8 +228,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 val yAxis = new YAxis("Average Balance").plotBands(
   Map("from" -> 0, "to" -> 1000, "color" -> "rgba(68, 170, 213, 0.1)",
@@ -268,8 +268,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(DataSet.dfSnowDepth).seriesCol("year")
   .series("x" -> "time", "y" -> "depth")

@@ -15,8 +15,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(
   bank,
@@ -40,8 +40,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 
 highcharts(
@@ -66,8 +66,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 
 highcharts(
@@ -96,8 +96,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank,
   "marital",
@@ -121,8 +121,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank,
   "marital",
@@ -154,8 +154,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank,
   List(
@@ -184,8 +184,8 @@ linearGradient is not described in [Highcharts API](http://api.highcharts.com/hi
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 
 val options = new plotOptions.Area()
@@ -215,8 +215,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(
   bank,
@@ -231,8 +231,8 @@ highcharts(
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 TODO
 // TODO
@@ -251,8 +251,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 val yAxis = new YAxis("Average Balance").plotBands(
   Map("from" -> 0, "to" -> 1000, "color" -> "rgba(68, 170, 213, 0.1)",
@@ -295,8 +295,8 @@ an line chart with
 
 ```scala
 
-import com.rockiey.zeppelin.highcharts._
-import com.rockiey.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(
   DataSet.dfSnowDepth,
