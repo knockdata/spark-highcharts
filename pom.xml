@@ -2,13 +2,37 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.knockdata</groupId>
   <artifactId>zeppelin-highcharts</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1</version>
   <inceptionYear>2016</inceptionYear>
+  <name>Zeppelin Highcharts POM</name>
+  <url>http://knockdata.com/</url>
+  <licenses>
+    <license>
+      <name>Apache 2.0 License</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:git@github.com:knockdata/zeppelin-highcharts.git</connection>
+    <url>scm:git:git@github.com:knockdata/zeppelin-highcharts</url>
+    <tag>HEAD</tag>
+  </scm>
+  <developers>
+    <developer>
+      <id>eyouyan</id>
+      <name>Rockie Yang</name>
+      <email>eyouyan@gmail.com</email>
+      <url>http://rockiey.com</url>
+    </developer>
+  </developers>
+
   <properties>
 
     <spark.version>1.6.1</spark.version>
     <scala.version>2.10.4</scala.version>
     <scala.binary.version>2.10</scala.binary.version>
+    <dependency.locations.enabled>false</dependency.locations.enabled>
     <!--<scala.version>2.11.8</scala.version>-->
     <!--<scala.binary.version>2.11</scala.binary.version>-->
 
@@ -36,16 +60,19 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-reflect</artifactId>
       <version>${scala.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-compiler</artifactId>
       <version>${scala.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.apache.spark</groupId>
@@ -74,7 +101,7 @@
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.17</version>
-      <scope>compile</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>net.liftweb</groupId>
@@ -85,6 +112,7 @@
       <groupId>org.skyscreamer</groupId>
       <artifactId>jsonassert</artifactId>
       <version>1.3.0</version>
+      <scope>test</scope>
     </dependency>
 
   </dependencies>
@@ -171,6 +199,32 @@
             <classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
           </classpathContainers>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

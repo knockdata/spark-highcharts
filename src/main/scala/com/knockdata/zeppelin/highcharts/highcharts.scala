@@ -28,10 +28,10 @@ object highcharts {
 //  def apply(tableName: String)(implicit sqlContext: SQLContext): HighchartsHolder = {
 //    new HighchartsHolder(sqlContext.table(tableName))
 //  }
-
-  def apply(dataSet: Dataset): HighchartsHolder = {
-    new HighchartsHolder(dataSet.toDF())
-  }
+//
+//  def apply(dataSet: Dataset): HighchartsHolder = {
+//    new HighchartsHolder(dataSet.toDF())
+//  }
 
   def apply(dataFrame: DataFrame,
             colDefs: List[(String, Any)],
