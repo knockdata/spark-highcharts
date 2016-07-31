@@ -165,6 +165,10 @@
           </systemProperties>
           <redirectTestOutputToFile>true</redirectTestOutputToFile>
           <reportFormat>plain</reportFormat>
+          <excludes>
+            <exclude>Demo*</exclude>
+            <exclude>*Highchart</exclude>
+          </excludes>
           <!--This enables to run integration test only-->
           <!--by skip unit test with-->
           <!--mvn verify -Dskip.surefire.tests-->

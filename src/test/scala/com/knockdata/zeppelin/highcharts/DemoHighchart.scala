@@ -21,7 +21,7 @@ import org.apache.spark.sql.Row
 import org.apache.spark.sql.functions._
 import org.junit.Test
 
-class TestHighchart extends AbstractTestCase{
+class DemoHighchart extends AbstractTestCase{
 
   def debug(result: List[(List[String], Array[String], Array[Row])]): Unit = {
     val msg = result.map{case (keys, cols, rows) => keys.mkString(",") + "\n" + rows.mkString("\n")}.mkString("\n")
