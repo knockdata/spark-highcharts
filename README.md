@@ -69,4 +69,4 @@ You will get the following graph
 
 [Select Data to Plot](docs/SelectDataToPlot.md)
 
-[Demos](doc/demos.md)
+[Demos](docs/demos.md)
