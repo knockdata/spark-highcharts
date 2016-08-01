@@ -131,12 +131,14 @@ class HighchartsHolder(dataFrame: DataFrame) {
       case buffer => buffer.toList
     }
 
-    _seriesCol match {
+    val chart = _seriesCol match {
       case None =>
-        convert(dataFrame, colDefs, drillsDefs:_*).plot()
+        convert(dataFrame, colDefs, drillsDefs:_*)
       case Some(seriesCol) =>
-        convert(dataFrame, seriesCol, colDefs, drillsDefs:_*).plot()
+        convert(dataFrame, seriesCol, colDefs, drillsDefs:_*)
     }
+
+    chart.options(optionsBuffer.toList:_*).plot()
   }
 
 

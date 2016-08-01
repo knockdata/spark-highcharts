@@ -18,10 +18,13 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank)
-  .series("x" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age")).plot()
-
+highcharts(
+  bank,
+  List(
+    "x" -> "age",
+    "y" -> avg(col("balance")),
+    "orderBy" -> col("age"))
+)
 ```
 
 ## Line Chart Basic, Explicitly Ascending Order
@@ -41,9 +44,13 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 
-highcharts(bank)
-  .series("x" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age").asc).plot()
+highcharts(
+  DataSet.dfBank,
+  List(
+    "x" -> "age",
+    "y" -> avg(col("balance")),
+    "orderBy" -> col("age").asc)
+)
 ```
 
 ## Line Chart Basic, Descending Order
@@ -63,11 +70,15 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 
-highcharts(bank)
-  .series("name" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age").desc)
-  .xAxis(new XAxis("age").typ("category"))
-  .plot()
+highcharts(
+  DataSet.dfBank,
+  List(
+    "name" -> "age",
+    "y" -> avg(col("balance")),
+    "orderBy" -> col("age").desc
+  ),
+  new XAxis("age").typ("category")
+)
 
 ```
 
@@ -88,10 +99,12 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank).seriesCol("marital")
-  .series("name" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age"))
-  .plot()
+highcharts(bank,
+  "marital",
+  List(
+    "name" -> "age",
+    "y" -> avg(col("balance")),
+    "orderBy" -> col("age")))
 ```
 
 ## Line Chart Multiple Series, With Options
@@ -111,20 +124,21 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank).seriesCol("marital")
-  .series("name" -> "age",
-    "y" -> avg(col("balance")))
-  .orderBy(col("age"))
-  .title(new Title("Marital Job Average Balance").x(-20))
-  .subtitle(new Subtitle("Source: Zeppelin Tutorial").x(-20))
-  .xAxis(new XAxis("Age").typ("category"))
-  .yAxis(new YAxis("Balance(¥)").plotLines(
-    Map("value" -> 0, "width" -> 1, "color" -> "#808080")))
-  .tooltip(new Tooltip().valueSuffix("¥"))
-  .legend(new Legend().layout("vertical").align("right")
-    .verticalAlign("middle").borderWidth(0))
-  .plot()
-
+highcharts(bank,
+  "marital",
+  List(
+    "name" -> "age",
+    "y" -> avg(col("balance")),
+    "orderBy" -> col("age")),
+  new Title("Marital Job Average Balance").x(-20),
+  new Subtitle("Source: Zeppelin Tutorial").x(-20),
+  new XAxis("Age").typ("category"),
+  new YAxis("Balance(¥)").plotLines(
+    Map("value"->0, "width"->1, "color"->"#808080")),
+  new Tooltip().valueSuffix("¥"),
+  new Legend().layout("vertical").align("right")
+    .verticalAlign("middle").borderWidth(0)
+)
 ```
 
 ## Line Chart, With Data Labels
@@ -143,12 +157,14 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank).series("name" -> "job", "y" -> avg(col("balance")))
-  .orderBy(col("job"))
-  .plotOptions(new plotOptions.Line()
-    .dataLabels("enabled" -> true, "format" -> "{point.y:.2f}"))
-  .tooltip(new Tooltip().valueDecimals(2)).plot()
-
+highcharts(bank,
+  List(
+    "name" -> "job",
+    "y" -> avg(col("balance")),
+    "orderBy" -> col("job")),
+  new plotOptions.Line().dataLabels("enabled" -> true, "format" -> "{point.y:.2f}"),
+  new Tooltip().valueDecimals(2)
+)
 ```
 
 ## Line Chart Zoomable
@@ -173,14 +189,17 @@ import com.knockdata.zeppelin.highcharts.model._
 
 
 val options = new plotOptions.Area()
-  .fillColorLinearGradient("x1" -> 0, "y1" -> 0, "x2" -> 0, "y2" -> 1)
+  .fillColorLinearGradient("x1"->0,"y1"->0, "x2"->0, "y2"->1)
   .fillColorStops((0, "Highcharts.getOptions().colors[0]"),
       (1, "Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')"))
 
-highcharts(bank).series("name" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age"))
-  .chart(new Chart("area").zoomType("x"))
-  .plotOptions(options).plot()
+highcharts(bank,
+  List(
+    "name" -> "age",
+    "y" -> avg(col("balance")),
+    "orderBy" -> col("age")),
+  new Chart("area").zoomType("x"), options
+)
 ```
 
 ## Spline Inverted
@@ -199,10 +218,14 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank).series("x" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age"))
-  .chart(new Chart("spline").inverted(true))
-  .plot()
+highcharts(
+  bank,
+  List(
+    "x" -> "age",
+    "y" -> avg(col("balance")),
+    "orderBy" -> col("age")),
+  new Chart("spline").inverted(true)
+)
 ```
 
 
@@ -249,10 +272,14 @@ val yAxis = new YAxis("Average Balance").plotBands(
     )
   )
 )
-highcharts(bank).series("x" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age"))
-  .yAxis(yAxis)
-  .plot()
+highcharts(
+  bank,
+  List(
+    "x" -> "age",
+    "y" -> avg(col("balance")),
+    "orderBy" -> col("age")),
+  yAxis
+)
 ```
 
 ## Time Data With Irregular Intervals
@@ -271,16 +298,18 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(DataSet.dfSnowDepth).seriesCol("year")
-  .series("x" -> "time", "y" -> "depth")
-  .chart(new Chart("spline"))
-  .title(new Title("Snow depth at Vikjafjellet, Norway"))
-  .subtitle(new Subtitle("Irregular time data in Highcharts JS"))
-  .xAxis(new XAxis("Date").typ("datetime").dateTimeLabelFormats(
-    "month" -> "%e. %b", "year" -> "%b"))
-  .yAxis(new YAxis("Snow depth (m)").min(0))
-  .tooltip(new Tooltip().headerFormat("<b>{series.name}</b><br>").pointFormat(
-    "{point.x:%e. %b}: {point.y:.2f} m"))
-  .plotOptions(new plotOptions.Spline().marker("enabled" -> true))
-  .plot()
+highcharts(
+  DataSet.dfSnowDepth,
+  "year",
+  List("x" -> "time", "y" -> "depth"),
+  new Chart("spline"),
+  new Title("Snow depth at Vikjafjellet, Norway"),
+  new Subtitle("Irregular time data in Highcharts JS"),
+  new XAxis("Date").typ("datetime").dateTimeLabelFormats(
+    "month"->"%e. %b", "year"->"%b"),
+  new YAxis("Snow depth (m)").min(0),
+  new Tooltip().headerFormat("<b>{series.name}</b><br>").pointFormat(
+    "{point.x:%e. %b}: {point.y:.2f} m"),
+  new plotOptions.Spline().marker("enabled" -> true)
+)
 ```

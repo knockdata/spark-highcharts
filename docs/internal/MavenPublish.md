@@ -8,3 +8,6 @@ mvn clean deploy
 mvn versions:set -DnewVersion=1.2.3
 
 mvn deploy -P release
+
+mvn release:prepare
+mvn release:perform
