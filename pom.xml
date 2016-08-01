@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.knockdata</groupId>
   <artifactId>zeppelin-highcharts</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.2</version>
   <inceptionYear>2016</inceptionYear>
   <name>Zeppelin Highcharts POM</name>
   <description>Provide Highcharts Support in Zeppelin</description>
@@ -17,7 +17,7 @@
   <scm>
     <connection>scm:git:git@github.com:knockdata/zeppelin-highcharts.git</connection>
     <url>scm:git:git@github.com:knockdata/zeppelin-highcharts</url>
-    <tag>HEAD</tag>
+    <tag>zeppelin-highcharts-0.1</tag>
   </scm>
   <developers>
     <developer>
@@ -194,7 +194,7 @@
         <version>3.2.2</version>
         <executions>
           <execution>
-            <id>eclipse-add-source</id>
+            <phase>compile</phase>
             <goals>
               <goal>add-source</goal>
             </goals>
@@ -280,6 +280,32 @@
             <classpathContainer>ch.epfl.lamp.sdt.launching.SCALA_CONTAINER</classpathContainer>
           </classpathContainers>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.0.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9.1</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>
