@@ -45,14 +45,13 @@ class DemoDrillDown {
   // * y axis aggregated the average balance
   @Test
   def demoDrilldownBasic: Unit = {
-    highcharts(DataSet.dfBank,
-      List("name" -> "marital",
-        "y" -> avg(col("balance"))),
-      List("name" -> "job",
-        "y" -> avg(col("balance"))),
-      new Chart("column")
-    )
-
+    highcharts(bank)
+      .series("name" -> "marital",
+        "y" -> avg(col("balance")))
+      .drilldown("name" -> "job",
+        "y" -> avg(col("balance")))
+      .chart(Chart("column"))
+      .plot()
   }
 
   // ## Drilldown 2 Levels
@@ -81,17 +80,16 @@ class DemoDrillDown {
   @Test
   def demoDrilldown2Level: Unit = {
 
-    highcharts(DataSet.dfBank,
-      List("name" -> "marital",
-        "y" -> avg(col("balance")),
-        "chart.type" -> "bar"),
-      List("name" -> "job",
-        "y" -> avg(col("balance"))),
-      List("name" -> "education",
-        "y" -> max(col("balance")),
-        "chart.type" -> "bar"),
-      new Chart("column")
-    )
+    highcharts(bank)
+      .series("name" -> "marital",
+        "y" -> avg(col("balance")))
+      .drilldown("name" -> "job",
+        "y" -> avg(col("balance")))
+      .drilldown("name" -> "education",
+        "y" -> max(col("balance")))
+      .chart(Chart("column"))
+      .plot()
+
 
   }
 
@@ -117,12 +115,13 @@ class DemoDrillDown {
   @Test
   def demoLineBasicDesc: Unit = {
 
-    highcharts(DataSet.dfBank, "marital",
-      List("name" -> "job",
-        "y" -> avg(col("balance"))),
-      List("name" -> "education",
-        "y" -> avg(col("balance"))))
-
+    highcharts(bank)
+      .seriesCol("marital")
+      .series("name" -> "job",
+        "y" -> avg(col("balance")))
+      .drilldown("name" -> "education",
+        "y" -> avg(col("balance")))
+      .plot()
   }
 
 }

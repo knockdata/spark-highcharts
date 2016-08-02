@@ -37,20 +37,24 @@ Paste the following code to a `Zeppelin` Paragraph and execute it
 	<script type="text/javascript">
 
 		$(function () {
-			$.getScript("http://code.highcharts.com/highcharts.js")
-			  .done(function( script, textStatus ) {
-			    console.log( "load http://code.highcharts.com/highcharts.js " + textStatus );
-			  })
-			  .fail(function(jqxhr, settings, exception ) {
-			     console.log("load http://code.highcharts.com/highcharts.js " + exception);
-			  });
+			if (Highcharts == null) {
+				$.getScript("http://code.highcharts.com/highcharts.js")
+				  .done(function( script, textStatus ) {
+				    console.log( "load http://code.highcharts.com/highcharts.js " + textStatus );
+				  })
+				  .fail(function(jqxhr, settings, exception ) {
+				     console.log("load http://code.highcharts.com/highcharts.js " + exception);
+				  });
+			} else {
+			    console.log("highcharts already loaded");
+			}
 		});
 	</script>
 
 ### Load the bank DataFrame
 
 Just need execute `Zeppelin Tutorial NoteBook`
-
+(
 ### Create your first chart with following code
 
 Paste the following code and execute it
@@ -69,4 +73,8 @@ You will get the following graph
 
 [Select Data to Plot](docs/SelectDataToPlot.md)
 
-[Demos](docs/demos.md)
+[Chart Options](docs/ChartOptions.md)
+
+[Demos](docs/Demos.md)
+
+[Type Mapping between Scala and Highcharts](docs/TypeMapping.md)

@@ -53,3 +53,7 @@ class Subtitle(text: String = "") extends BaseModel with PublicApply{
     append("y", value)
   }
 }
+
+object Subtitle {
+  def apply(text: String): Subtitle = new Subtitle(text)
+}

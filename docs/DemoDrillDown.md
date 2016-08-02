@@ -21,14 +21,13 @@ Then it drilldown to
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(DataSet.dfBank,
-  List("name" -> "marital",
-    "y" -> avg(col("balance"))),
-  List("name" -> "job",
-    "y" -> avg(col("balance"))),
-  new Chart("column")
-)
-
+highcharts(bank)
+  .series("name" -> "marital",
+    "y" -> avg(col("balance")))
+  .drilldown("name" -> "job",
+    "y" -> avg(col("balance")))
+  .chart(Chart("column"))
+  .plot()
 ```
 
 ## Drilldown 2 Levels
@@ -61,17 +60,16 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 
-highcharts(DataSet.dfBank,
-  List("name" -> "marital",
-    "y" -> avg(col("balance")),
-    "chart.type" -> "bar"),
-  List("name" -> "job",
-    "y" -> avg(col("balance"))),
-  List("name" -> "education",
-    "y" -> max(col("balance")),
-    "chart.type" -> "bar"),
-  new Chart("column")
-)
+highcharts(bank)
+  .series("name" -> "marital",
+    "y" -> avg(col("balance")))
+  .drilldown("name" -> "job",
+    "y" -> avg(col("balance")))
+  .drilldown("name" -> "education",
+    "y" -> max(col("balance")))
+  .chart(Chart("column"))
+  .plot()
+
 
 ```
 
@@ -101,10 +99,11 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 
-highcharts(DataSet.dfBank, "marital",
-  List("name" -> "job",
-    "y" -> avg(col("balance"))),
-  List("name" -> "education",
-    "y" -> avg(col("balance"))))
-
+highcharts(bank)
+  .seriesCol("marital")
+  .series("name" -> "job",
+    "y" -> avg(col("balance")))
+  .drilldown("name" -> "education",
+    "y" -> avg(col("balance")))
+  .plot()
 ```

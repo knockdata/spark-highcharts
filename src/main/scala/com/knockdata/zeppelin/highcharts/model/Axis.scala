@@ -308,4 +308,13 @@ class YAxis(text: String = "") extends Axis(text) {
   }
 }
 
+object XAxis {
+  def apply(text: String): XAxis = new XAxis(text)
+}
+
+object YAxis {
+  def apply(text: String): YAxis = new YAxis(text)
+}
+
+
 

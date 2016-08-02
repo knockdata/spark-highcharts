@@ -177,6 +177,7 @@ class DemoLineChart {
       .fillColorStops((0, "Highcharts.getOptions().colors[0]"),
           (1, "Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')"))
 
+
     highcharts(bank).series("name" -> "age", "y" -> avg(col("balance")))
       .orderBy(col("age"))
       .chart(new Chart("area").zoomType("x"))

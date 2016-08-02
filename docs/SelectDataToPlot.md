@@ -66,3 +66,18 @@ orderBy by default is using ascencding order.  Add desc to make the data in desc
 	highcharts(bank)
 	  .series("x" -> "age", "y" -> avg(col("balance")))
 	  .orderBy(col("age").desc).plot()
+
+## Series and Drilldown
+
+`series` is used for top level chart. `drilldown` is used to define dive in level
+
+## seriesCol
+
+Multiple series will be plotted if seriesCol is provided. 
+
+In the following example 3 series will be plotted. Since there are 3 distinct value for column `marital` which are `married`, `single` and `devorced`. 
+
+	highcharts(bank)
+	  .seriesCol("marital")
+	  .series("x" -> "age", "y" -> avg(col("balance")))
+	  .orderBy(col("age").desc).plot()

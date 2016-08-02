@@ -40,3 +40,7 @@ class Credits(text: String) extends BaseModel with PublicApply{
     append("style", values.toMap)
   }
 }
+
+object Credits {
+  def apply(text: String): Credits = new Credits(text)
+}

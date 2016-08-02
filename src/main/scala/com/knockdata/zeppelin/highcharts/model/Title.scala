@@ -62,3 +62,7 @@ class Title(text: String = "") extends BaseModel {
     append("y", value)
   }
 }
+
+object Title {
+  def title(text: String): Title = new Title()
+}
