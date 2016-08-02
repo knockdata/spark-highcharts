@@ -75,7 +75,7 @@ You will get the following graph
 
 [Chart Options](docs/ChartOptions.md)
 
-[Demos](docs/Demos.md)
+[Demos](docs/demos.md)
 
 [Type Mapping between Scala and Highcharts](docs/TypeMapping.md)
 
