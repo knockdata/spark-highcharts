@@ -78,3 +78,5 @@ You will get the following graph
 [Demos](docs/Demos.md)
 
 [Type Mapping between Scala and Highcharts](docs/TypeMapping.md)
+
+[Scaladocs](https://knockdata.github.io/zeppelin-highcharts/docs/scaladocs)
