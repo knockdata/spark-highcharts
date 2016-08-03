@@ -17,11 +17,10 @@
 
 package com.knockdata.zeppelin.highcharts
 
-import base.BaseModel
-import org.apache.spark.sql.{DataFrame, Dataset, SQLContext}
+import org.apache.spark.sql.DataFrame
 
 object highcharts {
   def apply(dataFrame: DataFrame): HighchartsHolder = {
-    new HighchartsHolder((dataFrame))
+    new HighchartsHolder(dataFrame)
   }
 }

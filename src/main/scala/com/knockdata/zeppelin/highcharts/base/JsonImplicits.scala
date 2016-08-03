@@ -4,6 +4,8 @@ import com.knockdata.zeppelin.highcharts.model._
 
 import net.liftweb.json.JsonAST._
 
+import scala.language.implicitConversions
+
 /**
   * Created by Rockie Yang on 2016/06/01.
   */
@@ -38,7 +40,7 @@ object JsonImplicits {
         throw new Exception("it should not arrive here, BaseModel need be enhanced to support more fieldValue")
       case v: List[_] =>
         listToJArray(v)
-      case v: Map[String,_] =>
+      case v: Map[String @unchecked, _] =>
         mapToJObject(v)
       case x: Any =>
         JString(x.toString)
@@ -61,7 +63,7 @@ object JsonImplicits {
       case v: List[_] =>
         listToJArray(v)
 
-      case v: Map[String, _] =>
+      case v: Map[String @unchecked, _] =>
         mapToJObject(v)
       case null =>
         JNull
@@ -91,7 +93,7 @@ object JsonImplicits {
             toJValue(v.head)
           else
             listToJArray(v.toList)
-        case v: Map[String, _] =>
+        case v: Map[String @unchecked, _] =>
           mapToJObject(v)
         case v: Array[_] =>
           listToJArray(v.toList)
