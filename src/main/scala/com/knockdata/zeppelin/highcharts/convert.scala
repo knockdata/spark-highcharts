@@ -339,32 +339,29 @@ object convert {
     else {
       val orderByDefs: List[Column] = optionDefs.collect { case ("orderBy", column: Column) => column }
 
-      val nameCols = colNameDefs.map(_._2)
-
-      val dfSelected = rootDataFrame.selectExpr(nameCols: _*)
-
       val dfOrdered =
         if (orderByDefs.isEmpty) {
-          dfSelected
+          rootDataFrame
         } else {
-          dfSelected.orderBy(orderByDefs: _*)
+          rootDataFrame.orderBy(orderByDefs: _*)
         }
 
-      val colAggNull = colAggDefs.map {
+      val (categoryFieldName, categoryCol) = colNameDefs.head
+
+      val rows = dfOrdered.selectExpr(categoryCol).distinct.collect.toList
+
+
+      val nulls: Map[String, Any] = (colNameDefs.tail ++ colAggDefs).map {
         case (jsonFieldName, column) =>
           jsonFieldName -> null
       }.toMap
 
-      val rows = dfOrdered.distinct.collect.toList
 
-      val colNameMap = colNameDefs.toMap
       rows.map {
         row =>
-          val key = colNameMap.map {
-            case (jsonFieldName, columnName) =>
-              jsonFieldName -> row.getAs[Any](columnName)
-          }
-          (key.mkString(","), key ++ colAggNull)
+          val category = row.get(0)
+          val defaultValues = nulls.updated(categoryFieldName, category)
+          category.toString -> defaultValues
       }
     }
   }
@@ -440,11 +437,8 @@ object convert {
     val colNameMap = colNameDefs.toMap
     data.rows.map {
       case row =>
-        val key = colNameMap.map {
-          case (jsonFieldName, nameCol) =>
-            jsonFieldName -> row.getAs[Any](nameCol)
-        }
-        (key.mkString(","), row)
+        val category = row.get(0).toString
+        (category, row)
     }.toMap
   }
 
