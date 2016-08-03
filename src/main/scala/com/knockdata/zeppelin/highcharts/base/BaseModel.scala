@@ -17,8 +17,8 @@
 
 package com.knockdata.zeppelin.highcharts.base
 
+import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
-import com.knockdata.zeppelin.highcharts.util
 
 import net.liftweb.json.JsonAST.{JField, JObject, render}
 import net.liftweb.json._
@@ -126,7 +126,7 @@ abstract class BaseModel extends IModel {
     */
   override protected def append(field: JField): this.type = {
     if (fieldsNames.contains(field.name)) {
-      println("something is strange");
+      println("something is strange")
     }
     fields += field
     fieldsNames += field.name
@@ -161,7 +161,7 @@ abstract class BaseModel extends IModel {
         val placeholder = placeholdCode(code)
         subFields(fieldName) = (subFieldName, (t1, placeholder)) :: prev
       case v: List[Any] =>
-        val vs = v.map{
+        val vs = v.map {
           case (k, code: Code) =>
             val placeholder = placeholdCode(code)
             (k, placeholder)
@@ -181,17 +181,8 @@ abstract class BaseModel extends IModel {
     this
   }
 
-  protected def appendCode(fieldName: String, code: Code): this.type = {
-    val codeMD5 = util.md5(code.code)
-    val placeholder = s"--$fieldName-$codeMD5--"
-
-    codes += placeholder -> code.code
-
-    append(fieldName, placeholder)
-  }
-
   protected def placeholdCode(code: String): String = {
-    val codeMD5 = util.md5(code)
+    val codeMD5 = md5(code)
     val placeholder = s"--code-$codeMD5--"
 
     codes += placeholder -> code
@@ -201,19 +192,6 @@ abstract class BaseModel extends IModel {
 
   protected def placeholdCode(code: Code): String = {
     placeholdCode(code.code)
-  }
-
-  protected def appendCode(fieldName: String, subFieldName: String, code: String): this.type = {
-    val codeMD5 = util.md5(code)
-    val placeholder = s"--$fieldName-$subFieldName-$codeMD5--"
-
-    codes += placeholder -> code
-
-    append(fieldName, subFieldName, placeholder)
-  }
-
-  protected def appendCode(fieldName: String, subFieldName: String, code: Code): this.type = {
-    appendCode(fieldName, subFieldName, code.code)
   }
 
   lazy val replaced: String = {

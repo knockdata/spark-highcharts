@@ -17,8 +17,8 @@
 
 package com.knockdata.zeppelin.highcharts.demo
 
-import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model.Chart
 
 import org.apache.spark.sql.functions._
 import org.junit.Test
@@ -50,7 +50,7 @@ class DemoDrillDown {
         "y" -> avg(col("balance")))
       .drilldown("name" -> "job",
         "y" -> avg(col("balance")))
-      .chart(Chart("column"))
+      .chart(Chart.column)
       .plot()
   }
 
@@ -87,7 +87,7 @@ class DemoDrillDown {
         "y" -> avg(col("balance")))
       .drilldown("name" -> "education",
         "y" -> max(col("balance")))
-      .chart(Chart("column"))
+      .chart(Chart.column)
       .plot()
 
 
