@@ -18,8 +18,10 @@
 package com.knockdata.zeppelin.highcharts
 
 import org.apache.spark.sql.DataFrame
+
 import model._
 
+import scala.language.implicitConversions
 
 object Implicits {
   implicit def dataFrameNoDrilldown2Highcharts(defs:
