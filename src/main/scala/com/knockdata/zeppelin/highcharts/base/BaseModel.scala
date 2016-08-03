@@ -112,7 +112,7 @@ abstract class BaseModel extends IModel {
     * so put Stakeholder first, after everything created as String
     * just before substitute it with real code
     *
-    * s"--$fieldName-$codeMD5--" -> Real JavaScript code
+    * s"--$$fieldName-$$codeMD5--" -> Real JavaScript code
     */
   val codes = mutable.Map[String, String]()
 
