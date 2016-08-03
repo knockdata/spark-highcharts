@@ -15,14 +15,15 @@
 * limitations under the License.
 */
 
-package com.knockdata.zeppelin.highcharts.util
+package com.knockdata.zeppelin
 
 import java.security.MessageDigest
+import java.util.UUID
 
-
-object md5 {
-  def apply(data: String) = {
+package object highcharts {
+  def md5(data: String) =
     MessageDigest.getInstance("MD5").digest(data.getBytes)
       .map("%02X".format(_)).mkString
-  }
+
+  def id = UUID.randomUUID.toString
 }

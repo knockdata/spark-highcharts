@@ -18,7 +18,7 @@
 package com.knockdata.zeppelin.highcharts.demo
 
 import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts.model.Chart
 import org.apache.spark.sql.functions._
 import org.junit.Test
 
@@ -42,11 +42,10 @@ class DemoColumnChart {
   @Test
   def demoHistogram: Unit = {
     highcharts(bank)
-      .chart(new Chart("column"))
+      .chart(Chart.column)
       .series("x" -> "age", "y" -> count("*"))
       .orderBy(col("age"))
       .plotOptions(new plotOptions.Column().groupPadding(0).pointPadding(0).borderWidth(0))
       .plot()
   }
-
 }

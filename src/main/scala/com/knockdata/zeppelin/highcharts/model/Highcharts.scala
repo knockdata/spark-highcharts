@@ -18,7 +18,7 @@
 package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base._
-import com.knockdata.zeppelin.highcharts.util
+import com.knockdata.zeppelin.highcharts._
 
 class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply{
   override def fieldName: String = "highcharts"
@@ -32,20 +32,18 @@ class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply
 
   def plot(): Unit = {
     val data = replaced
-    val id = util.md5(data)
-
 
     val jq = "$"
     val code =
       s"""|%angular
           |
-         |<div id="md5_$id" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+         |<div id="highcharts_$id" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
           |
          |<script type="text/javascript">
           |$jq(function () {
-          |var data = ${data}
+          |var data = $data
           |
-         |$jq("#md5_$id").highcharts(data)
+         |$jq("#highcharts_$id").highcharts(data)
           |});
           |</script>""".stripMargin
     println(code)

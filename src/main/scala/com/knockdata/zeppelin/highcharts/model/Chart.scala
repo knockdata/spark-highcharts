@@ -27,140 +27,147 @@ class Chart(chartType: String) extends BaseModel
   override def fieldName: String = "chart"
   append("type", chartType)
 
-  def alignTicks(value: Boolean): this.type = {
+  def alignTicks(value: Boolean) =
     append("alignTicks", value)
-  }
 
-  def animation(value: Boolean): this.type = {
-    append("",value)
-  }
+  def animation(value: Boolean) =
+    append("", value)
 
-  def backgroundColor(value: String): this.type = {
-    append("backgroundColor",value)
-  }
+  def backgroundColor(value: String) =
+    append("backgroundColor", value)
 
-  def borderColor(value: String): this.type = {
-    append("borderColor",value)
-  }
+  def borderColor(value: String) =
+    append("borderColor", value)
 
-  def borderRadius(value: Int): this.type = {
-    append("borderRadius",value)
-  }
+  def borderRadius(value: Int) =
+    append("borderRadius", value)
 
-  def borderWidth(value: Int): this.type = {
-    append("borderWidth",value)
-  }
+  def borderWidth(value: Int) =
+    append("borderWidth", value)
 
-  def className(value: String): this.type = {
-    append("className",value)
-  }
+  def className(value: String) =
+    append("className", value)
 
-  def defaultSeriesType(value: String): this.type = {
-    append("defaultSeriesType",value)
-  }
+  def defaultSeriesType(value: String) =
+    append("defaultSeriesType", value)
 
-  def events(values: (String, String)*): this.type = {
-    append("events",values.map{
+  def events(values: (String, String)*) =
+    append("events", values.map {
       case (fieldName, code) =>
         fieldName -> placeholdCode(code)
     }.toMap)
-  }
 
-  def height(value: Int): this.type = {
-    append("height",value)
-  }
+  def height(value: Int) =
+    append("height", value)
 
-  def ignoreHiddenSeries(value: Boolean): this.type = {
-    append("ignoreHiddenSeries",value)
-  }
+  def ignoreHiddenSeries(value: Boolean) =
+    append("ignoreHiddenSeries", value)
 
-  def inverted(value: Boolean): this.type = {
-    append("inverted",value)
-  }
+  def inverted(value: Boolean) =
+    append("inverted", value)
 
-  def option3d(values: (String, Any)*): this.type = {
-    append("option3d",values.toMap)
-  }
+  def option3d(values: (String, Any)*) =
+    append("option3d", values.toMap)
 
-  def panKey(value: String): this.type = {
-    append("panKey",value)
-  }
+  def panKey(value: String) =
+    append("panKey", value)
 
-  def panning(value: Boolean): this.type = {
-    append("panning",value)
-  }
+  def panning(value: Boolean) =
+    append("panning", value)
 
-  def pinchType(value: String): this.type = {
-    append("pinchType",value)
-  }
+  def pinchType(value: String) =
+    append("pinchType", value)
 
-  def plotBackgroundColor(value: String): this.type = {
-    append("plotBackgroundColor",value)
-  }
+  def plotBackgroundColor(value: String) =
+    append("plotBackgroundColor", value)
 
-  def plotBackgroundImage(value: String): this.type = {
-    append("plotBackgroundImage",value)
-  }
+  def plotBackgroundImage(value: String) =
+    append("plotBackgroundImage", value)
 
-  def plotBorderColor(value: Boolean): this.type = {
-    append("plotBorderColor",value)
-  }
+  def plotBorderColor(value: Boolean) =
+    append("plotBorderColor", value)
 
-  def plotBorderWidth(value: Int): this.type = {
-    append("plotBorderWidth",value)
-  }
+  def plotBorderWidth(value: Int) =
+    append("plotBorderWidth", value)
 
-  def plotShadow(value: Any): this.type = {
+  def plotShadow(value: Any) =
     append("plotShadow", value)
-  }
 
-  def polar(value: Boolean): this.type = {
+  def polar(value: Boolean) =
     append("polar", value)
-  }
 
-  def reflow(value: Boolean): this.type = {
+  def reflow(value: Boolean) =
     append("reflow", value)
-  }
 
   // renderTo is defined by the plot method in Highcharts
   //  def renderTo(value: Boolean) =
   //    append("renderTo", value)
 
-  def resetZoomButton(values: (String, Any)*): this.type = {
+  def resetZoomButton(values: (String, Any)*) =
     append("resetZoomButton", values.toMap)
-  }
 
-  def selectionMarkerFill(value: String): this.type = {
+  def selectionMarkerFill(value: String) =
     append("selectionMarkerFill", value)
-  }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) =
     append("shadow", value)
-  }
 
-  def shadow(values: (String, Any)*): this.type = {
+  def shadow(values: (String, Any)*) =
     append("shadow", values.toMap)
-  }
 
-  def showAxes(value: Boolean): this.type = {
+  def showAxes(value: Boolean) =
     append("showAxes", value)
-  }
 
-  def style(values: (String, Any)*): this.type = {
+  def style(values: (String, Any)*) =
     append("style", values.toMap)
-  }
 
-  def width(value: Int): this.type = {
+  def width(value: Int) =
     append("width", value)
-  }
 
-  def zoomType(value: String): this.type = {
+  def zoomType(value: String) =
     append("zoomType", value)
-  }
 }
 
-object Chart{
-  def apply(chartType: String): Chart = {
-    new Chart(chartType)
-  }
+object Chart {
+  def apply(chartType: String) = new Chart(chartType)
+
+  val area = Chart("area")
+
+  val arearange = Chart("arearange")
+
+  val areaspline = Chart("areaspline")
+
+  val areasplinerange = Chart("areasplinerange")
+
+  val bar = Chart("bar")
+
+  val boxplot = Chart("boxplot")
+
+  val bubble = Chart("bubble")
+
+  val column = Chart("column")
+
+  val errorbar = Chart("errorbar")
+
+  val funnel = Chart("funnel")
+
+  val gauge = Chart("gauge")
+
+  val heatmap = Chart("heatmap")
+
+  val pie = Chart("pie")
+
+  val polygon = Chart("Polygon")
+
+  val pyramid = Chart("Pyramid")
+
+  val scatter = Chart("scatter")
+
+  val solidgauge = Chart("solidgauge")
+
+  val spline = Chart("Spline")
+
+  val treemap = Chart("treemap")
+
+  val waterfall = Chart("waterfall")
 }

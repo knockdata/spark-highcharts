@@ -24,7 +24,7 @@ import model._
 
 import scala.collection.mutable
 
-class HighchartsHolder(dataFrame: DataFrame) {
+private[highcharts] class HighchartsHolder(dataFrame: DataFrame) {
   private var _seriesCol: Option[String] = None
 
   private val colDefsBuffer = mutable.Buffer[(String, Any)]()
@@ -33,94 +33,88 @@ class HighchartsHolder(dataFrame: DataFrame) {
 
   private var currentDefs = colDefsBuffer
 
-  def seriesCol(columnName: String): this.type = {
+  def seriesCol(columnName: String) = {
     _seriesCol = Some(columnName)
     this
   }
 
-  def series(defs: (String, Any)*): this.type = {
+  def series(defs: (String, Any)*) = {
     currentDefs ++= defs
     this
   }
 
-  def options(seriesOption: BasePlotOptions): this.type = {
+  def options(seriesOption: BasePlotOptions) = {
     currentDefs += "options" -> seriesOption
     this
   }
 
-  def orderBy(column: Column): this.type = {
+  def orderBy(column: Column) = {
     currentDefs += "orderBy" -> column
     this
   }
 
-  def drilldown(defs: (String, Any)*): this.type = {
+  def drilldown(defs: (String, Any)*) = {
     currentDefs = defs.toBuffer
 
     drillsDefsBuffer += currentDefs
     this
   }
 
-  def chart(chart: Chart): this.type = {
+  def chart(chart: Chart) =
     appendOptions(chart)
-  }
 
-  def credits(credits: Credits): this.type = {
+  def credits(credits: Credits) =
     appendOptions(credits)
-  }
 
-  def data(data: Data): this.type = {
+  def data(data: Data) =
     appendOptions(data)
-  }
 
-  def exporting(exporting: Exporting): this.type = {
+  def exporting(exporting: Exporting) =
     appendOptions(exporting)
-  }
 
-  def labels(labels: Labels): this.type = {
+  def labels(labels: Labels) =
     appendOptions(labels)
-  }
 
-  def legend(legend: Legend): this.type = {
+  def legend(legend: Legend) =
     appendOptions(legend)
-  }
 
-  def navigation(navigation: Navigation): this.type = {
+  def navigation(navigation: Navigation) =
     appendOptions(navigation)
-  }
 
-  def noData(value: Any) =
+  def noData(value: Any) {
     throw new Exception("does not support noData")
-
-  def pane(pane: Pane): this.type = {
-    appendOptions(pane)
   }
 
-  def plotOptions(plotOptions: BasePlotOptions*): this.type = {
+  def pane(pane: Pane) =
+    appendOptions(pane)
+
+  def plotOptions(plotOptions: BasePlotOptions*) = {
     plotOptions.foreach(appendOptions)
     this
   }
 
-  def subtitle(subtitle: Subtitle): this.type = {
+  def subtitle(subtitle: Subtitle) =
     appendOptions(subtitle)
-  }
 
-  def title(title: Title): this.type = {
+  def subtitle(subtitle: String) =
+    appendOptions(Subtitle(subtitle))
+
+  def title(title: Title) =
     appendOptions(title)
-  }
 
-  def tooltip(tooltip: Tooltip): this.type = {
+  def title(title: String) =
+    appendOptions(Title(title))
+
+  def tooltip(tooltip: Tooltip) =
     appendOptions(tooltip)
-  }
 
-  def xAxis(xAxis: Axis): this.type = {
+  def xAxis(xAxis: Axis) =
     appendOptions(xAxis)
-  }
 
-  def yAxis(yAxis: Axis): this.type = {
+  def yAxis(yAxis: Axis) =
     appendOptions(yAxis)
-  }
 
-  private def appendOptions(options: BaseModel): this.type = {
+  private def appendOptions(options: BaseModel) = {
     optionsBuffer += options
     this
   }
@@ -140,6 +134,4 @@ class HighchartsHolder(dataFrame: DataFrame) {
 
     chart.options(optionsBuffer.toList:_*).plot()
   }
-
-
 }
