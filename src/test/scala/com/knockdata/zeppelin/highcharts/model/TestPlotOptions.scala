@@ -17,17 +17,26 @@
 
 package com.knockdata.zeppelin.highcharts.model
 
+import com.knockdata.zeppelin.highcharts.AbstractTestCase
 import com.knockdata.zeppelin.highcharts.plotOptions._
-
 import org.junit.Test
 
-class TestPlotOptions {
+class TestPlotOptions extends AbstractTestCase{
   @Test
   def testCodeInPlot = {
     val options = new Area()//.fillColor("linearGradient", Map("x1"->0,"y1"->0, "x2"->0, "y2"->1))
     .fillColorStops((0, "Highcharts.getOptions().colors[0]"),
         (1, "Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')"))
 
-    println(options.replaced)
+    val expected =
+      """
+        |{
+        |  "fillColor":{
+        |    "stops":[[0,"--code-FEA24034CBC777B5F8EC1B3125E2BFC7--"],[1,"--code-7619821E4C9B6D7CA8090F17507C6024--"]]
+        |  }
+        |}
+      """.stripMargin
+
+    assertEqualJson(expected, options.data)
   }
 }

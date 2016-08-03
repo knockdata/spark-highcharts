@@ -26,7 +26,7 @@ highcharts(bank)
     "y" -> avg(col("balance")))
   .drilldown("name" -> "job",
     "y" -> avg(col("balance")))
-  .chart(Chart("column"))
+  .chart(Chart.column)
   .plot()
 ```
 
@@ -67,7 +67,7 @@ highcharts(bank)
     "y" -> avg(col("balance")))
   .drilldown("name" -> "education",
     "y" -> max(col("balance")))
-  .chart(Chart("column"))
+  .chart(Chart.column)
   .plot()
 
 

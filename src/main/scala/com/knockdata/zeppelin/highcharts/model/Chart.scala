@@ -131,43 +131,43 @@ class Chart(chartType: String) extends BaseModel
 object Chart {
   def apply(chartType: String) = new Chart(chartType)
 
-  val area = Chart("area")
+  def area = new Chart("area")
 
-  val arearange = Chart("arearange")
+  def arearange = new Chart("arearange")
 
-  val areaspline = Chart("areaspline")
+  def areaspline = new Chart("areaspline")
 
-  val areasplinerange = Chart("areasplinerange")
+  def areasplinerange = new Chart("areasplinerange")
 
-  val bar = Chart("bar")
+  def bar = new Chart("bar")
 
-  val boxplot = Chart("boxplot")
+  def boxplot = new Chart("boxplot")
 
-  val bubble = Chart("bubble")
+  def bubble = new Chart("bubble")
 
-  val column = Chart("column")
+  def column = new Chart("column")
 
-  val errorbar = Chart("errorbar")
+  def errorbar = new Chart("errorbar")
 
-  val funnel = Chart("funnel")
+  def funnel = new Chart("funnel")
 
-  val gauge = Chart("gauge")
+  def gauge = new Chart("gauge")
 
-  val heatmap = Chart("heatmap")
+  def heatmap = new Chart("heatmap")
 
-  val pie = Chart("pie")
+  def pie = new Chart("pie")
 
-  val polygon = Chart("Polygon")
+  def polygon = new Chart("Polygon")
 
-  val pyramid = Chart("Pyramid")
+  def pyramid = new Chart("Pyramid")
 
-  val scatter = Chart("scatter")
+  def scatter = new Chart("scatter")
 
-  val solidgauge = Chart("solidgauge")
+  def solidgauge = new Chart("solidgauge")
 
-  val spline = Chart("Spline")
+  def spline = new Chart("Spline")
 
-  val treemap = Chart("treemap")
+  def treemap = new Chart("treemap")
 
-  val waterfall = Chart("waterfall")
+  def waterfall = new Chart("waterfall")
 }

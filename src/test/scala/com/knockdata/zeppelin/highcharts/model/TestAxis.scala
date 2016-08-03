@@ -17,9 +17,10 @@
 
 package com.knockdata.zeppelin.highcharts.model
 
+import com.knockdata.zeppelin.highcharts.AbstractTestCase
 import org.junit.Test
 
-class TestAxis {
+class TestAxis extends AbstractTestCase {
 
   @Test
   def testLabelStyleColor: Unit = {
@@ -42,6 +43,36 @@ class TestAxis {
       )
     )
 
-    println(yAxis.replaced)
+    val expected =
+      """
+        |{
+        |  "plotBands":[{
+        |    "from":0,
+        |    "to":1000,
+        |    "color":"rgba(68, 170, 213, 0.1)",
+        |    "label":{
+        |      "text":"Low",
+        |      "style":{
+        |        "color":"#606060"
+        |      }
+        |    }
+        |  },{
+        |    "from":5000,
+        |    "to":10000,
+        |    "color":"rgba(68, 170, 213, 0.1)",
+        |    "label":{
+        |      "text":"High",
+        |      "style":{
+        |        "color":"#606060"
+        |      }
+        |    }
+        |  }],
+        |  "title":{
+        |    "text":"Average Balance"
+        |  }
+        |}
+        |
+      """.stripMargin
+    assertEqualJson(expected, actual = yAxis.replaced)
   }
 }

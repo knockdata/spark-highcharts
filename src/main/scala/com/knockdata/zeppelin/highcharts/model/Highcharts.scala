@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.model
 import com.knockdata.zeppelin.highcharts.base._
 import com.knockdata.zeppelin.highcharts._
 
-class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply{
+class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply {
   override def fieldName: String = "highcharts"
 
   private var _drilldown: Option[Drilldown] = None
@@ -34,18 +34,21 @@ class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply
     val data = replaced
 
     val jq = "$"
+
+    val chartId = id
     val code =
       s"""|%angular
           |
-         |<div id="highcharts_$id" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+          |<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
           |
-         |<script type="text/javascript">
+          |<script type="text/javascript">
           |$jq(function () {
           |var data = $data
           |
-         |$jq("#highcharts_$id").highcharts(data)
+          |$jq("#highcharts_$chartId").highcharts(data)
           |});
           |</script>""".stripMargin
+
     println(code)
   }
 

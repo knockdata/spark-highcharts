@@ -19,7 +19,7 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank)
-  .chart(new Chart("column"))
+  .chart(Chart.column)
   .series("x" -> "age", "y" -> count("*"))
   .orderBy(col("age"))
   .plotOptions(new plotOptions.Column().groupPadding(0).pointPadding(0).borderWidth(0))
