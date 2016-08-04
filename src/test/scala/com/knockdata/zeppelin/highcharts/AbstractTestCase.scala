@@ -86,7 +86,7 @@ trait AbstractTestCase {
     val stream = scala.io.Source.fromFile(jsonFile)
     try {
       val expected = stream.getLines().mkString("\n")
-      val actual = chart.data
+      val actual = chart.json
       assertEqualJson(expected, actual)
     }
     finally {

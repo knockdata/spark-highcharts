@@ -125,11 +125,31 @@ private[highcharts] class HighchartsHolder(dataFrame: DataFrame) {
       case buffer => buffer.toList
     }
 
-    val chart = _seriesCol match {
+    val chart =
+      _seriesCol match {
       case None =>
-        convert(dataFrame, colDefs, drillsDefs:_*)
+        drillsDefs match {
+          case Nil =>
+            val series = convert(dataFrame, colDefs)
+            new Highcharts(series)
+          case drillsDefs1 :: drillsDefsn =>
+            val (normalSeriesList, drilldownSeriesList) = convert(dataFrame, colDefs, drillsDefs1, drillsDefsn:_*)
+            new Highcharts(normalSeriesList:_*)
+              .drilldown(drilldownSeriesList)
+
+        }
+
       case Some(seriesCol) =>
-        convert(dataFrame, seriesCol, colDefs, drillsDefs:_*)
+        drillsDefs match {
+          case Nil =>
+            val normalSeriesList = convert(dataFrame, seriesCol, colDefs)
+            new Highcharts(normalSeriesList:_*)
+          case drillsDefs1 :: drillsDefsn =>
+            val (normalSeriesList, drilldownSeriesList) = convert(dataFrame, seriesCol, colDefs, drillsDefs1, drillsDefsn:_*)
+            new Highcharts(normalSeriesList:_*)
+              .drilldown(drilldownSeriesList)
+
+      }
     }
 
     chart.options(optionsBuffer.toList:_*).plot()

@@ -19,6 +19,8 @@
 package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
+import com.knockdata.zeppelin.highcharts.convert
+import org.apache.spark.sql.DataFrame
 
 class Series(val values: List[Any]) extends BaseModel with PublicApply{
   override def fieldName: String = "series"
@@ -44,12 +46,20 @@ class Series(val values: List[Any]) extends BaseModel with PublicApply{
     append("size", s)
   }
 
+  def size(s: String): this.type = {
+    append("size", s)
+  }
+
+  def innerSize(value: String): this.type = {
+    append("innerSize", value)
+  }
+
   def showInLegend(show: Boolean): this.type = {
     append("showInLegend", show)
   }
 
-  def dataLabels(subname: String, value: Any): this.type = {
-    append("dataLabels", subname, value)
+  def dataLabels(values: (String, Any)*): this.type = {
+    append("dataLabels", values.toMap)
   }
 
   override def preProcessResult(): Unit = {
@@ -60,6 +70,10 @@ class Series(val values: List[Any]) extends BaseModel with PublicApply{
 }
 
 object Series {
+
+  def apply(dataFrame: DataFrame, colDefs: (String, Any)*): Series = {
+    convert(dataFrame, colDefs.toList)
+  }
 
   def apply(values: Any*) = new Series(values.toList)
 }

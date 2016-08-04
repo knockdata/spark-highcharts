@@ -53,7 +53,7 @@ class TestCombo extends AbstractTestCase{
       Map("name" -> "Joe", "y" -> 19)).typ("pie").
       center(100, 80).
       size(100).
-      dataLabels("enabled", true)
+      dataLabels("enabled" -> true)
 
 
     val chart = new Highcharts(seriesJane, seriesJohn, seriesJoe, seriesAverage,seriesTotalConsumption)

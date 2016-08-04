@@ -37,6 +37,6 @@ class TestPlotOptions extends AbstractTestCase{
         |}
       """.stripMargin
 
-    assertEqualJson(expected, options.data)
+    assertEqualJson(expected, options.json)
   }
 }

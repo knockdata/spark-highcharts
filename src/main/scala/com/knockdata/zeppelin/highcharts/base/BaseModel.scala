@@ -81,11 +81,11 @@ abstract class BaseModel extends IModel {
   }
 
 
-  lazy val data: String = {
+  lazy val json: String = {
     pretty(render(result))
   }
 
-  def compactString: String = {
+  def compactJson: String = {
     compact(render(result))
   }
 
@@ -195,7 +195,7 @@ abstract class BaseModel extends IModel {
   }
 
   lazy val replaced: String = {
-    val beforeFunctionReplace: String = data
+    val beforeFunctionReplace: String = json
 
     (beforeFunctionReplace /: codes) {
       (result, item) => result.replaceAllLiterally(s""""${item._1}"""", item._2)

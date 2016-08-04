@@ -20,13 +20,85 @@ package com.knockdata.zeppelin.highcharts.model
 import com.knockdata.zeppelin.highcharts.base._
 import com.knockdata.zeppelin.highcharts._
 
+import scala.collection.mutable
+
 class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply {
   override def fieldName: String = "highcharts"
 
   private var _drilldown: Option[Drilldown] = None
+  private val optionsBuffer = mutable.Buffer[BaseModel]()
+
+  def drilldown(drilldownSeriesList: List[Series]): this.type = {
+    drilldownSeriesList match {
+      case Nil =>
+      case xs =>
+        _drilldown = Some(new Drilldown(xs))
+    }
+    this
+  }
+
 
   def drilldown(drilldown: Drilldown): this.type = {
     _drilldown = Some(drilldown)
+    this
+  }
+
+  def chart(chart: Chart) =
+    appendOptions(chart)
+
+  def credits(credits: Credits) =
+    appendOptions(credits)
+
+  def data(data: Data) =
+    appendOptions(data)
+
+  def exporting(exporting: Exporting) =
+    appendOptions(exporting)
+
+  def labels(labels: Labels) =
+    appendOptions(labels)
+
+  def legend(legend: Legend) =
+    appendOptions(legend)
+
+  def navigation(navigation: Navigation) =
+    appendOptions(navigation)
+
+  def noData(value: Any) {
+    throw new Exception("does not support noData")
+  }
+
+  def pane(pane: Pane) =
+    appendOptions(pane)
+
+  def plotOptions(plotOptions: BasePlotOptions*) = {
+    plotOptions.foreach(appendOptions)
+    this
+  }
+
+  def subtitle(subtitle: Subtitle) =
+    appendOptions(subtitle)
+
+  def subtitle(subtitle: String) =
+    appendOptions(Subtitle(subtitle))
+
+  def title(title: Title) =
+    appendOptions(title)
+
+  def title(title: String) =
+    appendOptions(Title(title))
+
+  def tooltip(tooltip: Tooltip) =
+    appendOptions(tooltip)
+
+  def xAxis(xAxis: Axis) =
+    appendOptions(xAxis)
+
+  def yAxis(yAxis: Axis) =
+    appendOptions(yAxis)
+
+  private def appendOptions(options: BaseModel) = {
+    optionsBuffer += options
     this
   }
 
@@ -84,6 +156,7 @@ class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply
   override def preProcessResult(): Unit = {
     append("series", series.toList)
     _drilldown.foreach(value => append("drilldown", value))
+    options(optionsBuffer.toList:_*)
 
     super.preProcessResult
   }

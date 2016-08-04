@@ -73,7 +73,7 @@ class TestAreaBasic extends AbstractTestCase{
       10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104).
       name("USA")
 
-    val data = seriesUSA.data
+    val data = seriesUSA.json
 
     val seriesRussia = Series(
       null, null, null, null, null, null, null, null, null, null,

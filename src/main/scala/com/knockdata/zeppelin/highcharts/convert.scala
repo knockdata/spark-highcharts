@@ -311,20 +311,39 @@ object convert {
     * @param colDefs List((jsonFieldName, groupByColumnName/aggColumn))*
     * @return highchart
     */
-  def apply(rootDataFrame: DataFrame, colDefs: List[(String, Any)], drillDefs: List[(String, Any)]*): Highcharts = {
+  def apply(rootDataFrame: DataFrame,
+            colDefs: List[(String, Any)]): Series = {
+    val buffer = mutable.ListBuffer[Data]()
+
+    drilldown(rootDataFrame, colDefs :: Nil, Nil, buffer)
+
+    // it only has one data
+    val normalData = buffer.result().head
+
+    toSeries(normalData)
+  }
+
+  def apply(rootDataFrame: DataFrame,
+            colDefs: List[(String, Any)],
+            drillDefs1: List[(String, Any)],
+            drillDefsn: List[(String, Any)]*): (List[Series], List[Series]) = {
     val buffer = mutable.ListBuffer[Data]()
 
 
-    drilldown(rootDataFrame, colDefs :: drillDefs.toList, Nil, buffer)
+    drilldown(rootDataFrame, colDefs :: drillDefs1 :: drillDefsn.toList, Nil, buffer)
 
-    buffer.result() match {
-      case normalSeriesData :: Nil =>
-        new Highcharts(toSeries(normalSeriesData))
-      case normalSeriesData :: drilldownSeriesData =>
-        val drilldownSeries = new Drilldown(toSeriesList(drilldownSeriesData))
-        new Highcharts(toSeries(normalSeriesData)).drilldown(drilldownSeries)
-    }
+    val normalData :: drilldownData = buffer.result()
+    val normalSeries = toSeries(normalData)
 
+    val drilldownSeriesList =
+      drilldownData match {
+        case Nil =>
+          Nil
+        case xs =>
+          toSeriesList(drilldownData)
+      }
+
+    (List(normalSeries), drilldownSeriesList)
   }
 
   def getCategories(rootDataFrame: DataFrame,
@@ -366,11 +385,9 @@ object convert {
     }
   }
 
-
   def apply(rootDataFrame: DataFrame,
             seriesCol: String,
-            colDefs: List[(String, Any)],
-            drillDefs: List[(String, Any)]*): Highcharts = {
+            colDefs: List[(String, Any)]): List[Series] = {
 
     val allSeriesValues = rootDataFrame.select(seriesCol).distinct.orderBy(col(seriesCol)).collect.map(_.get(0))
 
@@ -382,7 +399,44 @@ object convert {
     val bufferNormalSeries = mutable.ListBuffer[Data]()
     val bufferDrilldownSeries = mutable.ListBuffer[Data]()
 
-    val drills = colDefs :: drillDefs.toList
+    val drills = colDefs :: Nil
+    for (aSeriesValue <- allSeriesValues) {
+      val seriesDataFrame =
+        rootDataFrame.filter(column === aSeriesValue).selectExpr(wantedCols: _*)
+
+      val keys = s"$seriesCol=${aSeriesValue.toString}" :: Nil
+      val buffer = mutable.ListBuffer[Data]()
+
+      drilldown(seriesDataFrame, drills, keys, buffer)
+
+      val normalSeries = buffer.result().head
+
+      bufferNormalSeries += normalSeries.setName(aSeriesValue)
+    }
+
+    val normalSeriesList = toSeriesList(bufferNormalSeries.result(), categories)
+    normalSeriesList
+  }
+
+
+  def apply(rootDataFrame: DataFrame,
+            seriesCol: String,
+            colDefs: List[(String, Any)],
+            drillDefs1: List[(String, Any)],
+            drillDefsn: List[(String, Any)]*): (List[Series], List[Series]) = {
+
+    val allSeriesValues = rootDataFrame.select(seriesCol).distinct.orderBy(col(seriesCol)).collect.map(_.get(0))
+
+    val categories = getCategories(rootDataFrame, colDefs)
+
+    val column = col(seriesCol)
+    val wantedCols = rootDataFrame.columns.filter(_ != seriesCol)
+
+    val bufferNormalSeries = mutable.ListBuffer[Data]()
+    val bufferDrilldownSeries = mutable.ListBuffer[Data]()
+
+    val drillDefsnList: List[List[(String , Any)]] = drillDefsn.toList
+    val drills: List[List[(String, Any)]] = colDefs :: drillDefs1 :: drillDefsnList
     for (aSeriesValue <- allSeriesValues) {
       val seriesDataFrame =
         rootDataFrame.filter(column === aSeriesValue).selectExpr(wantedCols: _*)
@@ -400,16 +454,11 @@ object convert {
 
     }
 
-    val chart = new Highcharts(toSeriesList(bufferNormalSeries.result(), categories): _*)
+    val normalSeriesList = toSeriesList(bufferNormalSeries.result(), categories)
 
     val drilldownSeriesList = toSeriesList(bufferDrilldownSeries.result())
 
-    if (drilldownSeriesList.isEmpty) {
-      chart
-    } else {
-      chart.drilldown(new Drilldown(drilldownSeriesList))
-    }
-
+    (normalSeriesList, drilldownSeriesList)
   }
 
 

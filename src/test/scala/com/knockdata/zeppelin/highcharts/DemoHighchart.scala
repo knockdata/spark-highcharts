@@ -21,6 +21,9 @@ import org.apache.spark.sql.Row
 import org.apache.spark.sql.functions._
 import org.junit.Test
 
+
+import com.knockdata.zeppelin.highcharts.model._
+
 class DemoHighchart extends AbstractTestCase{
 
   def debug(result: List[(List[String], Array[String], Array[Row])]): Unit = {
@@ -30,7 +33,7 @@ class DemoHighchart extends AbstractTestCase{
 
   @Test
   def test1ColumnWithAgg: Unit = {
-    val chart = convert(DataSet.dfBank,
+    val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital",
         "y" -> avg(col("balance"))))
 
@@ -39,7 +42,7 @@ class DemoHighchart extends AbstractTestCase{
 
   @Test
   def testDrilldown1Level: Unit = {
-    val chart = convert(DataSet.dfBank,
+    val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital",
         "y" -> avg(col("balance"))),
       List("name" -> "job",
@@ -51,7 +54,7 @@ class DemoHighchart extends AbstractTestCase{
   @Test
   def test2ColumnWithAgg: Unit = {
     // example for HeatMap
-    val chart = convert(DataSet.dfBank,
+    val chart: Highcharts = convert(DataSet.dfBank,
       List("x" -> "marital", "y" -> "job",
         "value" -> avg(col("balance"))))
 
@@ -63,7 +66,7 @@ class DemoHighchart extends AbstractTestCase{
     // with 3 levels, the output is pretty big
     // number of data point is
     // size(marital) + size(marital) * size(balance) + size(marital) * size(balance) + size(education)
-    val chart = convert(DataSet.dfBank,
+    val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital",
         "y" -> avg(col("balance"))),
       List("name" -> "job",
@@ -78,7 +81,7 @@ class DemoHighchart extends AbstractTestCase{
   def test2ColumnDrilldown1Level: Unit = {
     // there is no such Highchart which accept job field
     // it is only for a test to see drilldown works with 2 name column
-    val chart = convert(DataSet.dfBank,
+    val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital", "job" -> "job",
         "y" -> avg(col("balance"))),
       List("name" -> "education",
@@ -90,7 +93,7 @@ class DemoHighchart extends AbstractTestCase{
 
   @Test
   def testSeriesWithAgg: Unit = {
-    val chart = convert(DataSet.dfBank,
+    val chart: Highcharts = convert(DataSet.dfBank,
       "marital",
       List("name" -> "job",
         "y" -> avg(col("balance"))))
@@ -104,7 +107,7 @@ class DemoHighchart extends AbstractTestCase{
     // with 3 levels, the output is pretty big
     // number of data point is
     // size(marital) + size(marital) * size(balance) + size(marital) * size(balance) + size(education)
-    val chart = convert(DataSet.dfBank, "marital",
+    val chart: Highcharts = convert(DataSet.dfBank, "marital",
       List("name" -> "job",
         "y" -> avg(col("balance"))),
       List("name" -> "education",

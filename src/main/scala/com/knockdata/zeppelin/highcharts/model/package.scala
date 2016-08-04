@@ -15,17 +15,24 @@
 * limitations under the License.
 */
 
-package com.knockdata.zeppelin
 
-import java.security.MessageDigest
-import java.util.UUID
+package com.knockdata.zeppelin.highcharts
 
-package object highcharts {
-  def md5(data: String) =
-    MessageDigest.getInstance("MD5").digest(data.getBytes)
-      .map("%02X".format(_)).mkString
 
-  def id = UUID.randomUUID.toString
+import scala.language.implicitConversions
 
+package object model {
+  implicit def normalNDrilldownSeriesListToHighcharts(allSeries: (List[Series], List[Series])): Highcharts = {
+    val (normalSeriesList, drilldownSeriesList) = allSeries
+    new Highcharts(normalSeriesList:_*).drilldown(drilldownSeriesList)
+  }
+
+  implicit def normalSeriesListToHighcharts(normalSeriesList: List[Series]): Highcharts = {
+    new Highcharts(normalSeriesList:_*)
+  }
+
+  implicit def normalSeriesToHighcharts(normalSeries: Series): Highcharts = {
+    new Highcharts(normalSeries)
+  }
 
 }
