@@ -59,7 +59,7 @@ abstract class BaseModel extends IModel {
     for ((name, values) <- subFields) {
       val fields = values.map {
         case (subname, value) =>
-          JField(subname, JsonImplicits.toJValue(value))
+          JField(subname, JsonConversion.toJValue(value))
       }
       val jobj = new JObject(fields)
       append(name, jobj)
@@ -141,7 +141,7 @@ abstract class BaseModel extends IModel {
       case model: BaseModel =>
         append(name, model.result)
       case _ =>
-        append(JField(name, JsonImplicits.toJValue(value)))
+        append(JField(name, JsonConversion.toJValue(value)))
     }
 
     this

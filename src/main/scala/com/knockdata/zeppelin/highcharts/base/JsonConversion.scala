@@ -9,8 +9,8 @@ import scala.language.implicitConversions
 /**
   * Created by Rockie Yang on 2016/06/01.
   */
-object JsonImplicits {
-  implicit def stringToOptionString(s: String): Option[String] = Some(s)
+object JsonConversion {
+  def stringToOptionString(s: String): Option[String] = Some(s)
 
   def isInt(value: Double): Boolean = {
     value == Math.floor(value) && !java.lang.Double.isInfinite(value)
@@ -73,7 +73,7 @@ object JsonImplicits {
     }
   }
 
-  implicit def listToJArray(vs: List[Any]): JArray = {
+  def listToJArray(vs: List[Any]): JArray = {
     val ar = vs.map(
       value => value match {
 
