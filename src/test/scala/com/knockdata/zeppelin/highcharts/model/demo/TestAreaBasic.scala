@@ -56,7 +56,7 @@ class TestAreaBasic extends AbstractTestCase{
       "enabled" -> false,
       "states" -> Map("hover" -> Map("enabled" -> true)))
 
-    val areaPlotOptions = new plotOptions.Area().pointStart(1940)
+    val areaPlotOptions = PlotOptions.area.pointStart(1940)
       .marker("enabled" -> false,
         "symbol" -> "circle",
         "radius" -> "2",
@@ -87,7 +87,7 @@ class TestAreaBasic extends AbstractTestCase{
 
 
     val chart = new Highcharts(seriesUSA, seriesRussia)
-    chart.options(new Chart("area"),
+    chart.options(Chart.area,
       title,
       subtitle,
       xAxis,

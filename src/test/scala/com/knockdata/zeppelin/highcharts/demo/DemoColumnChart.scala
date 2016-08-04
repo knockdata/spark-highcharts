@@ -45,7 +45,7 @@ class DemoColumnChart {
       .chart(Chart.column)
       .series("x" -> "age", "y" -> count("*"))
       .orderBy(col("age"))
-      .plotOptions(new plotOptions.Column().groupPadding(0).pointPadding(0).borderWidth(0))
+      .plotOptions(PlotOptions.column.groupPadding(0).pointPadding(0).borderWidth(0))
       .plot()
   }
 }

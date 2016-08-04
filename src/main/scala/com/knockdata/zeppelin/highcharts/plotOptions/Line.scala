@@ -16,12 +16,12 @@
 */
 
 
-package com.knockdata.zeppelin.highcharts.plotOptions
+package com.knockdata.zeppelin.highcharts.plotoptions
 
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-class Line extends BasePlotOptions with PublicApply {
+private[zeppelin] class Line extends BasePlotOptions with PublicApply {
   def fieldName = "line"
 
   def allowPointSelect(value: Boolean): this.type = {

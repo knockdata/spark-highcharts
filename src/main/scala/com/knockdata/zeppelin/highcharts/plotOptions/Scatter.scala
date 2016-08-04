@@ -15,12 +15,12 @@
 * limitations under the License.
 */
 
-package com.knockdata.zeppelin.highcharts.plotOptions
+package com.knockdata.zeppelin.highcharts.plotoptions
 
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-class Scatter extends BasePlotOptions with PublicApply {
+private[zeppelin] class Scatter extends BasePlotOptions with PublicApply {
   def fieldName = "scatter"
 
   def allowPointSelect(value: Boolean): this.type = {

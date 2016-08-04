@@ -18,7 +18,7 @@
 package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.AbstractTestCase
-import com.knockdata.zeppelin.highcharts.plotOptions._
+import com.knockdata.zeppelin.highcharts.plotoptions._
 import org.junit.Test
 
 class TestPlotOptions extends AbstractTestCase{

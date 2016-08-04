@@ -58,7 +58,7 @@ class TestBarBasic extends AbstractTestCase{
 //      "((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF')")
 
 
-    val barPlotOptions = new plotOptions.Bar()("dataLabels", "enabled", true)
+    val barPlotOptions = PlotOptions.bar("dataLabels", "enabled", true)
 
     val series1800 = Series(107, 31, 635, 203, 2).name("Year 1800")
     val series1900 = Series(133, 156, 947, 408, 6).name("Year 1900")
@@ -66,7 +66,7 @@ class TestBarBasic extends AbstractTestCase{
 
 
     val chart = new Highcharts(series1800, series1900, series2012)
-    chart.options(new Chart("bar"),
+    chart.options(Chart.bar,
       title,
       subtitle,
       xAxis,
