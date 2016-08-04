@@ -15,12 +15,12 @@
 * limitations under the License.
 */
 
-package com.knockdata.zeppelin.highcharts.plotOptions
+package com.knockdata.zeppelin.highcharts.plotoptions
 
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-class Gauge extends BasePlotOptions with PublicApply {
+private[zeppelin] class Gauge extends BasePlotOptions with PublicApply {
   def fieldName = "gauge"
 
   def animation(value: Boolean): this.type = {

@@ -147,6 +147,8 @@ object Chart {
 
   def column = new Chart("column")
 
+  def columnrange = new Chart("columnrange")
+
   def errorbar = new Chart("errorbar")
 
   def funnel = new Chart("funnel")
@@ -154,6 +156,8 @@ object Chart {
   def gauge = new Chart("gauge")
 
   def heatmap = new Chart("heatmap")
+
+  def line = new Chart("line")
 
   def pie = new Chart("pie")
 
