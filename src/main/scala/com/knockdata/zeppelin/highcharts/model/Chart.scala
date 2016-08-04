@@ -163,6 +163,8 @@ object Chart {
 
   def scatter = new Chart("scatter")
 
+  def series = new Chart("series")
+
   def solidgauge = new Chart("solidgauge")
 
   def spline = new Chart("Spline")
