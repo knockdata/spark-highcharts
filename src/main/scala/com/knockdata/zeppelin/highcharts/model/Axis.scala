@@ -52,6 +52,10 @@ class Axis(text: String = "") extends BaseModel with PublicApply {
     append("categories", values.toList)
   }
 
+  def categories(values: List[String]): this.type = {
+    append("categories", values)
+  }
+
   def ceiling(value: Int): this.type = {
     append("ceiling", value)
   }

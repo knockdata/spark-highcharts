@@ -6,3 +6,5 @@
 [Drilldown](DemoDrillDown.md)
 
 [Column Chart](DemoColumnChart.md)
+
+[Bar Chart](DemoBarChart)

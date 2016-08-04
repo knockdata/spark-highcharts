@@ -54,6 +54,8 @@ object PlotOptions {
 
   def scatter = new Scatter
 
+  def series = new Series
+
   def solidgauge = new SolidGauge
 
   def spline = new Spline

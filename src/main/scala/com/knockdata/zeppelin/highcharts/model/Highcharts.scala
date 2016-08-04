@@ -62,9 +62,19 @@ class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply
     }
 
     val (plotOptions, otherOptions) = opts.partition(_.isInstanceOf[BasePlotOptions])
-    for (option <- otherOptions) {
-      append(option.fieldName, option)
+
+    val otherOptionsGroup: Map[String, List[BaseModel]] = otherOptions.groupBy(m => m.fieldName)
+
+    for ((fieldName, options) <- otherOptionsGroup) {
+      options match {
+        case one :: Nil =>
+          append(fieldName, one)
+        // xAxis, yAxis can have multiple values
+        case multiple =>
+          append(fieldName, multiple)
+      }
     }
+
     for (plotOption <- plotOptions) {
       append("plotOptions", plotOption.fieldName, plotOption.result)
     }
