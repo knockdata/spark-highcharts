@@ -172,7 +172,7 @@ import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank).series("name" -> "job", "y" -> avg(col("balance")))
   .orderBy(col("job"))
-  .plotOptions(new plotOptions.Line()
+  .plotOptions(PlotOptions.line
     .dataLabels("enabled" -> true, "format" -> "{point.y:.2f}"))
   .tooltip(new Tooltip().valueDecimals(2)).plot()
 
@@ -199,7 +199,7 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 
-val options = new plotOptions.Area()
+val options = PlotOptions.area
   .fillColorLinearGradient("x1" -> 0, "y1" -> 0, "x2" -> 0, "y2" -> 1)
   .fillColorStops((0, "Highcharts.getOptions().colors[0]"),
       (1, "Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')"))
@@ -207,7 +207,7 @@ val options = new plotOptions.Area()
 
 highcharts(bank).series("name" -> "age", "y" -> avg(col("balance")))
   .orderBy(col("age"))
-  .chart(new Chart("area").zoomType("x"))
+  .chart(Chart.area.zoomType("x"))
   .plotOptions(options).plot()
 ```
 
@@ -229,7 +229,7 @@ import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(bank).series("x" -> "age", "y" -> avg(col("balance")))
   .orderBy(col("age"))
-  .chart(new Chart("spline").inverted(true))
+  .chart(Chart.spline.inverted(true))
   .plot()
 ```
 
@@ -301,7 +301,7 @@ import com.knockdata.zeppelin.highcharts.model._
 
 highcharts(DataSet.dfSnowDepth).seriesCol("year")
   .series("x" -> "time", "y" -> "depth")
-  .chart(new Chart("spline"))
+  .chart(Chart.spline)
   .title(new Title("Snow depth at Vikjafjellet, Norway"))
   .subtitle(new Subtitle("Irregular time data in Highcharts JS"))
   .xAxis(new XAxis("Date").typ("datetime").dateTimeLabelFormats(
@@ -309,6 +309,6 @@ highcharts(DataSet.dfSnowDepth).seriesCol("year")
   .yAxis(new YAxis("Snow depth (m)").min(0))
   .tooltip(new Tooltip().headerFormat("<b>{series.name}</b><br>").pointFormat(
     "{point.x:%e. %b}: {point.y:.2f} m"))
-  .plotOptions(new plotOptions.Spline().marker("enabled" -> true))
+  .plotOptions(PlotOptions.spline.marker("enabled" -> true))
   .plot()
 ```

@@ -38,15 +38,10 @@ val USSR = Seq(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
   21000, 20000, 19000, 18000, 18000, 17000, 16000)
   .zip(1940 to 2006).map(p => ("USSR/Russia", p._1, p._2))
 
-
-case class NData(stockpile: Any, year: Int)
-
-implicit val mapEncoder = org.apache.spark.sql.Encoders.kryo[Map[Any, Int]]
-
 val dataFrame = (USA ++ USSR).toDF("country", "stockpile", "year")
 
 highcharts(dataFrame)
-  .chart(new Chart("area"))
+  .chart(Chart.area)
   .seriesCol("country")
   .series("x" -> "year", "y" -> "stockpile")
   .orderBy(col("year"))
