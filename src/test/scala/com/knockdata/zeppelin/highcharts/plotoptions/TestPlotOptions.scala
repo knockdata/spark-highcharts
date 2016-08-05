@@ -15,10 +15,10 @@
 * limitations under the License.
 */
 
-package com.knockdata.zeppelin.highcharts.model
+package com.knockdata.zeppelin.highcharts.plotoptions
 
 import com.knockdata.zeppelin.highcharts.AbstractTestCase
-import com.knockdata.zeppelin.highcharts.plotoptions._
+
 import org.junit.Test
 
 class TestPlotOptions extends AbstractTestCase{
