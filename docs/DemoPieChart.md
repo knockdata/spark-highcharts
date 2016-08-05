@@ -2,7 +2,7 @@
 
 Based on [Pie Chart Demo](http://www.highcharts.com/demo/pie-basic)
 
-## Histogram
+## Donut Chart
 
 Based on [plot-histograms-in-highcharts](http://stackoverflow.com/questions/18042165/plot-histograms-in-highcharts)
 
@@ -19,6 +19,7 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 import sqlContext.implicits._
+import org.apache.spark.sql.functions._
 
 val dataFrame = Seq(
   ("Microsoft Internet Explorer", "v11.0", 24.13),
@@ -60,15 +61,55 @@ val dataFrame = Seq(
   ("Opera", "v28", 0.24),
   ("Opera", "v27", 0.17),
   ("Opera", "v12.x", 0.34)
-).toDF("browser", "version", "share")
+).map{
+  case (b, v, s) => (b, b + " " + v, s)
+}.toDF("browser", "version", "share")
 
-val seriesBrower =
+val seriesBrowser = Series(dataFrame,
+  "name" -> "browser",
+  "y" -> sum(col("share")),
+  "orderBy" -> col("browser"))
+  .size("60%")
+  .dataLabels(
+    "distance" -> -30,
+    "formatter" ->
+      """
+        |function() {
+        |  return this.y > 1 ? this.point.name : null;
+        |}
+      """.stripMargin)
+
+val seriesVersion = Series(dataFrame,
+  "name" -> "version",
+  "y" -> "share",
+  "orderBy" -> col("browser"))
+  .size("80%")
+  .innerSize("60%")
+  .dataLabels("formatter" ->
+    """
+      |function() {
+      |  return this.y > 1 ? this.point.name : null;
+      |}
+    """.stripMargin)
+
+val chart = new Highcharts(seriesBrowser, seriesVersion)
+  .chart(Chart.pie)
+
+chart.plot()
+
+
 highcharts(bank)
-  .chart(Chart.column)
-  .series("x" -> "age", "y" -> count("*"))
-  .orderBy(col("age"))
-  .plotOptions(PlotOptions.column.groupPadding(0).pointPadding(0).borderWidth(0))
-  .plot()
+  highcharts(bank)
+.chart(Chart.column)
+    .chart(Chart.column)
+.series("x" -> "age", "y" -> count("*"))
+    .series("x" -> "age", "y" -> count("*"))
+.orderBy(col("age"))
+    .orderBy(col("age"))
+.plotOptions(PlotOptions.column.groupPadding(0).pointPadding(0).borderWidth(0))
+    .plotOptions(PlotOptions.column.groupPadding(0).pointPadding(0).borderWidth(0))
+.plot()
+    .plot()
 ```
 
 ## Stacked Column

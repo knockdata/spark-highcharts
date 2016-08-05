@@ -31,7 +31,7 @@ class DemoPieChart {
 
   val bank = DataSet.dfBank
 
-  // ## Histogram
+  // ## Donut Chart
   //
   // Based on [plot-histograms-in-highcharts](http://stackoverflow.com/questions/18042165/plot-histograms-in-highcharts)
   //
@@ -86,18 +86,36 @@ class DemoPieChart {
       ("Opera", "v28", 0.24),
       ("Opera", "v27", 0.17),
       ("Opera", "v12.x", 0.34)
-    ).toDF("browser", "version", "share")
+    ).map{
+      case (b, v, s) => (b, b + " " + v, s)
+    }.toDF("browser", "version", "share")
 
     val seriesBrowser = Series(dataFrame,
       "name" -> "browser",
-      "y" -> sum(col("share")))
+      "y" -> sum(col("share")),
+      "orderBy" -> col("browser"))
       .size("60%")
-      .dataLabels("distance" -> -30)
+      .dataLabels(
+        "distance" -> -30,
+        "formatter" ->
+          """
+            |function() {
+            |  return this.y > 1 ? this.point.name : null;
+            |}
+          """.stripMargin)
+
     val seriesVersion = Series(dataFrame,
       "name" -> "version",
-      "y" -> "share")
+      "y" -> "share",
+      "orderBy" -> col("browser"))
       .size("80%")
       .innerSize("60%")
+      .dataLabels("formatter" ->
+        """
+          |function() {
+          |  return this.y > 1 ? this.point.name : null;
+          |}
+        """.stripMargin)
 
     val chart = new Highcharts(seriesBrowser, seriesVersion)
       .chart(Chart.pie)

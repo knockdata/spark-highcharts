@@ -197,8 +197,18 @@ class Axis(text: String = "") extends BaseModel with PublicApply {
     append("plotBands", values.toList)
   }
 
+  // plot ONE band
+  def plotBand(values: (String, Any)*): this.type = {
+    append("plotBands", List(values.toMap))
+  }
+  
   def plotLines(values: Map[String, Any]*): this.type = {
     append("plotLines", values.toList)
+  }
+
+  // plot ONE line
+  def plotLine(values: (String, Any)*): this.type = {
+    append("plotLines", List(values.toMap))
   }
 
   def reversed(value: Boolean): this.type = {

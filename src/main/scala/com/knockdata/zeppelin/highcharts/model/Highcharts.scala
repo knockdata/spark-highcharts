@@ -155,6 +155,10 @@ class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply
 
   override def preProcessResult(): Unit = {
     append("series", series.toList)
+    for (s <- series) {
+      codes ++= s.codes
+    }
+
     _drilldown.foreach(value => append("drilldown", value))
     options(optionsBuffer.toList:_*)
 

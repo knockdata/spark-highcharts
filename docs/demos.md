@@ -7,4 +7,8 @@
 
 [Column Chart](DemoColumnChart.md)
 
-[Bar Chart](DemoBarChart)
+[Bar Chart](DemoBarChart.md)
+
+[Pie Chart](DemoPieChart.md)
+
+[Bubble Chart](DemoBubbleChart.md)

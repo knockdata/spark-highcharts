@@ -59,7 +59,13 @@ class Series(val values: List[Any]) extends BaseModel with PublicApply{
   }
 
   def dataLabels(values: (String, Any)*): this.type = {
-    append("dataLabels", values.toMap)
+    append("dataLabels",
+      values.map{
+        case ("formatter", v: String) =>
+          "formatter" -> placeholdCode(v)
+        case (k, v) =>
+          k -> v
+    }.toMap)
   }
 
   override def preProcessResult(): Unit = {
