@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.plotoptions
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-private[zeppelin] class Spline extends BasePlotOptions with PublicApply {
+private[highcharts] class Spline extends BasePlotOptions with PublicApply {
   def fieldName = "spline"
 
   def allowPointSelect(value: Boolean): this.type = {

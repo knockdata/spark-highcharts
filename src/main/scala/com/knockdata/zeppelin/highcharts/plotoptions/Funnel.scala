@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.plotoptions
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-private[zeppelin] class Funnel extends BasePlotOptions with PublicApply {
+private[highcharts] class Funnel extends BasePlotOptions with PublicApply {
   def fieldName = "funnel"
 
   def allowPointSelect(value: Boolean): this.type = {

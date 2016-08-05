@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.plotoptions
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-private[zeppelin] class Series extends BasePlotOptions with PublicApply {
+private[highcharts] class Series extends BasePlotOptions with PublicApply {
   def fieldName = "series"
 
   def allowPointSelect(value: Boolean): this.type = {

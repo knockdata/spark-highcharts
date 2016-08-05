@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.plotoptions
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-private[zeppelin] class SolidGauge extends BasePlotOptions with PublicApply {
+private[highcharts] class SolidGauge extends BasePlotOptions with PublicApply {
   def fieldName = "solidgauge"
 
 

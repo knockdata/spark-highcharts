@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.plotoptions
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-private[zeppelin] class Pie extends BasePlotOptions with PublicApply {
+private[highcharts] class Pie extends BasePlotOptions with PublicApply {
   def fieldName = "pie"
 
   def allowPointSelect(value: Boolean): this.type = {

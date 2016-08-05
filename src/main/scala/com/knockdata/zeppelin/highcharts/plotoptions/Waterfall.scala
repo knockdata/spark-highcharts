@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.plotoptions
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-private[zeppelin] class Waterfall extends BasePlotOptions with PublicApply {
+private[highcharts] class Waterfall extends BasePlotOptions with PublicApply {
   def fieldName = "waterfall"
 
   def allowPointSelect(value: Boolean): this.type = {

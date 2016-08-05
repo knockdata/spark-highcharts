@@ -21,7 +21,7 @@ import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
 
-private[zeppelin] class AreaSpline extends BasePlotOptions with PublicApply{
+private[highcharts] class AreaSpline extends BasePlotOptions with PublicApply{
 
   def fieldName = "areaspline"
 
