@@ -325,12 +325,11 @@ object convert {
 
   def apply(rootDataFrame: DataFrame,
             colDefs: List[(String, Any)],
-            drillDefs1: List[(String, Any)],
-            drillDefsn: List[(String, Any)]*): (List[Series], List[Series]) = {
+            drillDefsList: List[List[(String, Any)]]): (List[Series], List[Series]) = {
     val buffer = mutable.ListBuffer[Data]()
 
 
-    drilldown(rootDataFrame, colDefs :: drillDefs1 :: drillDefsn.toList, Nil, buffer)
+    drilldown(rootDataFrame, colDefs :: drillDefsList, Nil, buffer)
 
     val normalData :: drilldownData = buffer.result()
     val normalSeries = toSeries(normalData)
@@ -422,8 +421,7 @@ object convert {
   def apply(rootDataFrame: DataFrame,
             seriesCol: String,
             colDefs: List[(String, Any)],
-            drillDefs1: List[(String, Any)],
-            drillDefsn: List[(String, Any)]*): (List[Series], List[Series]) = {
+            drillDefsList: List[List[(String, Any)]]): (List[Series], List[Series]) = {
 
     val allSeriesValues = rootDataFrame.select(seriesCol).distinct.orderBy(col(seriesCol)).collect.map(_.get(0))
 
@@ -435,8 +433,8 @@ object convert {
     val bufferNormalSeries = mutable.ListBuffer[Data]()
     val bufferDrilldownSeries = mutable.ListBuffer[Data]()
 
-    val drillDefsnList: List[List[(String , Any)]] = drillDefsn.toList
-    val drills: List[List[(String, Any)]] = colDefs :: drillDefs1 :: drillDefsnList
+    val allDefs = colDefs :: drillDefsList
+
     for (aSeriesValue <- allSeriesValues) {
       val seriesDataFrame =
         rootDataFrame.filter(column === aSeriesValue).selectExpr(wantedCols: _*)
@@ -444,7 +442,7 @@ object convert {
       val keys = s"$seriesCol=${aSeriesValue.toString}" :: Nil
       val buffer = mutable.ListBuffer[Data]()
 
-      drilldown(seriesDataFrame, drills, keys, buffer)
+      drilldown(seriesDataFrame, allDefs, keys, buffer)
 
       val normalSeries :: drilldownSeries = buffer.result()
 

@@ -64,14 +64,14 @@ class DemoBubbleChart {
     ).toDF("fat intake", "sugar intake", "obesity", "country code", "country")
 
 
-    highcharts(dataFrame)
-      .chart(Chart.bubble)
+    highcharts(dataFrame
       .series(
         "x" -> "fat intake",
         "y" -> "sugar intake",
         "z" -> "obesity",
         "name" -> "country code",
-        "country" -> "country")
+        "country" -> "country"))
+      .chart(Chart.bubble)
       .plotOptions(PlotOptions.bubble.dataLabels("enabled" -> true, "format" -> "{point.name}"))
       .xAxis(XAxis("fat intake daily"))
       .yAxis(YAxis("sugar intake daily")

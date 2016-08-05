@@ -43,10 +43,12 @@ class DemoColumnChart {
   //
   @Test
   def demoHistogram: Unit = {
-    highcharts(bank)
+    highcharts(
+      bank
+        .series("x" -> "age", "y" -> count("*"))
+        .orderBy(col("age"))
+      )
       .chart(Chart.column)
-      .series("x" -> "age", "y" -> count("*"))
-      .orderBy(col("age"))
       .plotOptions(PlotOptions.column.groupPadding(0).pointPadding(0).borderWidth(0))
       .plot()
   }
@@ -70,10 +72,11 @@ class DemoColumnChart {
 
     val dataFrame = (john ++ jane ++ joe).toDF("name", "consumption")
 
-    highcharts(dataFrame)
+    highcharts(
+      dataFrame
+        .seriesCol("name")
+        .series("y" -> "consumption"))
       .chart(Chart.column)
-      .seriesCol("name")
-      .series("y" -> "consumption")
       .xAxis(XAxis("").categories("Apples", "Oranges", "Pears", "Grapes", "Bananas"))
       .plotOptions(PlotOptions.column.stacking("normal"))
       .plot()

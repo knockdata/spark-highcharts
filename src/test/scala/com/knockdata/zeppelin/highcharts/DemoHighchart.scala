@@ -23,8 +23,11 @@ import org.junit.Test
 
 
 import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.zeppelin.highcharts._
 
 class DemoHighchart extends AbstractTestCase{
+
+  val bank = DataSet.dfBank
 
   def debug(result: List[(List[String], Array[String], Array[Row])]): Unit = {
     val msg = result.map{case (keys, cols, rows) => keys.mkString(",") + "\n" + rows.mkString("\n")}.mkString("\n")
@@ -42,11 +45,13 @@ class DemoHighchart extends AbstractTestCase{
 
   @Test
   def testDrilldown1Level: Unit = {
-    val chart: Highcharts = convert(DataSet.dfBank,
-      List("name" -> "marital",
-        "y" -> avg(col("balance"))),
-      List("name" -> "job",
-        "y" -> avg(col("balance"))))
+    val chart: Highcharts = highcharts(
+      DataSet.dfBank
+        .series("name" -> "marital",
+            "y" -> avg(col("balance")))
+        .drilldown(
+          "name" -> "job",
+            "y" -> avg(col("balance"))))
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/Drilldown1Level.json", chart)
   }
@@ -69,10 +74,10 @@ class DemoHighchart extends AbstractTestCase{
     val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital",
         "y" -> avg(col("balance"))),
-      List("name" -> "job",
+      List(List("name" -> "job",
         "y" -> avg(col("balance"))),
       List("name" -> "education",
-        "y" -> avg(col("balance"))))
+        "y" -> avg(col("balance")))))
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/Drilldown2Level.json", chart)
   }
@@ -84,8 +89,8 @@ class DemoHighchart extends AbstractTestCase{
     val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital", "job" -> "job",
         "y" -> avg(col("balance"))),
-      List("name" -> "education",
-        "y" -> avg(col("balance"))))
+      List(List("name" -> "education",
+        "y" -> avg(col("balance")))))
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/2ColumnDrilldown1Level.json", chart)
 
@@ -110,8 +115,8 @@ class DemoHighchart extends AbstractTestCase{
     val chart: Highcharts = convert(DataSet.dfBank, "marital",
       List("name" -> "job",
         "y" -> avg(col("balance"))),
-      List("name" -> "education",
-        "y" -> avg(col("balance"))))
+      List(List("name" -> "education",
+        "y" -> avg(col("balance")))))
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/SeriesDrilldown1Level.json", chart)
   }

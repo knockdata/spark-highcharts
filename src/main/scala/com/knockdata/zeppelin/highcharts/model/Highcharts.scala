@@ -22,8 +22,10 @@ import com.knockdata.zeppelin.highcharts._
 
 import scala.collection.mutable
 
-class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply {
+class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with PublicApply {
   override def fieldName: String = "highcharts"
+
+  def this(series: Series*) = this(series.toList)
 
   private var _drilldown: Option[Drilldown] = None
   private val optionsBuffer = mutable.Buffer[BaseModel]()
@@ -154,8 +156,8 @@ class Highcharts(series: Series*) extends BaseModel with Margin with PublicApply
   }
 
   override def preProcessResult(): Unit = {
-    append("series", series.toList)
-    for (s <- series) {
+    append("series", seriesList.toList)
+    for (s <- seriesList) {
       codes ++= s.codes
     }
 

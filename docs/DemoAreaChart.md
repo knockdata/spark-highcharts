@@ -40,10 +40,10 @@ val USSR = Seq(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 val dataFrame = (USA ++ USSR).toDF("country", "stockpile", "year")
 
-highcharts(dataFrame)
-  .chart(Chart.area)
+highcharts(dataFrame
   .seriesCol("country")
   .series("x" -> "year", "y" -> "stockpile")
-  .orderBy(col("year"))
+  .orderBy(col("year")))
+  .chart(Chart.area)
   .plot()
 ```

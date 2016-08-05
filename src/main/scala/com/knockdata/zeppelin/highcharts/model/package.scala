@@ -24,15 +24,15 @@ import scala.language.implicitConversions
 package object model {
   implicit def normalNDrilldownSeriesListToHighcharts(allSeries: (List[Series], List[Series])): Highcharts = {
     val (normalSeriesList, drilldownSeriesList) = allSeries
-    new Highcharts(normalSeriesList:_*).drilldown(drilldownSeriesList)
+    new Highcharts(normalSeriesList).drilldown(drilldownSeriesList)
   }
 
   implicit def normalSeriesListToHighcharts(normalSeriesList: List[Series]): Highcharts = {
-    new Highcharts(normalSeriesList:_*)
+    new Highcharts(normalSeriesList)
   }
 
   implicit def normalSeriesToHighcharts(normalSeries: Series): Highcharts = {
-    new Highcharts(normalSeries)
+    new Highcharts(List(normalSeries))
   }
 
 }

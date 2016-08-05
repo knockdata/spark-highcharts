@@ -48,9 +48,9 @@ class DemoLineChart {
 
     dataFrame.show()
 
-    highcharts(dataFrame)
+    highcharts(dataFrame
       .seriesCol("city")
-      .series("y" -> col("temperature"))
+      .series("y" -> col("temperature")))
       .plot()
   }
 
@@ -67,9 +67,9 @@ class DemoLineChart {
   //
   @Test
   def demoLineBasic: Unit = {
-    highcharts(bank)
+    highcharts(bank
       .series("x" -> "age", "y" -> avg(col("balance")))
-      .orderBy(col("age")).plot()
+      .orderBy(col("age"))).plot()
 
   }
 
@@ -86,9 +86,9 @@ class DemoLineChart {
   @Test
   def demoLineBasicAsc: Unit = {
 
-    highcharts(bank)
+    highcharts(bank
       .series("x" -> "age", "y" -> avg(col("balance")))
-      .orderBy(col("age").asc).plot()
+      .orderBy(col("age").asc)).plot()
   }
 
   // ## Line Chart Basic, Descending Order
@@ -104,9 +104,9 @@ class DemoLineChart {
   @Test
   def demoLineBasicDesc: Unit = {
 
-    highcharts(bank)
+    highcharts(bank
       .series("name" -> "age", "y" -> avg(col("balance")))
-      .orderBy(col("age").desc)
+      .orderBy(col("age").desc))
       .xAxis(new XAxis("age").typ("category"))
       .plot()
 
@@ -125,9 +125,9 @@ class DemoLineChart {
   //
   @Test
   def demoLineBasicMultipleSeriesWithoutOption: Unit = {
-    highcharts(bank).seriesCol("marital")
+    highcharts(bank.seriesCol("marital")
       .series("name" -> "age", "y" -> avg(col("balance")))
-      .orderBy(col("age"))
+      .orderBy(col("age")))
       .plot()
   }
 
@@ -144,10 +144,10 @@ class DemoLineChart {
   //
   @Test
   def demoLineBasicMultipleSeriesWithOption: Unit = {
-    highcharts(bank).seriesCol("marital")
+    highcharts(bank.seriesCol("marital")
       .series("name" -> "age",
         "y" -> avg(col("balance")))
-      .orderBy(col("age"))
+      .orderBy(col("age")))
       .title(new Title("Marital Job Average Balance").x(-20))
       .subtitle(new Subtitle("Source: Zeppelin Tutorial").x(-20))
       .xAxis(new XAxis("Age").typ("category"))
@@ -172,8 +172,8 @@ class DemoLineChart {
   //
   @Test
   def demoLineWithDataLabels: Unit = {
-    highcharts(bank).series("name" -> "job", "y" -> avg(col("balance")))
-      .orderBy(col("job"))
+    highcharts(bank.series("name" -> "job", "y" -> avg(col("balance")))
+      .orderBy(col("job")))
       .plotOptions(PlotOptions.line
         .dataLabels("enabled" -> true, "format" -> "{point.y:.2f}"))
       .tooltip(new Tooltip().valueDecimals(2)).plot()
@@ -203,8 +203,8 @@ class DemoLineChart {
           (1, "Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')"))
 
 
-    highcharts(bank).series("name" -> "age", "y" -> avg(col("balance")))
-      .orderBy(col("age"))
+    highcharts(bank.series("name" -> "age", "y" -> avg(col("balance")))
+      .orderBy(col("age")))
       .chart(Chart.area.zoomType("x"))
       .plotOptions(options).plot()
   }
@@ -221,8 +221,8 @@ class DemoLineChart {
   //
   @Test
   def demoSplineInverted: Unit = {
-    highcharts(bank).series("x" -> "age", "y" -> avg(col("balance")))
-      .orderBy(col("age"))
+    highcharts(bank.series("x" -> "age", "y" -> avg(col("balance")))
+      .orderBy(col("age")))
       .chart(Chart.spline.inverted(true))
       .plot()
   }
@@ -262,8 +262,8 @@ class DemoLineChart {
         )
       )
     )
-    highcharts(bank).series("x" -> "age", "y" -> avg(col("balance")))
-      .orderBy(col("age"))
+    highcharts(bank.series("x" -> "age", "y" -> avg(col("balance")))
+      .orderBy(col("age")))
       .yAxis(yAxis)
       .plot()
   }
@@ -280,8 +280,8 @@ class DemoLineChart {
   //
   @Test
   def demoTimeDataWithIrregularIntervals: Unit = {
-    highcharts(DataSet.dfSnowDepth).seriesCol("year")
-      .series("x" -> "time", "y" -> "depth")
+    highcharts(DataSet.dfSnowDepth.seriesCol("year")
+      .series("x" -> "time", "y" -> "depth"))
       .chart(Chart.spline)
       .title(new Title("Snow depth at Vikjafjellet, Norway"))
       .subtitle(new Subtitle("Irregular time data in Highcharts JS"))

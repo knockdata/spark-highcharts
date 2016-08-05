@@ -86,7 +86,7 @@ class TestAreaBasic extends AbstractTestCase{
       name("USSR/Russia")
 
 
-    val chart = new Highcharts(seriesUSA, seriesRussia)
+    val chart = new Highcharts(List(seriesUSA, seriesRussia))
     chart.options(Chart.area,
       title,
       subtitle,

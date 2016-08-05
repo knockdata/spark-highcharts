@@ -21,11 +21,11 @@ Then it drilldown to
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank)
+highcharts(bank
   .series("name" -> "marital",
     "y" -> avg(col("balance")))
   .drilldown("name" -> "job",
-    "y" -> avg(col("balance")))
+    "y" -> avg(col("balance"))))
   .chart(Chart.column)
   .plot()
 ```
@@ -60,13 +60,13 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 
-highcharts(bank)
+highcharts(bank
   .series("name" -> "marital",
     "y" -> avg(col("balance")))
   .drilldown("name" -> "job",
     "y" -> avg(col("balance")))
   .drilldown("name" -> "education",
-    "y" -> max(col("balance")))
+    "y" -> max(col("balance"))))
   .chart(Chart.column)
   .plot()
 
@@ -99,11 +99,11 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 
-highcharts(bank)
+highcharts(bank
   .seriesCol("marital")
   .series("name" -> "job",
     "y" -> avg(col("balance")))
   .drilldown("name" -> "education",
-    "y" -> avg(col("balance")))
+    "y" -> avg(col("balance"))))
   .plot()
 ```

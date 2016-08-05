@@ -201,7 +201,7 @@ class Axis(text: String = "") extends BaseModel with PublicApply {
   def plotBand(values: (String, Any)*): this.type = {
     append("plotBands", List(values.toMap))
   }
-  
+
   def plotLines(values: Map[String, Any]*): this.type = {
     append("plotLines", values.toList)
   }

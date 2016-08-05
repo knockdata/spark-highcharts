@@ -43,10 +43,10 @@ class DemoBarChart {
   //
   @Test
   def demoHistogram: Unit = {
-    highcharts(bank)
-      .chart(Chart.column)
+    highcharts(bank
       .series("x" -> "age", "y" -> count("*"))
-      .orderBy(col("age"))
+      .orderBy(col("age")))
+      .chart(Chart.column)
       .plotOptions(PlotOptions.column.groupPadding(0).pointPadding(0).borderWidth(0))
       .plot()
   }
@@ -79,10 +79,10 @@ class DemoBarChart {
 
     val dataFrame = (male ++ female).toDF("gender", "population")
 
-    highcharts(dataFrame)
-      .chart(Chart.bar)
+    highcharts(dataFrame
       .seriesCol("gender")
-      .series("y" -> "population")
+      .series("y" -> "population"))
+      .chart(Chart.bar)
       .xAxis(XAxis("").categories(categories))
       .xAxis(XAxis("").categories(categories).opposite(true).linkedTo(0))
       .plotOptions(PlotOptions.series.stacking("normal"))

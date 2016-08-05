@@ -23,9 +23,9 @@ val dataFrame = (Tokyo ++ NewYork ++ Berlin ++ London).toDF("city", "temperature
 
 dataFrame.show()
 
-highcharts(dataFrame)
+highcharts(dataFrame
   .seriesCol("city")
-  .series("y" -> col("temperature"))
+  .series("y" -> col("temperature")))
   .plot()
 ```
 
@@ -45,9 +45,9 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank)
+highcharts(bank
   .series("x" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age")).plot()
+  .orderBy(col("age"))).plot()
 
 ```
 
@@ -68,9 +68,9 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 
-highcharts(bank)
+highcharts(bank
   .series("x" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age").asc).plot()
+  .orderBy(col("age").asc)).plot()
 ```
 
 ## Line Chart Basic, Descending Order
@@ -90,9 +90,9 @@ import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
 
-highcharts(bank)
+highcharts(bank
   .series("name" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age").desc)
+  .orderBy(col("age").desc))
   .xAxis(new XAxis("age").typ("category"))
   .plot()
 
@@ -115,9 +115,9 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank).seriesCol("marital")
+highcharts(bank.seriesCol("marital")
   .series("name" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age"))
+  .orderBy(col("age")))
   .plot()
 ```
 
@@ -138,10 +138,10 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank).seriesCol("marital")
+highcharts(bank.seriesCol("marital")
   .series("name" -> "age",
     "y" -> avg(col("balance")))
-  .orderBy(col("age"))
+  .orderBy(col("age")))
   .title(new Title("Marital Job Average Balance").x(-20))
   .subtitle(new Subtitle("Source: Zeppelin Tutorial").x(-20))
   .xAxis(new XAxis("Age").typ("category"))
@@ -170,8 +170,8 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank).series("name" -> "job", "y" -> avg(col("balance")))
-  .orderBy(col("job"))
+highcharts(bank.series("name" -> "job", "y" -> avg(col("balance")))
+  .orderBy(col("job")))
   .plotOptions(PlotOptions.line
     .dataLabels("enabled" -> true, "format" -> "{point.y:.2f}"))
   .tooltip(new Tooltip().valueDecimals(2)).plot()
@@ -205,8 +205,8 @@ val options = PlotOptions.area
       (1, "Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')"))
 
 
-highcharts(bank).series("name" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age"))
+highcharts(bank.series("name" -> "age", "y" -> avg(col("balance")))
+  .orderBy(col("age")))
   .chart(Chart.area.zoomType("x"))
   .plotOptions(options).plot()
 ```
@@ -227,8 +227,8 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank).series("x" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age"))
+highcharts(bank.series("x" -> "age", "y" -> avg(col("balance")))
+  .orderBy(col("age")))
   .chart(Chart.spline.inverted(true))
   .plot()
 ```
@@ -277,8 +277,8 @@ val yAxis = new YAxis("Average Balance").plotBands(
     )
   )
 )
-highcharts(bank).series("x" -> "age", "y" -> avg(col("balance")))
-  .orderBy(col("age"))
+highcharts(bank.series("x" -> "age", "y" -> avg(col("balance")))
+  .orderBy(col("age")))
   .yAxis(yAxis)
   .plot()
 ```
@@ -299,8 +299,8 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(DataSet.dfSnowDepth).seriesCol("year")
-  .series("x" -> "time", "y" -> "depth")
+highcharts(DataSet.dfSnowDepth.seriesCol("year")
+  .series("x" -> "time", "y" -> "depth"))
   .chart(Chart.spline)
   .title(new Title("Snow depth at Vikjafjellet, Norway"))
   .subtitle(new Subtitle("Irregular time data in Highcharts JS"))

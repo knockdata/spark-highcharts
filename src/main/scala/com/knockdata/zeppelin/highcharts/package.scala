@@ -20,6 +20,8 @@ package com.knockdata.zeppelin
 import java.security.MessageDigest
 import java.util.UUID
 
+import org.apache.spark.sql.DataFrame
+
 package object highcharts {
   def md5(data: String) =
     MessageDigest.getInstance("MD5").digest(data.getBytes)
@@ -27,5 +29,5 @@ package object highcharts {
 
   def id = UUID.randomUUID.toString
 
-
+  implicit def dataFrame2SeriesHolder(dataFrame: DataFrame) = new SeriesHolder(dataFrame)
 }

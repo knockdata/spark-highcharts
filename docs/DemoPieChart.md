@@ -92,7 +92,7 @@ val seriesVersion = Series(dataFrame,
       |}
     """.stripMargin)
 
-val chart = new Highcharts(seriesBrowser, seriesVersion)
+val chart = new Highcharts(List(seriesBrowser, seriesVersion))
   .chart(Chart.pie)
 
 chart.plot()
@@ -144,10 +144,10 @@ val categories = List("0-4", "5-9", "10-14", "15-19",
 
 val dataFrame = (male ++ female).toDF("gender", "population")
 
-highcharts(dataFrame)
-  .chart(Chart.bar)
+highcharts(dataFrame
   .seriesCol("gender")
-  .series("y" -> "population")
+  .series("y" -> "population"))
+  .chart(Chart.bar)
   .xAxis(XAxis("").categories(categories))
   .xAxis(XAxis("").categories(categories).opposite(true).linkedTo(0))
   .plotOptions(PlotOptions.series.stacking("normal"))

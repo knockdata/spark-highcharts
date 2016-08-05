@@ -18,10 +18,10 @@ an line chart with
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
 
-highcharts(bank)
-  .chart(Chart.column)
+highcharts(bank
   .series("x" -> "age", "y" -> count("*"))
-  .orderBy(col("age"))
+  .orderBy(col("age")))
+  .chart(Chart.column)
   .plotOptions(PlotOptions.column.groupPadding(0).pointPadding(0).borderWidth(0))
   .plot()
 ```
@@ -58,10 +58,10 @@ val categories = List("0-4", "5-9", "10-14", "15-19",
 
 val dataFrame = (male ++ female).toDF("gender", "population")
 
-highcharts(dataFrame)
-  .chart(Chart.bar)
+highcharts(dataFrame
   .seriesCol("gender")
-  .series("y" -> "population")
+  .series("y" -> "population"))
+  .chart(Chart.bar)
   .xAxis(XAxis("").categories(categories))
   .xAxis(XAxis("").categories(categories).opposite(true).linkedTo(0))
   .plotOptions(PlotOptions.series.stacking("normal"))

@@ -45,11 +45,11 @@ class DemoDrillDown {
   // * y axis aggregated the average balance
   @Test
   def demoDrilldownBasic: Unit = {
-    highcharts(bank)
+    highcharts(bank
       .series("name" -> "marital",
         "y" -> avg(col("balance")))
       .drilldown("name" -> "job",
-        "y" -> avg(col("balance")))
+        "y" -> avg(col("balance"))))
       .chart(Chart.column)
       .plot()
   }
@@ -80,13 +80,13 @@ class DemoDrillDown {
   @Test
   def demoDrilldown2Level: Unit = {
 
-    highcharts(bank)
+    highcharts(bank
       .series("name" -> "marital",
         "y" -> avg(col("balance")))
       .drilldown("name" -> "job",
         "y" -> avg(col("balance")))
       .drilldown("name" -> "education",
-        "y" -> max(col("balance")))
+        "y" -> max(col("balance"))))
       .chart(Chart.column)
       .plot()
 
@@ -115,12 +115,12 @@ class DemoDrillDown {
   @Test
   def demoLineBasicDesc: Unit = {
 
-    highcharts(bank)
+    highcharts(bank
       .seriesCol("marital")
       .series("name" -> "job",
         "y" -> avg(col("balance")))
       .drilldown("name" -> "education",
-        "y" -> avg(col("balance")))
+        "y" -> avg(col("balance"))))
       .plot()
   }
 

@@ -17,10 +17,27 @@
 
 package com.knockdata.zeppelin.highcharts
 
+import com.knockdata.zeppelin.highcharts.model._
 import org.apache.spark.sql.DataFrame
 
+import scala.collection.mutable
+
 object highcharts {
-  def apply(dataFrame: DataFrame): HighchartsHolder = {
-    new HighchartsHolder(dataFrame)
+  def apply(seriesHolders: SeriesHolder*): Highcharts = {
+    val normalSeriesBuffer = mutable.Buffer[Series]()
+    val drilldownSeriesBuffer = mutable.Buffer[Series]()
+
+    for (holder <- seriesHolders) {
+      val (normalSeriesList, drilldownSeriesList) = holder.result
+
+      normalSeriesBuffer ++= normalSeriesList
+      drilldownSeriesBuffer ++= drilldownSeriesList
+    }
+
+    new Highcharts(normalSeriesBuffer.toList).drilldown(drilldownSeriesBuffer.toList)
   }
+
+//  def apply(dataFrame: DataFrame): HighchartsHolder = {
+//    new HighchartsHolder(dataFrame)
+//  }
 }
