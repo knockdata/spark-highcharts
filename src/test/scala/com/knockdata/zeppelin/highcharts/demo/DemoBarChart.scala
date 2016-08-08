@@ -42,7 +42,7 @@ class DemoBarChart {
   // * data point order by age
   //
   @Test
-  def demoHistogram: Unit = {
+  def demoHistogram(): Unit = {
     highcharts(bank
       .series("x" -> "age", "y" -> count("*"))
       .orderBy(col("age")))
@@ -61,7 +61,7 @@ class DemoBarChart {
   // * y from $"consumption"
   //
   @Test
-  def demoStackedColumn: Unit = {
+  def demoStackedColumn(): Unit = {
     import sqlContext.implicits._
 
     val male = Seq(-2.2, -2.2, -2.3, -2.5, -2.7, -3.1, -3.2,

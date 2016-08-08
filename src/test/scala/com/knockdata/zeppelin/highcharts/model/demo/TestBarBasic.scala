@@ -29,7 +29,7 @@ import org.junit.Test
 class TestBarBasic extends AbstractTestCase{
 
   @Test
-  def testAreaBasic: Unit = {
+  def testAreaBasic(): Unit = {
     val title = new Title("Historic World Population by Region")
 
     val subtitle = new Subtitle(

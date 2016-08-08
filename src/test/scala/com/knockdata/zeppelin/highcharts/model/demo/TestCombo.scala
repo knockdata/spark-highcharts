@@ -28,7 +28,7 @@ import org.junit.Test
 class TestCombo extends AbstractTestCase{
 
   @Test
-  def testAreaBasic: Unit = {
+  def testAreaBasic(): Unit = {
     val title = new Title("Combination chart")
 
     val subtitle = new Subtitle(

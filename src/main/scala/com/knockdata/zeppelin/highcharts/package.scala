@@ -22,6 +22,8 @@ import java.util.UUID
 
 import org.apache.spark.sql.DataFrame
 
+import scala.language.implicitConversions
+
 package object highcharts {
   def md5(data: String) =
     MessageDigest.getInstance("MD5").digest(data.getBytes)
@@ -29,5 +31,5 @@ package object highcharts {
 
   def id = UUID.randomUUID.toString
 
-  implicit def dataFrame2SeriesHolder(dataFrame: DataFrame) = new SeriesHolder(dataFrame)
+  implicit def dataFrame2SeriesHolder(dataFrame: DataFrame): SeriesHolder = new SeriesHolder(dataFrame)
 }

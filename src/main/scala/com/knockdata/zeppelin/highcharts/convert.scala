@@ -90,11 +90,11 @@ object convert {
       if (optionFields.contains(fieldName)) {
         optionDefBuffer += fieldName -> theDef
       }
-      else if (theDef.isInstanceOf[String]) {
-        nameDefBuffer += fieldName -> theDef.asInstanceOf[String]
-      }
-      else {
-        aggDefBuffer += fieldName -> theDef.asInstanceOf[Column]
+      else theDef match {
+        case s: String =>
+          nameDefBuffer += fieldName -> s
+        case _ =>
+          aggDefBuffer += fieldName -> theDef.asInstanceOf[Column]
       }
 
     }
@@ -233,7 +233,7 @@ object convert {
     // start from currentDataFrame
     val nextDF = (currentDataFrame /: groupByColumns) (
       (df: DataFrame, pair: (String, String)) => {
-        val (fieldName, colName) = pair
+        val (_, colName) = pair
         df.filter(col(colName) === row.getAs[Any](colName))
       }
     ).selectExpr(wantedCols: _*)
@@ -292,7 +292,7 @@ object convert {
 
       // for each row, we need drilldown once (create one more data series)
       rows.foreach {
-        case row: Row =>
+        row =>
           val (nextKeys, nextDF) = nextDFs(currentDataFrame, row, drillColumns)
           val fullNextKeys: List[String] = currentKeys ::: nextKeys
 
@@ -396,7 +396,6 @@ object convert {
     val wantedCols = rootDataFrame.columns.filter(_ != seriesCol)
 
     val bufferNormalSeries = mutable.ListBuffer[Data]()
-    val bufferDrilldownSeries = mutable.ListBuffer[Data]()
 
     val drills = colDefs :: Nil
     for (aSeriesValue <- allSeriesValues) {
@@ -478,12 +477,8 @@ object convert {
   }
 
   def getNameRows(data: Data): Map[String, Row] = {
-
-    val (colNameDefs, colAggDefs, optionDefs) = partitionDefs(data.allDefs)
-
-    val colNameMap = colNameDefs.toMap
     data.rows.map {
-      case row =>
+      row =>
         val category = row.get(0).toString
         (category, row)
     }.toMap
@@ -524,9 +519,7 @@ object convert {
     * @return
     */
   private def toSeriesList(allData: List[Data]): List[Series] = {
-    val allSeries = allData.map {
-      toSeries(_)
-    }
+    val allSeries = allData.map(toSeries)
 
     allSeries
   }
@@ -535,7 +528,7 @@ object convert {
     val allSeries = allData.map {
       categories match {
         case Nil =>
-          toSeries(_)
+          toSeries
         case xs =>
           toSeries(_, categories)
       }
@@ -544,5 +537,4 @@ object convert {
 
     allSeries
   }
-
 }

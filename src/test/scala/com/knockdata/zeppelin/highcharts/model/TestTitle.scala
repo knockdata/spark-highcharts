@@ -23,7 +23,7 @@ import org.junit.Test
 
 class TestTitle {
     @Test
-  def testEmpty: Unit = {
+  def testEmpty(): Unit = {
     val expected =
       """
         {}
@@ -34,7 +34,7 @@ class TestTitle {
   }
 
   @Test
-  def testX: Unit = {
+  def testX(): Unit = {
     val expected =
       """
         |{
@@ -49,7 +49,7 @@ class TestTitle {
   }
 
   @Test
-  def testAlign: Unit = {
+  def testAlign(): Unit = {
     val expected =
       """
         |{

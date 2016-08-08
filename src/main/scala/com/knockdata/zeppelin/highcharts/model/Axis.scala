@@ -28,7 +28,7 @@ class Axis(text: String = "") extends BaseModel with PublicApply {
     if (text != "") {
       append("title", "text", text)
     }
-    super.preProcessResult
+    super.preProcessResult()
   }
 
 

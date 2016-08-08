@@ -23,7 +23,7 @@ import org.junit.Test
 
 class TestSeries extends AbstractTestCase{
   @Test
-  def testSeriesListInt: Unit = {
+  def testSeriesListInt(): Unit = {
     val expected =
       """
         |{
@@ -37,7 +37,7 @@ class TestSeries extends AbstractTestCase{
   }
 
   @Test
-  def testSeriesListPair: Unit = {
+  def testSeriesListPair(): Unit = {
     val expected = """
                   |{
                   |  "data":[[5, 2], [6, 3], [8, 2]],
@@ -67,7 +67,7 @@ class TestSeries extends AbstractTestCase{
 //  }
 
   @Test
-  def testSeriesListNamedValue: Unit = {
+  def testSeriesListNamedValue(): Unit = {
     val expected =
       """
         |{
@@ -96,7 +96,7 @@ class TestSeries extends AbstractTestCase{
   }
 
   @Test
-  def testSeriesListMarker: Unit = {
+  def testSeriesListMarker(): Unit = {
     val expected =
       """
         |{

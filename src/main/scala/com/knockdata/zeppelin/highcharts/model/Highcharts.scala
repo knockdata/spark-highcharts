@@ -156,15 +156,15 @@ class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with Pu
   }
 
   override def preProcessResult(): Unit = {
-    append("series", seriesList.toList)
+    append("series", seriesList)
     for (s <- seriesList) {
       codes ++= s.codes
     }
 
     _drilldown.foreach(value => append("drilldown", value))
-    options(optionsBuffer.toList:_*)
+    options(optionsBuffer.toList: _*)
 
-    super.preProcessResult
+    super.preProcessResult()
   }
 }
 

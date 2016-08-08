@@ -35,7 +35,7 @@ class DemoHighchart extends AbstractTestCase{
   }
 
   @Test
-  def test1ColumnWithAgg: Unit = {
+  def test1ColumnWithAgg(): Unit = {
     val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital",
         "y" -> avg(col("balance"))))
@@ -44,7 +44,7 @@ class DemoHighchart extends AbstractTestCase{
   }
 
   @Test
-  def testDrilldown1Level: Unit = {
+  def testDrilldown1Level(): Unit = {
     val chart: Highcharts = highcharts(
       DataSet.dfBank
         .series("name" -> "marital",
@@ -57,7 +57,7 @@ class DemoHighchart extends AbstractTestCase{
   }
 
   @Test
-  def test2ColumnWithAgg: Unit = {
+  def test2ColumnWithAgg(): Unit = {
     // example for HeatMap
     val chart: Highcharts = convert(DataSet.dfBank,
       List("x" -> "marital", "y" -> "job",
@@ -67,7 +67,7 @@ class DemoHighchart extends AbstractTestCase{
   }
 
   @Test
-  def testDrilldown2Level: Unit = {
+  def testDrilldown2Level(): Unit = {
     // with 3 levels, the output is pretty big
     // number of data point is
     // size(marital) + size(marital) * size(balance) + size(marital) * size(balance) + size(education)
@@ -83,7 +83,7 @@ class DemoHighchart extends AbstractTestCase{
   }
 
   @Test
-  def test2ColumnDrilldown1Level: Unit = {
+  def test2ColumnDrilldown1Level(): Unit = {
     // there is no such Highchart which accept job field
     // it is only for a test to see drilldown works with 2 name column
     val chart: Highcharts = convert(DataSet.dfBank,
@@ -97,7 +97,7 @@ class DemoHighchart extends AbstractTestCase{
   }
 
   @Test
-  def testSeriesWithAgg: Unit = {
+  def testSeriesWithAgg(): Unit = {
     val chart: Highcharts = convert(DataSet.dfBank,
       "marital",
       List("name" -> "job",
@@ -108,7 +108,7 @@ class DemoHighchart extends AbstractTestCase{
   }
 
   @Test
-  def testSeriesDrilldown1Level: Unit = {
+  def testSeriesDrilldown1Level(): Unit = {
     // with 3 levels, the output is pretty big
     // number of data point is
     // size(marital) + size(marital) * size(balance) + size(marital) * size(balance) + size(education)

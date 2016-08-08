@@ -23,8 +23,8 @@ import org.skyscreamer.jsonassert.{JSONAssert, JSONCompare, JSONCompareMode}
 
 trait AbstractTestCase {
 
-  val isDebug = java.lang.management.ManagementFactory.getRuntimeMXBean().
-    getInputArguments().toString().indexOf("jdwp") >= 0
+  val isDebug = java.lang.management.ManagementFactory.getRuntimeMXBean.
+    getInputArguments.toString.indexOf("jdwp") >= 0
 
   def debug(msg: String) = {
     if (isDebug) {
@@ -51,18 +51,18 @@ trait AbstractTestCase {
   def assertEqualJson(expected: String, actual: String): Unit = {
     val compareMode = JSONCompareMode.NON_EXTENSIBLE
     val result = try {
-      JSONCompare.compareJSON(expected, actual, compareMode);
+      JSONCompare.compareJSON(expected, actual, compareMode)
     }
     catch {
       case ex: JSONException =>
         val msg = s"actual \n$actual"
         println(msg)
-        throw new AssertionError(ex.getMessage());
+        throw new AssertionError(ex.getMessage)
     }
     if(result.failed()) {
         val msg = s"actual \n$actual \n!= expected \n$expected"
         println(msg)
-        throw new AssertionError(result.getMessage());
+        throw new AssertionError(result.getMessage)
     }
       JSONAssert.assertEquals(expected, actual, false)
 

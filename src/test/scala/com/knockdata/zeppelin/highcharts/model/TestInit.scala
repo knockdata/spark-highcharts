@@ -24,18 +24,18 @@ import org.junit.Test
 class TestInit {
 
   @Test
-  def testInitBasic: Unit = {
+  def testInitBasic(): Unit = {
     Init.init("highcharts")
   }
 
 
   @Test
-  def testInit: Unit = {
+  def testInit(): Unit = {
     Init.init()
   }
 
   @Test
-  def testHighcharts: Unit = {
+  def testHighcharts(): Unit = {
     Init.init("map")
   }
 }

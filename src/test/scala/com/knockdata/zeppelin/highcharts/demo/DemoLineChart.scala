@@ -32,7 +32,7 @@ class DemoLineChart {
   val bank = DataSet.dfBank
 
   @Test
-  def demoBasicLine: Unit = {
+  def demoBasicLine(): Unit = {
     import sqlContext.implicits._
 
     val Tokyo = Seq(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6)
@@ -66,7 +66,7 @@ class DemoLineChart {
   // * data point order by age
   //
   @Test
-  def demoLineBasic: Unit = {
+  def demoLineBasic(): Unit = {
     highcharts(bank
       .series("x" -> "age", "y" -> avg(col("balance")))
       .orderBy(col("age"))).plot()
@@ -84,7 +84,7 @@ class DemoLineChart {
   // * data point order by age, specified EXPLICITLY ascending order
   //
   @Test
-  def demoLineBasicAsc: Unit = {
+  def demoLineBasicAsc(): Unit = {
 
     highcharts(bank
       .series("x" -> "age", "y" -> avg(col("balance")))
@@ -102,7 +102,7 @@ class DemoLineChart {
   // * data point order by age, descending order
   //
   @Test
-  def demoLineBasicDesc: Unit = {
+  def demoLineBasicDesc(): Unit = {
 
     highcharts(bank
       .series("name" -> "age", "y" -> avg(col("balance")))
@@ -124,7 +124,7 @@ class DemoLineChart {
   // * data point order by age, descending order
   //
   @Test
-  def demoLineBasicMultipleSeriesWithoutOption: Unit = {
+  def demoLineBasicMultipleSeriesWithoutOption(): Unit = {
     highcharts(bank.seriesCol("marital")
       .series("name" -> "age", "y" -> avg(col("balance")))
       .orderBy(col("age")))
@@ -143,7 +143,7 @@ class DemoLineChart {
   // * data point order by age
   //
   @Test
-  def demoLineBasicMultipleSeriesWithOption: Unit = {
+  def demoLineBasicMultipleSeriesWithOption(): Unit = {
     highcharts(bank.seriesCol("marital")
       .series("name" -> "age",
         "y" -> avg(col("balance")))
@@ -171,7 +171,7 @@ class DemoLineChart {
   // * data point order by $"job"
   //
   @Test
-  def demoLineWithDataLabels: Unit = {
+  def demoLineWithDataLabels(): Unit = {
     highcharts(bank.series("name" -> "job", "y" -> avg(col("balance")))
       .orderBy(col("job")))
       .plotOptions(PlotOptions.line
@@ -195,7 +195,7 @@ class DemoLineChart {
   // linearGradient is not described in [Highcharts API](http://api.highcharts.com/highcharts#plotOptions.area.fillColor)
   //
   @Test
-  def demoLineZoomable: Unit = {
+  def demoLineZoomable(): Unit = {
 
     val options = PlotOptions.area
       .fillColorLinearGradient("x1" -> 0, "y1" -> 0, "x2" -> 0, "y2" -> 1)
@@ -220,7 +220,7 @@ class DemoLineChart {
   // * data point order by $"job"
   //
   @Test
-  def demoSplineInverted: Unit = {
+  def demoSplineInverted(): Unit = {
     highcharts(bank.series("x" -> "age", "y" -> avg(col("balance")))
       .orderBy(col("age")))
       .chart(Chart.spline.inverted(true))
@@ -228,7 +228,7 @@ class DemoLineChart {
   }
 
   @Test
-  def demoSplineWithSymbols: Unit = {
+  def demoSplineWithSymbols(): Unit = {
     // TODO
   }
 
@@ -243,7 +243,7 @@ class DemoLineChart {
   // * data point order by $"job"
   //
   @Test
-  def demoSplineWithPlotBands: Unit = {
+  def demoSplineWithPlotBands(): Unit = {
     val yAxis = new YAxis("Average Balance").plotBands(
       Map("from" -> 0, "to" -> 1000, "color" -> "rgba(68, 170, 213, 0.1)",
         "label" -> Map(
@@ -279,7 +279,7 @@ class DemoLineChart {
   // * y axis using $"depth"
   //
   @Test
-  def demoTimeDataWithIrregularIntervals: Unit = {
+  def demoTimeDataWithIrregularIntervals(): Unit = {
     highcharts(DataSet.dfSnowDepth.seriesCol("year")
       .series("x" -> "time", "y" -> "depth"))
       .chart(Chart.spline)

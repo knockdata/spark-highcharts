@@ -41,7 +41,7 @@ object Init {
     "http://code.highcharts.com/mapdata/countries/us/us-all.js")
 
   val highchartName2Url = allHighchartUrls.map {
-    case url =>
+    url =>
       val name = url.stripSuffix(".js").split("/").last
       name -> url
   }.toMap
@@ -57,16 +57,16 @@ object Init {
       }
 
     val loaders = highchartUrls.map {
-      case url =>
+      url =>
         s"""
-          |$$.getScript("$url")
-          |  .done(function( script, textStatus ) {
-          |    console.log( "load $url " + textStatus );
-          |  })
-          |  .fail(function(jqxhr, settings, exception ) {
-          |     console.log("load $url " + exception);
-          |  });
-          | """.stripMargin
+           |$$.getScript("$url")
+           |  .done(function( script, textStatus ) {
+           |    console.log( "load $url " + textStatus );
+           |  })
+           |  .fail(function(jqxhr, settings, exception ) {
+           |     console.log("load $url " + exception);
+           |  });
+           | """.stripMargin
     }
     val template =
       s"""

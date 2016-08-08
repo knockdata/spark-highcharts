@@ -61,7 +61,7 @@ abstract class BaseModel extends IModel {
         case (subname, value) =>
           JField(subname, JsonConversion.toJValue(value))
       }
-      val jobj = new JObject(fields)
+      val jobj = JObject(fields)
       append(name, jobj)
     }
   }

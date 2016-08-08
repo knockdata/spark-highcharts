@@ -41,7 +41,7 @@ class DemoBubbleChart {
   // * data point order by age
   //
   @Test
-  def demoDonut: Unit = {
+  def demoDonut(): Unit = {
     import org.apache.spark.sql.functions._
     import sqlContext.implicits._
 

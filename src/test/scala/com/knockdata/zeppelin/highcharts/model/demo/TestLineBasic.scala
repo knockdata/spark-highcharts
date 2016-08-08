@@ -28,7 +28,7 @@ import org.junit.Test
 class TestLineBasic extends AbstractTestCase{
 
   @Test
-  def testLineBasic: Unit = {
+  def testLineBasic(): Unit = {
     val title = new Title("Monthly Average Temperature").x(-20)
     val subtitle = new Subtitle("Source: WorldClimate.com").x(-20)
     val xAxis = new XAxis("").categories("Jan", "Feb", "Mar", "Apr", "May",

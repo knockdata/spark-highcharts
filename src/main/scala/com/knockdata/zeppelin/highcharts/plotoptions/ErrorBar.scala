@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.plotoptions
 import com.knockdata.zeppelin.highcharts.model._
 import com.knockdata.zeppelin.highcharts.base._
 
-private[highcharts] class ErrorBar extends BasePlotOptions  with PublicApply{
+private[highcharts] class ErrorBar extends BasePlotOptions with PublicApply {
   override def fieldName: String = "errorbar"
 
   def allowPointSelect(value: Boolean): this.type = {

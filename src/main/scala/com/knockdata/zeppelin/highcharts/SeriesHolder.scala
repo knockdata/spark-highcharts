@@ -62,9 +62,7 @@ private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
 
   def result: (List[Series], List[Series]) = {
     val colDefs = colDefsBuffer.toList
-    val drillsDefList = drillsDefsBuffer.toList.map{
-      case buffer => buffer.toList
-    }
+    val drillsDefList = drillsDefsBuffer.toList.map(_.toList)
 
     _seriesCol match {
       case None =>
