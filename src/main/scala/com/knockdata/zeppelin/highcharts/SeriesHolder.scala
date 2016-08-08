@@ -26,10 +26,8 @@ import scala.collection.mutable
 private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
   private var _seriesCol: Option[String] = None
 
-  private val colDefsBuffer = mutable.Buffer[(String, Any)]()
-  private val drillsDefsBuffer = mutable.Buffer[mutable.Buffer[(String, Any)]]()
-
-  private var currentDefs = colDefsBuffer
+  private var defsBuffer = mutable.Buffer[(String, Any)]()
+  private val allDefsBuffer = mutable.Buffer[List[(String, Any)]]()
 
   def seriesCol(columnName: String) = {
     _seriesCol = Some(columnName)
@@ -37,38 +35,50 @@ private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
   }
 
   def series(defs: (String, Any)*) = {
-    currentDefs ++= defs
+    defsBuffer ++= defs
     this
   }
 
   def options(seriesOption: BasePlotOptions) = {
-    currentDefs += "options" -> seriesOption
+    defsBuffer += "options" -> seriesOption
     this
   }
 
   def orderBy(column: Column) = {
-    currentDefs += "orderBy" -> column
+    defsBuffer += "orderBy" -> column
+    this
+  }
+
+  // always using without replacement, can not specify seed
+  // https://www.ma.utexas.edu/users/parker/sampling/repl.htm
+  def sample(fractions: Double) = {
+    defsBuffer += "sample" -> fractions
+    this
+  }
+
+  def take(n: Int) = {
+    defsBuffer += "take" -> n
     this
   }
 
   def drilldown(defs: (String, Any)*) = {
-    currentDefs = defs.toBuffer
+    allDefsBuffer += defsBuffer.toList
 
-    drillsDefsBuffer += currentDefs
+    defsBuffer = mutable.Buffer[(String, Any)](defs:_*)
+
     this
   }
 
-
-
   def result: (List[Series], List[Series]) = {
-    val colDefs = colDefsBuffer.toList
-    val drillsDefList = drillsDefsBuffer.toList.map(_.toList)
+    if (defsBuffer.nonEmpty) {
+      allDefsBuffer += defsBuffer.toList
+    }
 
     _seriesCol match {
       case None =>
-        convert(dataFrame, colDefs, drillsDefList)
+        convert(dataFrame, allDefsBuffer.toList)
       case Some(seriesCol) =>
-        convert(dataFrame, seriesCol, colDefs, drillsDefList)
+        convert(dataFrame, seriesCol, allDefsBuffer.toList)
     }
   }
 }

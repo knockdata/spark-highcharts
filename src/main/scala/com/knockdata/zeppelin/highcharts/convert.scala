@@ -30,7 +30,7 @@ object convert {
 
   var seriesOptions = Set("chart.type")
   val chartOptions = Set("xAxis")
-  val optionFields = Set("orderBy", "sortBy") ++ chartOptions ++ seriesOptions
+  val optionFields = Set("orderBy", "sortBy", "sample", "take") ++ chartOptions ++ seriesOptions
 
   def setSeriesOptions(series: Series, colDefs: List[(String, Any)]): Series = {
     val options = colDefs.collect {
@@ -134,7 +134,6 @@ object convert {
             col(colName)
         }
 
-
         val aggCols = colAggDefs.map {
           case (jsonFieldName, aggCol: Column) =>
             aggCol
@@ -145,22 +144,36 @@ object convert {
           .agg(aggCols.head, aggCols.tail: _*)
       }
 
-    val dfSelected = dfAgg.select(wantedCols.head, wantedCols.tail: _*)
-
     val dfOrdered =
       if (orderByDefs.isEmpty) {
-        dfSelected
+        dfAgg
       } else {
-        dfSelected.orderBy(orderByDefs: _*)
+        dfAgg.orderBy(orderByDefs: _*)
       }
+
+    val dfSelected = dfOrdered.select(wantedCols.head, wantedCols.tail: _*)
+
+
 
     val dfDrill =
       if (withDrilldownField)
-        withDrilldown(currentKeys, colNameDefs, dfOrdered)
+        withDrilldown(currentKeys, colNameDefs, dfSelected)
       else
-        dfOrdered
+        dfSelected
 
-    (dfDrill.columns, dfDrill.collect())
+    val rows: Array[Row] = if (optionDefs.exists(_._1 == "take")) {
+      val n = optionDefs.collect{case ("take", n: Int) => n}.head
+      dfDrill.take(n)
+    }
+    else if (optionDefs.exists(_._1 == "sample")) {
+      val fractions = optionDefs.collect{case ("sample", fractions: Double) => fractions}.head
+      dfDrill.sample(false, fractions).collect()
+    }
+    else {
+      dfDrill.collect()
+    }
+
+    (dfDrill.columns, rows)
   }
 
   private[zeppelin] def withDrilldown(currentKeys: List[String],
@@ -311,25 +324,24 @@ object convert {
     * @param colDefs List((jsonFieldName, groupByColumnName/aggColumn))*
     * @return highchart
     */
+//  def apply(rootDataFrame: DataFrame,
+//            colDefs: List[(String, Any)]): Series = {
+//    val buffer = mutable.ListBuffer[Data]()
+//
+//    drilldown(rootDataFrame, colDefs :: Nil, Nil, buffer)
+//
+//    // it only has one data
+//    val normalData = buffer.result().head
+//
+//    toSeries(normalData)
+//  }
+
   def apply(rootDataFrame: DataFrame,
-            colDefs: List[(String, Any)]): Series = {
+            allDefs: List[List[(String, Any)]]): (List[Series], List[Series]) = {
     val buffer = mutable.ListBuffer[Data]()
 
-    drilldown(rootDataFrame, colDefs :: Nil, Nil, buffer)
 
-    // it only has one data
-    val normalData = buffer.result().head
-
-    toSeries(normalData)
-  }
-
-  def apply(rootDataFrame: DataFrame,
-            colDefs: List[(String, Any)],
-            drillDefsList: List[List[(String, Any)]]): (List[Series], List[Series]) = {
-    val buffer = mutable.ListBuffer[Data]()
-
-
-    drilldown(rootDataFrame, colDefs :: drillDefsList, Nil, buffer)
+    drilldown(rootDataFrame, allDefs, Nil, buffer)
 
     val normalData :: drilldownData = buffer.result()
     val normalSeries = toSeries(normalData)
@@ -384,47 +396,46 @@ object convert {
     }
   }
 
+//  def apply(rootDataFrame: DataFrame,
+//            seriesCol: String,
+//            colDefs: List[(String, Any)]): List[Series] = {
+//
+//    val allSeriesValues = rootDataFrame.select(seriesCol).distinct.orderBy(col(seriesCol)).collect.map(_.get(0))
+//
+//    val categories = getCategories(rootDataFrame, colDefs)
+//
+//    val column = col(seriesCol)
+//    val wantedCols = rootDataFrame.columns.filter(_ != seriesCol)
+//
+//    val bufferNormalSeries = mutable.ListBuffer[Data]()
+//
+//    val drills = colDefs :: Nil
+//    for (aSeriesValue <- allSeriesValues) {
+//      val seriesDataFrame =
+//        rootDataFrame.filter(column === aSeriesValue).selectExpr(wantedCols: _*)
+//
+//      val keys = s"$seriesCol=${aSeriesValue.toString}" :: Nil
+//      val buffer = mutable.ListBuffer[Data]()
+//
+//      drilldown(seriesDataFrame, drills, keys, buffer)
+//
+//      val normalSeries = buffer.result().head
+//
+//      bufferNormalSeries += normalSeries.setName(aSeriesValue)
+//    }
+//
+//    val normalSeriesList = toSeriesList(bufferNormalSeries.result(), categories)
+//    normalSeriesList
+//  }
+
+
   def apply(rootDataFrame: DataFrame,
             seriesCol: String,
-            colDefs: List[(String, Any)]): List[Series] = {
+            allDefs: List[List[(String, Any)]]): (List[Series], List[Series]) = {
 
     val allSeriesValues = rootDataFrame.select(seriesCol).distinct.orderBy(col(seriesCol)).collect.map(_.get(0))
 
-    val categories = getCategories(rootDataFrame, colDefs)
-
-    val column = col(seriesCol)
-    val wantedCols = rootDataFrame.columns.filter(_ != seriesCol)
-
-    val bufferNormalSeries = mutable.ListBuffer[Data]()
-
-    val drills = colDefs :: Nil
-    for (aSeriesValue <- allSeriesValues) {
-      val seriesDataFrame =
-        rootDataFrame.filter(column === aSeriesValue).selectExpr(wantedCols: _*)
-
-      val keys = s"$seriesCol=${aSeriesValue.toString}" :: Nil
-      val buffer = mutable.ListBuffer[Data]()
-
-      drilldown(seriesDataFrame, drills, keys, buffer)
-
-      val normalSeries = buffer.result().head
-
-      bufferNormalSeries += normalSeries.setName(aSeriesValue)
-    }
-
-    val normalSeriesList = toSeriesList(bufferNormalSeries.result(), categories)
-    normalSeriesList
-  }
-
-
-  def apply(rootDataFrame: DataFrame,
-            seriesCol: String,
-            colDefs: List[(String, Any)],
-            drillDefsList: List[List[(String, Any)]]): (List[Series], List[Series]) = {
-
-    val allSeriesValues = rootDataFrame.select(seriesCol).distinct.orderBy(col(seriesCol)).collect.map(_.get(0))
-
-    val categories = getCategories(rootDataFrame, colDefs)
+    val categories = getCategories(rootDataFrame, allDefs.head)
 
     val column = col(seriesCol)
     val wantedCols = rootDataFrame.columns.filter(_ != seriesCol)
@@ -432,7 +443,6 @@ object convert {
     val bufferNormalSeries = mutable.ListBuffer[Data]()
     val bufferDrilldownSeries = mutable.ListBuffer[Data]()
 
-    val allDefs = colDefs :: drillDefsList
 
     for (aSeriesValue <- allSeriesValues) {
       val seriesDataFrame =

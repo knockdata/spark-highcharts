@@ -12,3 +12,5 @@
 [Pie Chart](DemoPieChart.md)
 
 [Bubble Chart](DemoBubbleChart.md)
+
+[SF Salaries](docs/DemoSFSalariesChart.md)

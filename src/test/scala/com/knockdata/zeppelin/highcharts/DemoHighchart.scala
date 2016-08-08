@@ -38,7 +38,7 @@ class DemoHighchart extends AbstractTestCase{
   def test1ColumnWithAgg(): Unit = {
     val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital",
-        "y" -> avg(col("balance"))))
+        "y" -> avg(col("balance"))) :: Nil)
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/1ColumnWithAgg.json", chart)
   }
@@ -61,7 +61,7 @@ class DemoHighchart extends AbstractTestCase{
     // example for HeatMap
     val chart: Highcharts = convert(DataSet.dfBank,
       List("x" -> "marital", "y" -> "job",
-        "value" -> avg(col("balance"))))
+        "value" -> avg(col("balance"))) :: Nil)
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/2ColumnWithAgg.json", chart)
   }
@@ -73,11 +73,11 @@ class DemoHighchart extends AbstractTestCase{
     // size(marital) + size(marital) * size(balance) + size(marital) * size(balance) + size(education)
     val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital",
-        "y" -> avg(col("balance"))),
-      List(List("name" -> "job",
-        "y" -> avg(col("balance"))),
+        "y" -> avg(col("balance"))) ::
+      List("name" -> "job",
+        "y" -> avg(col("balance"))) ::
       List("name" -> "education",
-        "y" -> avg(col("balance")))))
+        "y" -> avg(col("balance"))) :: Nil)
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/Drilldown2Level.json", chart)
   }
@@ -88,9 +88,9 @@ class DemoHighchart extends AbstractTestCase{
     // it is only for a test to see drilldown works with 2 name column
     val chart: Highcharts = convert(DataSet.dfBank,
       List("name" -> "marital", "job" -> "job",
-        "y" -> avg(col("balance"))),
-      List(List("name" -> "education",
-        "y" -> avg(col("balance")))))
+        "y" -> avg(col("balance"))) ::
+      List("name" -> "education",
+        "y" -> avg(col("balance"))) :: Nil)
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/2ColumnDrilldown1Level.json", chart)
 
@@ -101,10 +101,9 @@ class DemoHighchart extends AbstractTestCase{
     val chart: Highcharts = convert(DataSet.dfBank,
       "marital",
       List("name" -> "job",
-        "y" -> avg(col("balance"))))
+        "y" -> avg(col("balance"))) :: Nil)
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/SeriesWithAgg.json", chart)
-
   }
 
   @Test
@@ -114,9 +113,9 @@ class DemoHighchart extends AbstractTestCase{
     // size(marital) + size(marital) * size(balance) + size(marital) * size(balance) + size(education)
     val chart: Highcharts = convert(DataSet.dfBank, "marital",
       List("name" -> "job",
-        "y" -> avg(col("balance"))),
-      List(List("name" -> "education",
-        "y" -> avg(col("balance")))))
+        "y" -> avg(col("balance"))) ::
+      List("name" -> "education",
+        "y" -> avg(col("balance"))) :: Nil)
 
     assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/SeriesDrilldown1Level.json", chart)
   }
