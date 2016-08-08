@@ -25,40 +25,40 @@ class Title(text: String = "") extends BaseModel {
   append("text", text)
 
   //  align: String = "center", floating: Boolean = false, margin: Int = 15
-  def align(align: String): this.type = {
+  def align(align: String) = {
     append("align", align)
   }
 
 
-  def floating(value: String): this.type = {
+  def floating(value: String) = {
     append("floating", value)
   }
 
-  def margin(value: Int): this.type = {
+  def margin(value: Int): Title = {
     margin(value.toString)
   }
 
-  def margin(value: String): this.type = {
+  def margin(value: String): Title = {
     append("margin", value)
   }
 
-  def style(values: (String, Any)*): this.type = {
+  def style(values: (String, Any)*) = {
     append("style", values.toMap)
   }
 
-  def verticalAlign(value: String): this.type = {
+  def verticalAlign(value: String) = {
     append("verticalAlign", value)
   }
 
-  def widthAdjust(value: Int): this.type = {
+  def widthAdjust(value: Int) = {
     append("widthAdjust", value)
   }
 
-  def x(value: Int): this.type = {
+  def x(value: Int) = {
     append("x", value)
   }
 
-  def y(value: Int): this.type = {
+  def y(value: Int) = {
     append("y", value)
   }
 }

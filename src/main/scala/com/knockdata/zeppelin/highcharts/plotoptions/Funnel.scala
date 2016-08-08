@@ -23,72 +23,72 @@ import com.knockdata.zeppelin.highcharts.base._
 private[highcharts] class Funnel extends BasePlotOptions with PublicApply {
   def fieldName = "funnel"
 
-  def allowPointSelect(value: Boolean): this.type = {
+  def allowPointSelect(value: Boolean) = {
     append("allowPointSelect", value)
   }
 
-  def borderColor(value: String): this.type = {
+  def borderColor(value: String) = {
     append("borderColor", value)
   }
 
-  def borderWidth(value: Int): this.type = {
+  def borderWidth(value: Int) = {
     append("borderWidth", value)
   }
 
-  def center(value: Any*): this.type = {
+  def center(value: Any*) = {
     append("center", value.toList)
   }
 
-  def colors(value: String*): this.type = {
+  def colors(value: String*) = {
     append("colors", value)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels", values.toMap)
   }
 
-  def depth(value: Int): this.type = {
+  def depth(value: Int) = {
     append("depth", value)
   }
 
-  def height(value: Int): this.type = {
+  def height(value: Int) = {
     append("height", value)
   }
 
-  def linkedTo(value: String): this.type = {
+  def linkedTo(value: String) = {
     append("linkedTo", value)
   }
 
-  def minSize(value: Int): this.type = {
+  def minSize(value: Int) = {
     append("minSize", value)
   }
 
-  def neckHeight(value: Int): this.type = {
+  def neckHeight(value: Int) = {
     append("neckHeight", value)
   }
 
-  def neckWidth(value: Int): this.type = {
+  def neckWidth(value: Int) = {
     append("neckWidth", value)
   }
 
-  def reversed(value: Boolean): this.type = {
+  def reversed(value: Boolean) = {
     append("reversed", value)
   }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) = {
     append("shadow", value)
   }
 
-  def showInLegend(value: Boolean): this.type = {
+  def showInLegend(value: Boolean) = {
     append("showInLegend", value)
   }
 
-  def slicedOffset(value: Int): this.type = {
+  def slicedOffset(value: Int) = {
     append("slicedOffset", value)
   }
 
   // the value only have one item which is hover
-  def states(values: (String, Map[String, Any])*): this.type = {
+  def states(values: (String, Map[String, Any])*) = {
     val hover = values.collect {
       case ("hover", v) => v
     }.head
@@ -100,11 +100,11 @@ private[highcharts] class Funnel extends BasePlotOptions with PublicApply {
     * it is states.hover, since only hover in states
     * so just using one function without embedded structure
     */
-  def statesHover(values: (String, Any)*): this.type = {
+  def statesHover(values: (String, Any)*) = {
     append("states", "hover", values.toMap)
   }
 
-  def width(value: Int): this.type = {
+  def width(value: Int) = {
     append("width", value)
   }
 }

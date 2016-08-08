@@ -18,37 +18,35 @@
 package com.knockdata.zeppelin.highcharts.base
 
 abstract class BasePlotOptions extends BaseModel {
-
-  def animationLimit(value: Int): this.type = {
+  def animationLimit(value: Int) = {
     append("animationLimit", value)
   }
 
-  def cursor(value: String): this.type = {
+  def cursor(value: String) = {
     append("cursor", value)
   }
 
-  def enableMouseTracking(value: Boolean): this.type = {
+  def enableMouseTracking(value: Boolean) = {
     append("enableMouseTracking", value)
   }
 
-  def events(values: (String, String)*): this.type = {
+  def events(values: (String, String)*) = {
     append("events", values.toMap.map {
       case (k, v) =>
         k -> placeholdCode(v)
     })
   }
 
-  def getExtremesFromAll(value: Boolean): this.type = {
+  def getExtremesFromAll(value: Boolean) = {
     append("getExtremesFromAll", value)
   }
 
-  def keys(value: String*): this.type = {
+  def keys(value: String*) = {
     append("keys", value)
   }
 
-
   // the value only have one item which is events
-  def point(values: (String, Map[String, Any])*): this.type = {
+  def point(values: (String, Map[String, Any])*) = {
     val events = values.collect {
       case ("events", v) => v
     }.head
@@ -64,34 +62,33 @@ abstract class BasePlotOptions extends BaseModel {
     * it is point.events, since only events in points
     * so just using one function without embedded structure
     */
-  def pointEvents(values: (String, String)*): this.type = {
+  def pointEvents(values: (String, String)*) = {
     append("point", "events", values.toMap.map {
       case (k, v) => k -> placeholdCode(v)
-    }
-    )
+    })
   }
 
-  def selected(value: Boolean): this.type = {
+  def selected(value: Boolean) = {
     append("selected", value)
   }
 
-  def stickyTracking(value: Boolean): this.type = {
+  def stickyTracking(value: Boolean) = {
     append("stickyTracking", value)
   }
 
-  def tooltip(values: (String, Any)*): this.type = {
+  def tooltip(values: (String, Any)*) = {
     append("tooltip", values.toMap)
   }
 
-  def visible(value: Boolean): this.type = {
+  def visible(value: Boolean) = {
     append("visible", value)
   }
 
-  def zoneAxis(value: String): this.type = {
+  def zoneAxis(value: String) = {
     append("zoneAxis", value)
   }
 
-  def zones(values: Map[String, Any]*): this.type = {
+  def zones(values: Map[String, Any]*) = {
     append("zones", values.toList)
   }
 }

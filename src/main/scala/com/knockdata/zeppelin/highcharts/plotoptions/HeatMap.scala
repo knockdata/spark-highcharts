@@ -23,76 +23,76 @@ import com.knockdata.zeppelin.highcharts.base._
 private[highcharts] class HeatMap extends BasePlotOptions with PublicApply {
   def fieldName = "heatmap"
 
-  def allowPointSelect(value: Boolean): this.type = {
+  def allowPointSelect(value: Boolean) = {
     append("allowPointSelect", value)
   }
 
-  def animation(value: Boolean): this.type = {
+  def animation(value: Boolean) = {
     append("animation", value)
   }
 
-  def borderColor(value: String): this.type = {
+  def borderColor(value: String) = {
     append("borderColor", value)
   }
 
-  def borderRadius(value: Int): this.type = {
+  def borderRadius(value: Int) = {
     append("borderRadius", value)
   }
 
-  def borderWidth(value: Int): this.type = {
+  def borderWidth(value: Int) = {
     append("borderWidth", value)
   }
 
-  def color(value: String): this.type = {
+  def color(value: String) = {
     append("color", value)
   }
 
-  def colorByPoint(value: Boolean): this.type = {
+  def colorByPoint(value: Boolean) = {
     append("colorByPoint", value)
   }
 
-  def colors(values: String*): this.type = {
+  def colors(values: String*) = {
     append("colors", values.toList)
   }
 
-  def colsize(value: Int): this.type = {
+  def colsize(value: Int) = {
     append("colsize", value)
   }
 
-  def cropThreshold(value: Int): this.type = {
+  def cropThreshold(value: Int) = {
     append("cropThreshold", value)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels", values.toMap)
   }
 
-  def linkedTo(value: String): this.type = {
+  def linkedTo(value: String) = {
     append("linkedTo", value)
   }
 
-  def maxPointWidth(value: Int): this.type = {
+  def maxPointWidth(value: Int) = {
     append("maxPointWidth", value)
   }
 
-  def rowsize(value: Int): this.type = {
+  def rowsize(value: Int) = {
     append("rowsize", value)
   }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) = {
     append("shadow", value)
   }
 
-  def showCheckbox(value: Boolean): this.type = {
+  def showCheckbox(value: Boolean) = {
     append("showCheckbox", value)
   }
 
-  def showInLegend(value: Boolean): this.type = {
+  def showInLegend(value: Boolean) = {
     append("showInLegend", value)
   }
 
   // the value only have one item which is hover
-  def states(values: (String, Map[String, Any])*): this.type = {
+  def states(values: (String, Map[String, Any])*) = {
     val hover = values.collect {
       case ("hover", v) => v
     }.head
@@ -104,11 +104,11 @@ private[highcharts] class HeatMap extends BasePlotOptions with PublicApply {
     * it is states.hover, since only hover in states
     * so just using one function without embedded structure
     */
-  def statesHover(values: (String, Any)*): this.type = {
+  def statesHover(values: (String, Any)*) = {
     append("states", "hover", values.toMap)
   }
 
-  def turboThreshold(value: Int): this.type = {
+  def turboThreshold(value: Int) = {
     append("turboThreshold", value)
   }
 }

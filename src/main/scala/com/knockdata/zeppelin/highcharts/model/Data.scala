@@ -19,14 +19,14 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Data() extends BaseModel with PublicApply{
+class Data extends BaseModel with PublicApply{
   override def fieldName: String = "data"
 
-  def dateFormat(value: String): this.type = {
+  def dateFormat(value: String) = {
     append("dateFormat", value)
   }
 
-  def decimalPoint(value: String): this.type = {
+  def decimalPoint(value: String) = {
     append("decimalPoint", value)
   }
 }

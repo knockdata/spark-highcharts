@@ -23,140 +23,140 @@ import com.knockdata.zeppelin.highcharts.base._
 private[highcharts] class Bar extends BasePlotOptions with PublicApply {
   def fieldName = "bar"
 
-  def allowPointSelect(value: Boolean): this.type = {
+  def allowPointSelect(value: Boolean) = {
     append("allowPointSelect", value)
   }
 
-  def animation(value: Boolean): this.type = {
+  def animation(value: Boolean) = {
     append("animation", value)
   }
 
-  def borderColor(value: String): this.type = {
+  def borderColor(value: String) = {
     append("borderColor", value)
   }
 
-  def borderRadius(value: Int): this.type = {
+  def borderRadius(value: Int) = {
     append("borderRadius", value)
   }
 
-  def borderWidth(value: Int): this.type = {
+  def borderWidth(value: Int) = {
     append("borderWidth", value)
   }
 
-  def color(value: String): this.type = {
+  def color(value: String) = {
     append("color", value)
   }
 
-  def colorByPoint(value: Boolean): this.type = {
+  def colorByPoint(value: Boolean) = {
     append("colorByPoint", value)
   }
 
-  def colors(values: String*): this.type = {
+  def colors(values: String*) = {
     append("colors", values.toList)
   }
 
-  def cropThreshold(value: Int): this.type = {
+  def cropThreshold(value: Int) = {
     append("cropThreshold", value)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels", values.toMap)
   }
 
-  def depth(value: Int): this.type = {
+  def depth(value: Int) = {
     append("depth", value)
   }
 
-  def edgeColor(value: String): this.type = {
+  def edgeColor(value: String) = {
     append("edgeColor", value)
   }
 
-  def edgeWidth(value: Int): this.type = {
+  def edgeWidth(value: Int) = {
     append("edgeWidth", value)
   }
 
-  def groupPadding(value: Double): this.type = {
+  def groupPadding(value: Double) = {
     append("groupPadding", value)
   }
 
-  def groupZPadding(value: Double): this.type = {
+  def groupZPadding(value: Double) = {
     append("groupZPadding", value)
   }
 
-  def grouping(value: Boolean): this.type = {
+  def grouping(value: Boolean) = {
     append("grouping", value)
   }
 
-  def linkedTo(value: String): this.type = {
+  def linkedTo(value: String) = {
     append("linkedTo", value)
   }
 
-  def maxPointWidth(value: Int): this.type = {
+  def maxPointWidth(value: Int) = {
     append("maxPointWidth", value)
   }
 
-  def minPointLength(value: Int): this.type = {
+  def minPointLength(value: Int) = {
     append("minPointLength", value)
   }
 
-  def negativeColor(value: String): this.type = {
+  def negativeColor(value: String) = {
     append("negativeColor", value)
   }
 
-  def pointInterval(value: Int): this.type = {
+  def pointInterval(value: Int) = {
     append("pointInterval", value)
   }
 
-  def pointIntervalUnit(value: Int): this.type = {
+  def pointIntervalUnit(value: Int) = {
     append("pointIntervalUnit", value)
   }
 
-  def pointPadding(value: Double): this.type = {
+  def pointPadding(value: Double) = {
     append("pointPadding", value)
   }
 
 
-  def pointPlacement(value: Any): this.type = {
+  def pointPlacement(value: Any) = {
     // null, "on", "between"
     append("pointPlacement", value)
   }
 
-  def pointRange(value: Double): this.type = {
+  def pointRange(value: Double) = {
     append("pointRange", value)
   }
 
-  def pointStart(value: Int): this.type = {
+  def pointStart(value: Int) = {
     append("pointStart", value)
   }
 
-  def pointWidth(value: Int): this.type = {
+  def pointWidth(value: Int) = {
     append("pointWidth", value)
   }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) = {
     append("shadow", value)
   }
 
-  def showCheckbox(value: Boolean): this.type = {
+  def showCheckbox(value: Boolean) = {
     append("showCheckbox", value)
   }
 
-  def showInLegend(value: Boolean): this.type = {
+  def showInLegend(value: Boolean) = {
     append("showInLegend", value)
   }
 
-  def softThreshold(value: Boolean): this.type = {
+  def softThreshold(value: Boolean) = {
     append("softThreshold", value)
   }
 
 
-  def stacking(value: String): this.type = {
+  def stacking(value: String) = {
     // "normal" to stack by value or "percent".
     append("stacking", value)
   }
 
   // the value only have one item which is hover
-  def states(values: (String, Map[String, Any])*): this.type = {
+  def states(values: (String, Map[String, Any])*) = {
     val hover = values.collect {
       case ("hover", v) => v
     }.head
@@ -168,15 +168,15 @@ private[highcharts] class Bar extends BasePlotOptions with PublicApply {
     * it is states.hover, since only hover in states
     * so just using one function without embedded structure
     */
-  def statesHover(values: (String, Any)*): this.type = {
+  def statesHover(values: (String, Any)*) = {
     append("states", "hover", values.toMap)
   }
 
-  def threshold(value: Int): this.type = {
+  def threshold(value: Int) = {
     append("threshold", value)
   }
 
-  def turboThreshold(value: Int): this.type = {
+  def turboThreshold(value: Int) = {
     append("turboThreshold", value)
   }
 }

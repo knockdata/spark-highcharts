@@ -18,7 +18,6 @@
 package com.knockdata.zeppelin.highcharts
 
 object Init {
-
   val allHighchartUrls = List(
     "http://code.highcharts.com/highcharts.js",
     "http://code.highcharts.com/highcharts-more.js",
@@ -48,7 +47,6 @@ object Init {
 
 
   def init(highcharts: String*): Unit = {
-
     val highchartUrls =
       if (highcharts.isEmpty)
         allHighchartUrls

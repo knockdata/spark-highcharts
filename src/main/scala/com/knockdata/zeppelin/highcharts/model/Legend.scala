@@ -22,151 +22,151 @@ import com.knockdata.zeppelin.highcharts.base.BaseModel
 class Legend extends BaseModel with PublicApply {
   override def fieldName: String = "legend"
 
-  def align(value: String): this.type = {
+  def align(value: String) = {
     append("align", value)
   }
 
-  def backgroundColo(value: String): this.type = {
+  def backgroundColo(value: String) = {
     append("backgroundColo", value)
   }
 
-  def borderColor(value: String): this.type = {
+  def borderColor(value: String) = {
     append("borderColor", value)
   }
 
-  def borderRadius(value: Int): this.type = {
+  def borderRadius(value: Int) = {
     append("borderRadius", value)
   }
 
-  def borderWidth(value: Int): this.type = {
+  def borderWidth(value: Int) = {
     append("borderWidth", value)
   }
 
-  def enabled(value: Boolean): this.type = {
+  def enabled(value: Boolean) = {
     append("enabled", value)
   }
 
-  def floating(value: Boolean): this.type = {
+  def floating(value: Boolean) = {
     append("floating", value)
   }
 
-  def itemDistance(value: Int): this.type = {
+  def itemDistance(value: Int) = {
     append("itemDistance", value)
   }
 
-  def itemHiddenStyle(values: (String, Any)*): this.type = {
+  def itemHiddenStyle(values: (String, Any)*) = {
     append("itemHiddenStyle", values.toMap)
   }
 
-  def itemHoverStyle(values: (String, Any)*): this.type = {
+  def itemHoverStyle(values: (String, Any)*) = {
     append("itemHoverStyle", values.toMap)
   }
 
-  def itemMarginBottom(value: Int): this.type = {
+  def itemMarginBottom(value: Int) = {
     append("itemMarginBottom", value)
   }
 
-  def itemMarginTop(value: Int): this.type = {
+  def itemMarginTop(value: Int) = {
     append("itemMarginTop", value)
   }
 
-  def itemStyle(values: (String, Any)*): this.type = {
+  def itemStyle(values: (String, Any)*) = {
     append("itemStyle", values.toMap)
   }
 
-  def itemWidth(value: Int): this.type = {
+  def itemWidth(value: Int) = {
     append("itemWidth", value)
   }
 
-  def labelFormat(value: String): this.type = {
+  def labelFormat(value: String) = {
     append("labelFormat", value)
   }
 
-  def labelFormatter(code: String): this.type = {
+  def labelFormatter(code: String) = {
     append("labelFormatter", placeholdCode(code))
   }
 
-  def layout(value: String): this.type = {
+  def layout(value: String) = {
     append("layout", value)
   }
 
-  def lineHeight(value: Int): this.type = {
+  def lineHeight(value: Int) = {
     append("lineHeight", value)
   }
 
-  def margin(value: Int): this.type = {
+  def margin(value: Int) = {
     append("margin", value)
   }
 
-  def maxHeight(value: Int): this.type = {
+  def maxHeight(value: Int) = {
     append("maxHeight", value)
   }
 
-  def navigation(values: (String, Any)*): this.type = {
+  def navigation(values: (String, Any)*) = {
     append("navigation", values.toMap)
   }
 
-  def padding(value: Int): this.type = {
+  def padding(value: Int) = {
     append("padding", value)
   }
 
-  def reversed(value: Boolean): this.type = {
+  def reversed(value: Boolean) = {
     append("reversed", value)
   }
 
-  def rtl(value: Boolean): this.type = {
+  def rtl(value: Boolean) = {
     append("rtl", value)
   }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) = {
     append("shadow", value)
   }
 
-  def shadow(values: (String, Any)*): this.type = {
+  def shadow(values: (String, Any)*) = {
     append("shadow", values.toMap)
   }
 
-  def style(values: (String, Any)*): this.type = {
+  def style(values: (String, Any)*) = {
     append("style", values.toMap)
   }
 
-  def symbolHeight(value: Int): this.type = {
+  def symbolHeight(value: Int) = {
     append("symbolHeight", value)
   }
 
-  def symbolPadding(value: Int): this.type = {
+  def symbolPadding(value: Int) = {
     append("symbolPadding", value)
   }
 
-  def symbolRadius(value: String): this.type = {
+  def symbolRadius(value: String) = {
     append("symbolRadius", value)
   }
 
-  def symbolWidth(value: String): this.type = {
+  def symbolWidth(value: String) = {
     append("symbolWidth", value)
   }
 
-  def title(values: (String, Any)*): this.type = {
+  def title(values: (String, Any)*) = {
     append("title", values.toMap)
   }
 
-  def useHTML(value: Boolean): this.type = {
+  def useHTML(value: Boolean) = {
     append("useHTML", value)
   }
 
-  def verticalAlign(value: String): this.type = {
+  def verticalAlign(value: String) = {
     append("verticalAlign", value)
   }
 
-  def width(value: Int): this.type = {
+  def width(value: Int) = {
     append("width", value)
   }
 
-  def x(value: Int): this.type = {
+  def x(value: Int) = {
     append("x", value)
   }
 
-  def y(value: Int): this.type = {
+  def y(value: Int) = {
     append("y", value)
   }
 }

@@ -23,23 +23,23 @@ import com.knockdata.zeppelin.highcharts.base._
 private[highcharts] class Scatter extends BasePlotOptions with PublicApply {
   def fieldName = "scatter"
 
-  def allowPointSelect(value: Boolean): this.type = {
+  def allowPointSelect(value: Boolean) = {
     append("allowPointSelect", value)
   }
 
-  def animation(value: Boolean): this.type = {
+  def animation(value: Boolean) = {
     append("animation", value)
   }
 
-  def color(value: String): this.type = {
+  def color(value: String) = {
     append("color", value)
   }
 
-  def cropThreshold(value: Int): this.type = {
+  def cropThreshold(value: Int) = {
     append("cropThreshold", value)
   }
 
-  def dashStyle(value: String): this.type = {
+  def dashStyle(value: String) = {
     expect(value, "Solid",
       "ShortDash",
       "ShortDot",
@@ -54,56 +54,56 @@ private[highcharts] class Scatter extends BasePlotOptions with PublicApply {
     append("dashStyle", value)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels", values.toMap)
   }
 
-  def lineWidth(value: Int): this.type = {
+  def lineWidth(value: Int) = {
     append("lineWidth", value)
   }
 
-  def linkedTo(value: String): this.type = {
+  def linkedTo(value: String) = {
     append("linkedTo", value)
   }
 
-  def marker(values: (String, Any)*): this.type = {
+  def marker(values: (String, Any)*) = {
     append("marker", values.toMap)
   }
 
-  def negativeColor(value: String): this.type = {
+  def negativeColor(value: String) = {
     append("negativeColor", value)
   }
 
-  def pointInterval(value: Int): this.type = {
+  def pointInterval(value: Int) = {
     append("pointInterval", value)
   }
 
-  def pointIntervalUnit(value: String): this.type = {
+  def pointIntervalUnit(value: String) = {
     append("pointIntervalUnit", value)
   }
 
-  def pointStart(value: Int): this.type = {
+  def pointStart(value: Int) = {
     append("pointStart", value)
   }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) = {
     append("shadow", value)
   }
 
-  def showCheckbox(value: Boolean): this.type = {
+  def showCheckbox(value: Boolean) = {
     append("showCheckbox", value)
   }
 
-  def showInLegend(value: Boolean): this.type = {
+  def showInLegend(value: Boolean) = {
     append("showInLegend", value)
   }
 
-  def softThreshold(value: Int): this.type = {
+  def softThreshold(value: Int) = {
     append("softThreshold", value)
   }
 
   // the value only have one item which is hover
-  def states(values: (String, Map[String, Any])*): this.type = {
+  def states(values: (String, Map[String, Any])*) = {
     val hover = values.collect {
       case ("hover", v) => v
     }.head
@@ -115,15 +115,15 @@ private[highcharts] class Scatter extends BasePlotOptions with PublicApply {
     * it is states.hover, since only hover in states
     * so just using one function without embedded structure
     */
-  def statesHover(values: (String, Any)*): this.type = {
+  def statesHover(values: (String, Any)*) = {
     append("states", "hover", values.toMap)
   }
 
-  def threshold(value: Int): this.type = {
+  def threshold(value: Int) = {
     append("threshold", value)
   }
 
-  def turboThreshold(value: Int): this.type = {
+  def turboThreshold(value: Int) = {
     append("turboThreshold", value)
   }
 }

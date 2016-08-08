@@ -30,7 +30,7 @@ class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with Pu
   private var _drilldown: Option[Drilldown] = None
   private val optionsBuffer = mutable.Buffer[BaseModel]()
 
-  def drilldown(drilldownSeriesList: List[Series]): this.type = {
+  def drilldown(drilldownSeriesList: List[Series]) = {
     drilldownSeriesList match {
       case Nil =>
       case xs =>
@@ -40,7 +40,7 @@ class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with Pu
   }
 
 
-  def drilldown(drilldown: Drilldown): this.type = {
+  def drilldown(drilldown: Drilldown) = {
     _drilldown = Some(drilldown)
     this
   }
@@ -126,11 +126,11 @@ class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with Pu
     println(code)
   }
 
-  def options(opts: BaseModel*): this.type = {
+  def options(opts: BaseModel*): Highcharts = {
     options(opts.toList)
   }
 
-  def options(opts: List[BaseModel]): this.type = {
+  def options(opts: List[BaseModel]): Highcharts = {
     for (opt <- opts) {
       codes ++= opt.codes
     }

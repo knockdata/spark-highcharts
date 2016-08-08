@@ -23,11 +23,11 @@ import com.knockdata.zeppelin.highcharts.base.BaseModel
 class Labels extends BaseModel with PublicApply {
   override def fieldName: String = "labels"
 
-  def items(values: (String, Any)*): this.type = {
+  def items(values: (String, Any)*) = {
     append("style", values.toMap)
   }
 
-  def style(values: (String, Any)*): this.type = {
+  def style(values: (String, Any)*) = {
     append("style", values.toMap)
   }
 }

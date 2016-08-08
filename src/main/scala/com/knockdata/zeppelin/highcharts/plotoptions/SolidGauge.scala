@@ -24,31 +24,31 @@ private[highcharts] class SolidGauge extends BasePlotOptions with PublicApply {
   def fieldName = "solidgauge"
 
 
-  def animation(value: Boolean): this.type = {
+  def animation(value: Boolean) = {
     append("animation", value)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels", values.toMap)
   }
 
-  def linecap(value: String): this.type = {
+  def linecap(value: String) = {
     append("linecap", value)
   }
 
-  def overshoot(value: Int): this.type = {
+  def overshoot(value: Int) = {
     append("overshoot", value)
   }
 
-  def showCheckbox(value: Boolean): this.type = {
+  def showCheckbox(value: Boolean) = {
     append("showCheckbox", value)
   }
 
-  def showInLegend(value: Boolean): this.type = {
+  def showInLegend(value: Boolean) = {
     append("showInLegend", value)
   }
 
-  def wrap(value: Boolean): this.type = {
+  def wrap(value: Boolean) = {
     append("wrap", value)
   }
 }

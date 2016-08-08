@@ -18,7 +18,6 @@
 package com.knockdata.zeppelin.highcharts.base
 
 trait Spacing extends IModel {
-
   def spacing(top: Int, right: Int, bottom: Int, left: Int) =
     append("spacing", List(top, right, bottom, left))
 
@@ -33,5 +32,4 @@ trait Spacing extends IModel {
 
   def spacingTop(value: Int) =
     append("spacingTop", value)
-
 }
