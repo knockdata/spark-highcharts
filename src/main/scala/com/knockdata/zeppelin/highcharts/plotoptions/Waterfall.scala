@@ -23,39 +23,39 @@ import com.knockdata.zeppelin.highcharts.base._
 private[highcharts] class Waterfall extends BasePlotOptions with PublicApply {
   def fieldName = "waterfall"
 
-  def allowPointSelect(value: Boolean): this.type = {
+  def allowPointSelect(value: Boolean) = {
     append("allowPointSelect", value)
   }
 
-  def animation(value: Boolean): this.type = {
+  def animation(value: Boolean) = {
     append("animation", value)
   }
 
-  def borderColor(value: String): this.type = {
+  def borderColor(value: String) = {
     append("borderColor", value)
   }
 
-  def borderRadius(value: Int): this.type = {
+  def borderRadius(value: Int) = {
     append("borderRadius", value)
   }
 
-  def borderWidth(value: Int): this.type = {
+  def borderWidth(value: Int) = {
     append("borderWidth", value)
   }
 
-  def color(value: String): this.type = {
+  def color(value: String) = {
     append("color", value)
   }
 
-  def colorByPoint(value: Boolean): this.type = {
+  def colorByPoint(value: Boolean) = {
     append("colorByPoint", value)
   }
 
-  def colors(values: String*): this.type = {
+  def colors(values: String*) = {
     append("colors", values.toList)
   }
 
-  def dashStyle(value: String): this.type = {
+  def dashStyle(value: String) = {
     expect(value, "Solid",
       "ShortDash",
       "ShortDot",
@@ -70,97 +70,97 @@ private[highcharts] class Waterfall extends BasePlotOptions with PublicApply {
     append("dashStyle", value)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels", values.toMap)
   }
 
-  def depth(value: Int): this.type = {
+  def depth(value: Int) = {
     append("depth", value)
   }
 
-  def edgeColor(value: String): this.type = {
+  def edgeColor(value: String) = {
     append("edgeColor", value)
   }
 
-  def edgeWidth(value: Int): this.type = {
+  def edgeWidth(value: Int) = {
     append("edgeWidth", value)
   }
 
-  def groupPadding(value: Int): this.type = {
+  def groupPadding(value: Int) = {
     append("groupPadding", value)
   }
 
-  def groupZPadding(value: Int): this.type = {
+  def groupZPadding(value: Int) = {
     append("groupZPadding", value)
   }
 
-  def grouping(value: Boolean): this.type = {
+  def grouping(value: Boolean) = {
     append("grouping", value)
   }
 
-  def lineColor(value: String): this.type = {
+  def lineColor(value: String) = {
     append("lineColor", value)
   }
 
-  def linkedTo(value: String): this.type = {
+  def linkedTo(value: String) = {
     append("linkedTo", value)
   }
 
-  def maxPointWidth(value: Int): this.type = {
+  def maxPointWidth(value: Int) = {
     append("maxPointWidth", value)
   }
 
-  def minPointLength(value: Int): this.type = {
+  def minPointLength(value: Int) = {
     append("minPointLength", value)
   }
 
-  def pointInterval(value: Int): this.type = {
+  def pointInterval(value: Int) = {
     append("pointInterval", value)
   }
 
-  def pointIntervalUnit(value: String): this.type = {
+  def pointIntervalUnit(value: String) = {
     append("pointIntervalUnit", value)
   }
 
-  def pointPadding(value: String): this.type = {
+  def pointPadding(value: String) = {
     append("pointPadding", value)
   }
 
-  def pointPlacement(value: String): this.type = {
+  def pointPlacement(value: String) = {
     // null, "on", "between"
     append("pointPlacement", value)
   }
 
-  def pointRange(value: Int): this.type = {
+  def pointRange(value: Int) = {
     append("pointRange", value)
   }
 
-  def pointStart(value: Int): this.type = {
+  def pointStart(value: Int) = {
     append("pointStart", value)
   }
 
-  def pointWidth(value: Int): this.type = {
+  def pointWidth(value: Int) = {
     append("pointWidth", value)
   }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) = {
     append("shadow", value)
   }
 
-  def showCheckbox(value: Boolean): this.type = {
+  def showCheckbox(value: Boolean) = {
     append("showCheckbox", value)
   }
 
-  def showInLegend(value: Boolean): this.type = {
+  def showInLegend(value: Boolean) = {
     append("showInLegend", value)
   }
 
-  def softThreshold(value: Boolean): this.type = {
+  def softThreshold(value: Boolean) = {
     append("softThreshold", value)
   }
 
   // the value only have one item which is hover
-  def states(values: (String, Map[String, Any])*): this.type = {
+  def states(values: (String, Map[String, Any])*) = {
     val hover = values.collect {
       case ("hover", v) => v
     }.head
@@ -172,15 +172,15 @@ private[highcharts] class Waterfall extends BasePlotOptions with PublicApply {
     * it is states.hover, since only hover in states
     * so just using one function without embedded structure
     */
-  def statesHover(values: (String, Any)*): this.type = {
+  def statesHover(values: (String, Any)*) = {
     append("states", "hover", values.toMap)
   }
 
-  def threshold(value: Int): this.type = {
+  def threshold(value: Int) = {
     append("threshold", value)
   }
 
-  def upColor(value: String): this.type = {
+  def upColor(value: String) = {
     append("upColor", value)
   }
 }

@@ -19,38 +19,38 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Exporting() extends BaseModel with PublicApply {
+class Exporting extends BaseModel with PublicApply {
   override def fieldName: String = "exporting"
 
-  def enabled(value: Boolean): this.type = {
+  def enabled(value: Boolean) = {
     append("enabled", value)
   }
 
-  def filename(value: String): this.type = {
+  def filename(value: String) = {
     append("filename", value)
   }
 
-  def printMaxWidth(value: Int): this.type = {
+  def printMaxWidth(value: Int) = {
     append("printMaxWidth", value)
   }
 
-  def scale(value: Int): this.type = {
+  def scale(value: Int) = {
     append("scale", value)
   }
 
-  def sourceHeight(value: Int): this.type = {
+  def sourceHeight(value: Int) = {
     append("sourceHeight", value)
   }
 
-  def sourceWidth(value: Int): this.type = {
+  def sourceWidth(value: Int) = {
     append("sourceWidth", value)
   }
 
-  def typ(value: String): this.type = {
+  def typ(value: String) = {
     append("type", value)
   }
 
-  def width(value: Int): this.type = {
+  def width(value: Int) = {
     append("width", value)
   }
 }

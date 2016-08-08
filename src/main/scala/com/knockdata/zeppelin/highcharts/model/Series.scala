@@ -26,39 +26,39 @@ class Series(val values: List[Any]) extends BaseModel with PublicApply {
 
   var vs = values
 
-  def id(value: String): this.type = {
+  def id(value: String) = {
     append("id", value)
   }
 
-  def name(value: String): this.type = {
+  def name(value: String) = {
     append("name", value)
   }
 
-  def typ(typ: String): this.type = {
+  def typ(typ: String) = {
     append("type", typ)
   }
 
-  def center(x: Int, y: Int): this.type = {
+  def center(x: Int, y: Int) = {
     append("center", Seq(x, y))
   }
 
-  def size(s: Int): this.type = {
+  def size(s: Int) = {
     append("size", s)
   }
 
-  def size(s: String): this.type = {
+  def size(s: String) = {
     append("size", s)
   }
 
-  def innerSize(value: String): this.type = {
+  def innerSize(value: String) = {
     append("innerSize", value)
   }
 
-  def showInLegend(show: Boolean): this.type = {
+  def showInLegend(show: Boolean) = {
     append("showInLegend", show)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels",
       values.map {
         case ("formatter", v: String) =>
@@ -75,7 +75,6 @@ class Series(val values: List[Any]) extends BaseModel with PublicApply {
 }
 
 object Series {
-
   def apply(dataFrame: DataFrame, colDefs: (String, Any)*): Series = {
     convert(dataFrame, colDefs.toList)
   }

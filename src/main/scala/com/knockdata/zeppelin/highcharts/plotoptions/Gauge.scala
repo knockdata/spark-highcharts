@@ -23,51 +23,51 @@ import com.knockdata.zeppelin.highcharts.base._
 private[highcharts] class Gauge extends BasePlotOptions with PublicApply {
   def fieldName = "gauge"
 
-  def animation(value: Boolean): this.type = {
+  def animation(value: Boolean) = {
     append("animation", value)
   }
 
-  def color(value: String): this.type = {
+  def color(value: String) = {
     append("color", value)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels", values.toMap)
   }
 
-  def dial(values: (String, Any)*): this.type = {
+  def dial(values: (String, Any)*) = {
     append("dial", values.toMap)
   }
 
-  def linkedTo(value: String): this.type = {
+  def linkedTo(value: String) = {
     append("linkedTo", value)
   }
 
-  def negativeColor(value: String): this.type = {
+  def negativeColor(value: String) = {
     append("negativeColor", value)
   }
 
-  def overshoot(value: Int): this.type = {
+  def overshoot(value: Int) = {
     append("overshoot", value)
   }
 
-  def pivot(values: (String, Any)*): this.type = {
+  def pivot(values: (String, Any)*) = {
     append("pivot", values.toMap)
   }
 
-  def showCheckbox(value: Boolean): this.type = {
+  def showCheckbox(value: Boolean) = {
     append("showCheckbox", value)
   }
 
-  def showInLegend(value: Boolean): this.type = {
+  def showInLegend(value: Boolean) = {
     append("showInLegend", value)
   }
 
-  def threshold(value: Int): this.type = {
+  def threshold(value: Int) = {
     append("threshold", value)
   }
 
-  def wrap(value: Boolean): this.type = {
+  def wrap(value: Boolean) = {
     append("wrap", value)
   }
 }

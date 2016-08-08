@@ -19,30 +19,30 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Pane() extends BaseModel with PublicApply {
+class Pane extends BaseModel with PublicApply {
   override def fieldName: String = "pane"
 
-  def background(values: Map[String, Any]*): this.type = {
+  def background(values: Map[String, Any]*) = {
     append("background", values.toList)
   }
 
-  def center(values: Any*): this.type = {
+  def center(values: Any*) = {
     append("center", values.toList)
   }
 
-  def endAngle(value: Int): this.type = {
+  def endAngle(value: Int) = {
     append("endAngle", value)
   }
 
-  def size(value: String): this.type = {
+  def size(value: String) = {
     append("size", value)
   }
 
-  def size(value: Int): this.type = {
+  def size(value: Int) = {
     append("size", value)
   }
 
-  def startAngle(value: String): this.type = {
+  def startAngle(value: String) = {
     append("startAngle", value)
   }
 }

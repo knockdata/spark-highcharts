@@ -19,22 +19,22 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Navigation() extends BaseModel with PublicApply {
+class Navigation extends BaseModel with PublicApply {
   override def fieldName: String = "navigation"
 
-  def buttonOptions(values: (String, Any)*): this.type = {
+  def buttonOptions(values: (String, Any)*) = {
     append("buttonOptions", values.toMap)
   }
 
-  def menuItemHoverStyle(values: (String, Any)*): this.type = {
+  def menuItemHoverStyle(values: (String, Any)*) = {
     append("menuItemHoverStyle", values.toMap)
   }
 
-  def menuItemStyle(values: (String, Any)*): this.type = {
+  def menuItemStyle(values: (String, Any)*) = {
     append("menuItemStyle", values.toMap)
   }
 
-  def menuStyle(values: (String, Any)*): this.type = {
+  def menuStyle(values: (String, Any)*) = {
     append("menuStyle", values.toMap)
   }
 }

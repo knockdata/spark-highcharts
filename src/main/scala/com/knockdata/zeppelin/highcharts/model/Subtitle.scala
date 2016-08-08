@@ -25,31 +25,31 @@ class Subtitle(text: String = "") extends BaseModel with PublicApply {
   append("text", text)
 
   //  align: String = "center", floating: Boolean = false, margin: Int = 15
-  def align(align: String): this.type = {
+  def align(align: String) = {
     append("align", align)
   }
 
-  def floating(value: String): this.type = {
+  def floating(value: String) = {
     append("floating", value)
   }
 
-  def style(values: (String, Any)*): this.type = {
+  def style(values: (String, Any)*) = {
     append("style", values.toMap)
   }
 
-  def useHTML(value: Boolean): this.type = {
+  def useHTML(value: Boolean) = {
     append("useHTML", value)
   }
 
-  def verticalAlign(value: String): this.type = {
+  def verticalAlign(value: String) = {
     append("verticalAlign", value)
   }
 
-  def x(value: Int): this.type = {
+  def x(value: Int) = {
     append("x", value)
   }
 
-  def y(value: Int): this.type = {
+  def y(value: Int) = {
     append("y", value)
   }
 }

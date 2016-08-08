@@ -18,16 +18,14 @@
 package com.knockdata.zeppelin.highcharts.base
 
 trait Margin extends BaseModel {
-
-  def margin(top: Int, right: Int, bottom: Int, left: Int): this.type =
+  def margin(top: Int, right: Int, bottom: Int, left: Int) =
     append("margin", Seq(top, right, bottom, left))
 
-  def marginBottom(value: Int): this.type = append("marginBottom", value)
+  def marginBottom(value: Int) = append("marginBottom", value)
 
-  def marginRight(value: Int): this.type = append("marginRight", value)
+  def marginRight(value: Int) = append("marginRight", value)
 
-  def marginLeft(value: Int): this.type = append("marginLeft", value)
+  def marginLeft(value: Int) = append("marginLeft", value)
 
-  def marginTop(value: Int): this.type = append("marginTop", value)
-
+  def marginTop(value: Int) = append("marginTop", value)
 }

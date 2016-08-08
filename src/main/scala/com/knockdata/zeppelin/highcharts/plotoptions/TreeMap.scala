@@ -23,98 +23,98 @@ import com.knockdata.zeppelin.highcharts.base._
 private[highcharts] class TreeMap extends BasePlotOptions with PublicApply {
   def fieldName = "treemap"
 
-  def allowDrillToNode(value: Boolean): this.type = {
+  def allowDrillToNode(value: Boolean) = {
     append("allowDrillToNode", value)
   }
 
-  def allowPointSelect(value: Boolean): this.type = {
+  def allowPointSelect(value: Boolean) = {
     append("allowPointSelect", value)
   }
 
-  def alternateStartingDirection(value: Boolean): this.type = {
+  def alternateStartingDirection(value: Boolean) = {
     append("alternateStartingDirection", value)
   }
 
-  def animation(value: Boolean): this.type = {
+  def animation(value: Boolean) = {
     append("animation", value)
   }
 
-  def borderColor(value: String): this.type = {
+  def borderColor(value: String) = {
     append("borderColor", value)
   }
 
-  def borderWidth(value: Int): this.type = {
+  def borderWidth(value: Int) = {
     append("borderWidth", value)
   }
 
-  def color(value: String): this.type = {
+  def color(value: String) = {
     append("color", value)
   }
 
-  def colorByPoint(value: Boolean): this.type = {
+  def colorByPoint(value: Boolean) = {
     append("colorByPoint", value)
   }
 
-  def colors(values: Any*): this.type = {
+  def colors(values: Any*) = {
     append("colors", values.toList)
   }
 
-  def cropThreshold(value: Int): this.type = {
+  def cropThreshold(value: Int) = {
     append("cropThreshold", value)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels", values.toMap)
   }
 
-  def interactByLeaf(value: Boolean): this.type = {
+  def interactByLeaf(value: Boolean) = {
     append("interactByLeaf", value)
   }
 
-  def layoutAlgorithm(value: String): this.type = {
+  def layoutAlgorithm(value: String) = {
     expect("value", "sliceAndDice", "stripes", "squarified", "strip")
     append("layoutAlgorithm", value)
   }
 
-  def layoutStartingDirection(value: String): this.type = {
+  def layoutStartingDirection(value: String) = {
     expect(value, "vertical", "horizontal")
     append("layoutStartingDirection", value)
   }
 
-  def levelIsConstant(value: Boolean): this.type = {
+  def levelIsConstant(value: Boolean) = {
     append("levelIsConstant", value)
   }
 
-  def levels(values: Map[String, Any]*): this.type = {
+  def levels(values: Map[String, Any]*) = {
     append("levels", values.toList)
   }
 
-  def linkedTo(value: String): this.type = {
+  def linkedTo(value: String) = {
     append("linkedTo", value)
   }
 
-  def maxPointWidth(value: Int): this.type = {
+  def maxPointWidth(value: Int) = {
     append("maxPointWidth", value)
   }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) = {
     append("shadow", value)
   }
 
-  def showCheckbox(value: Boolean): this.type = {
+  def showCheckbox(value: Boolean) = {
     append("showCheckbox", value)
   }
 
-  def showInLegend(value: Boolean): this.type = {
+  def showInLegend(value: Boolean) = {
     append("showInLegend", value)
   }
 
-  def sortIndex(value: Int): this.type = {
+  def sortIndex(value: Int) = {
     append("sortIndex", value)
   }
 
   // the value only have one item which is hover
-  def states(values: (String, Map[String, Any])*): this.type = {
+  def states(values: (String, Map[String, Any])*) = {
     val hover = values.collect {
       case ("hover", v) => v
     }.head
@@ -126,11 +126,11 @@ private[highcharts] class TreeMap extends BasePlotOptions with PublicApply {
     * it is states.hover, since only hover in states
     * so just using one function without embedded structure
     */
-  def statesHover(values: (String, Any)*): this.type = {
+  def statesHover(values: (String, Any)*) = {
     append("states", "hover", values.toMap)
   }
 
-  def turboThreshold(value: Int): this.type = {
+  def turboThreshold(value: Int) = {
     append("turboThreshold", value)
   }
 }

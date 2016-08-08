@@ -23,113 +23,113 @@ import com.knockdata.zeppelin.highcharts.base._
 private[highcharts] class BoxPlot extends BasePlotOptions with PublicApply {
   def fieldName = "boxplot"
 
-  def allowPointSelect(value: Boolean): this.type = {
+  def allowPointSelect(value: Boolean) = {
     append("allowPointSelect", value)
   }
 
-  def color(value: String): this.type = {
+  def color(value: String) = {
     append("color", value)
   }
 
-  def colorByPoint(value: Boolean): this.type = {
+  def colorByPoint(value: Boolean) = {
     append("colorByPoint", value)
   }
 
-  def colors(values: String*): this.type = {
+  def colors(values: String*) = {
     append("colors", values.toList)
   }
 
-  def depth(value: Int): this.type = {
+  def depth(value: Int) = {
     append("depth", value)
   }
 
-  def edgeColor(value: String): this.type = {
+  def edgeColor(value: String) = {
     append("edgeColor", value)
   }
 
-  def edgeWidth(value: Int): this.type = {
+  def edgeWidth(value: Int) = {
     append("edgeWidth", value)
   }
 
-  def fillColor(value: String): this.type = {
+  def fillColor(value: String) = {
     append("fillColor", value)
   }
 
-  def groupPadding(value: Double): this.type = {
+  def groupPadding(value: Double) = {
     append("groupPadding", value)
   }
 
-  def groupZPadding(value: Int): this.type = {
+  def groupZPadding(value: Int) = {
     append("groupZPadding", value)
   }
 
-  def grouping(value: Boolean): this.type = {
+  def grouping(value: Boolean) = {
     append("grouping", value)
   }
 
-  def lineWidth(value: Int): this.type = {
+  def lineWidth(value: Int) = {
     append("lineWidth", value)
   }
 
-  def linkedTo(value: String): this.type = {
+  def linkedTo(value: String) = {
     append("linkedTo", value)
   }
 
-  def maxPointWidth(value: Int): this.type = {
+  def maxPointWidth(value: Int) = {
     append("maxPointWidth", value)
   }
 
-  def medianColor(value: String): this.type = {
+  def medianColor(value: String) = {
     append("medianColor", value)
   }
 
-  def medianWidth(value: Int): this.type = {
+  def medianWidth(value: Int) = {
     append("medianWidth", value)
   }
 
-  def negativeColor(value: String): this.type = {
+  def negativeColor(value: String) = {
     append("negativeColor", value)
   }
 
-  def pointInterval(value: Int): this.type = {
+  def pointInterval(value: Int) = {
     append("pointInterval", value)
   }
 
-  def pointIntervalUnit(value: String): this.type = {
+  def pointIntervalUnit(value: String) = {
     append("pointIntervalUnit", value)
   }
 
-  def pointPadding(value: Double): this.type = {
+  def pointPadding(value: Double) = {
     append("pointPadding", value)
   }
 
-  def pointPlacement(value: String): this.type = {
+  def pointPlacement(value: String) = {
     // null, "on", "between"
     append("pointPlacement", value)
   }
 
-  def pointRange(value: Int): this.type = {
+  def pointRange(value: Int) = {
     append("pointRange", value)
   }
 
-  def pointStart(value: Int): this.type = {
+  def pointStart(value: Int) = {
     append("pointStart", value)
   }
 
-  def pointWidth(value: Int): this.type = {
+  def pointWidth(value: Int) = {
     append("pointWidth", value)
   }
 
-  def showCheckbox(value: Int): this.type = {
+  def showCheckbox(value: Int) = {
     append("showCheckbox", value)
   }
 
-  def showInLegend(value: Int): this.type = {
+  def showInLegend(value: Int) = {
     append("showInLegend", value)
   }
 
   // the value only have one item which is hover
-  def states(values: (String, Map[String, Any])*): this.type = {
+  def states(values: (String, Map[String, Any])*) = {
     val hover = values.collect {
       case ("hover", v) => v
     }.head
@@ -141,15 +141,15 @@ private[highcharts] class BoxPlot extends BasePlotOptions with PublicApply {
     * it is states.hover, since only hover in states
     * so just using one function without embedded structure
     */
-  def statesHover(values: (String, Any)*): this.type = {
+  def statesHover(values: (String, Any)*) = {
     append("states", "hover", values.toMap)
   }
 
-  def stemColor(value: String): this.type = {
+  def stemColor(value: String) = {
     append("stemColor", value)
   }
 
-  def stemDashStyle(value: String): this.type = {
+  def stemDashStyle(value: String) = {
     expect(value, "Solid",
       "ShortDash",
       "ShortDot",
@@ -164,23 +164,23 @@ private[highcharts] class BoxPlot extends BasePlotOptions with PublicApply {
     append("stemDashStyle", value)
   }
 
-  def stemWidth(value: Int): this.type = {
+  def stemWidth(value: Int) = {
     append("stemWidth", value)
   }
 
-  def turboThreshold(value: Int): this.type = {
+  def turboThreshold(value: Int) = {
     append("turboThreshold", value)
   }
 
-  def whiskerColor(value: String): this.type = {
+  def whiskerColor(value: String) = {
     append("whiskerColor", value)
   }
 
-  def whiskerLength(value: Int): this.type = {
+  def whiskerLength(value: Int) = {
     append("whiskerLength", value)
   }
 
-  def whiskerWidth(value: Int): this.type = {
+  def whiskerWidth(value: Int) = {
     append("whiskerWidth", value)
   }
 }

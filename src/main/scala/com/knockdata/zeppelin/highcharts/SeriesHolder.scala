@@ -58,8 +58,6 @@ private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
     this
   }
 
-
-
   def result: (List[Series], List[Series]) = {
     val colDefs = colDefsBuffer.toList
     val drillsDefList = drillsDefsBuffer.toList.map(_.toList)

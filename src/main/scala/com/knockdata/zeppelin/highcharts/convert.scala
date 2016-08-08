@@ -27,7 +27,6 @@ import model._
 import scala.collection.mutable.ListBuffer
 
 object convert {
-
   var seriesOptions = Set("chart.type")
   val chartOptions = Set("xAxis")
   val optionFields = Set("orderBy", "sortBy") ++ chartOptions ++ seriesOptions
@@ -68,7 +67,6 @@ object convert {
       providedMap
   }
 
-
   def getWantedColumns(colDefs: List[(String, Any)]): List[String] = {
     val optionExcluded = colDefs.filter {
       pair =>
@@ -79,12 +77,9 @@ object convert {
   }
 
   def partitionDefs(colDefs: List[(String, Any)]) = {
-
-
     val nameDefBuffer = new ListBuffer[(String, String)]
     val aggDefBuffer = new ListBuffer[(String, Column)]
     val optionDefBuffer = new ListBuffer[(String, Any)]
-
 
     for ((fieldName, theDef) <- colDefs) {
       if (optionFields.contains(fieldName)) {
@@ -122,7 +117,6 @@ object convert {
     val orderByDefs: List[Column] = optionDefs.collect { case ("orderBy", column: Column) => column }
 
     val wantedCols = getWantedColumns(colDefs)
-
 
     val dfAgg =
       if (colAggDefs.isEmpty || colNameDefs.isEmpty) {

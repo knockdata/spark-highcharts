@@ -22,107 +22,107 @@ import com.knockdata.zeppelin.highcharts.base.BaseModel
 class Tooltip extends BaseModel with PublicApply {
   override def fieldName: String = "tooltip"
 
-  def animation(value: Boolean): this.type = {
+  def animation(value: Boolean) = {
     append("animation", value)
   }
 
-  def backgroundColor(value: String): this.type = {
+  def backgroundColor(value: String) = {
     append("backgroundColor", value)
   }
 
-  def borderColor(value: String): this.type = {
+  def borderColor(value: String) = {
     append("borderColor", value)
   }
 
-  def borderRadius(value: Int): this.type = {
+  def borderRadius(value: Int) = {
     append("borderRadius", value)
   }
 
-  def crosshairs(value: String): this.type = {
+  def crosshairs(value: String) = {
     throw new Exception("using crosshairs in Axis instead")
   }
 
-  def dateTimeLabelFormats(value: String): this.type = {
+  def dateTimeLabelFormats(value: String) = {
     append("dateTimeLabelFormats", value)
   }
 
-  def enabled(value: Boolean): this.type = {
+  def enabled(value: Boolean) = {
     append("enabled", value)
   }
 
-  def followPointer(value: Boolean): this.type = {
+  def followPointer(value: Boolean) = {
     append("followPointer", value)
   }
 
-  def followTouchMove(value: String): this.type = {
+  def followTouchMove(value: String) = {
     append("followTouchMove", value)
   }
 
-  def footerFormat(value: String): this.type = {
+  def footerFormat(value: String) = {
     append("footerFormat", value)
   }
 
-  def formatter(value: String): this.type = {
+  def formatter(value: String) = {
     append("formatter", placeholdCode(value))
   }
 
-  def headerFormat(format: String): this.type = {
+  def headerFormat(format: String) = {
     append("headerFormat", format)
   }
 
-  def hideDelay(value: Int): this.type = {
+  def hideDelay(value: Int) = {
     append("hideDelay", value)
   }
 
-  def pointFormat(format: String): this.type = {
+  def pointFormat(format: String) = {
     append("pointFormat", format)
   }
 
-  def pointFormatter(value: String): this.type = {
+  def pointFormatter(value: String) = {
     append("pointFormatter", placeholdCode(value))
   }
 
-  def positioner(value: String): this.type = {
+  def positioner(value: String) = {
     append("positioner", placeholdCode(value))
   }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) = {
     append("shadow", value)
   }
 
-  def shape(value: String): this.type = {
+  def shape(value: String) = {
     append("shape", value)
   }
 
-  def shared(value: Boolean): this.type = {
+  def shared(value: Boolean) = {
     append("shared", value)
   }
 
-  def snap(value: Int): this.type = {
+  def snap(value: Int) = {
     append("snap", value)
   }
 
-  def style(values: (String, Any)*): this.type = {
+  def style(values: (String, Any)*) = {
     append("style", values.toMap)
   }
 
-  def useHTML(value: Boolean): this.type = {
+  def useHTML(value: Boolean) = {
     append("useHTML", value)
   }
 
-  def valueDecimals(value: Int): this.type = {
+  def valueDecimals(value: Int) = {
     append("valueDecimals", value)
   }
 
-  def valuePrefix(value: String): this.type = {
+  def valuePrefix(value: String) = {
     append("valuePrefix", value)
   }
 
-  def valueSuffix(value: String): this.type = {
+  def valueSuffix(value: String) = {
     append("valueSuffix", value)
   }
 
-  def xDateFormat(value: String): this.type = {
+  def xDateFormat(value: String) = {
     append("xDateFormat", value)
   }
 }

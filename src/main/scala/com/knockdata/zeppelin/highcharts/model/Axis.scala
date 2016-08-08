@@ -22,8 +22,6 @@ import com.knockdata.zeppelin.highcharts.base.BaseModel
 class Axis(text: String = "") extends BaseModel with PublicApply {
   override def fieldName: String = "axis"
 
-  //  val title = new AxisTitle(text)
-
   override def preProcessResult(): Unit = {
     if (text != "") {
       append("title", "text", text)
@@ -31,79 +29,78 @@ class Axis(text: String = "") extends BaseModel with PublicApply {
     super.preProcessResult()
   }
 
-
-  def typ(value: String): this.type = {
+  def typ(value: String) = {
     append("type", value)
   }
 
-  def allowDecimals(value: Boolean): this.type = {
+  def allowDecimals(value: Boolean) = {
     append("allowDecimals", value)
   }
 
-  def alternateGridColor(value: String): this.type = {
+  def alternateGridColor(value: String) = {
     append("alternateGridColor", value)
   }
 
-  def breaks(values: Map[String, Any]*): this.type = {
+  def breaks(values: Map[String, Any]*) = {
     append("breaks", values.toList)
   }
 
-  def categories(values: String*): this.type = {
+  def categories(values: String*) = {
     append("categories", values.toList)
   }
 
-  def categories(values: List[String]): this.type = {
+  def categories(values: List[String]) = {
     append("categories", values)
   }
 
-  def ceiling(value: Int): this.type = {
+  def ceiling(value: Int) = {
     append("ceiling", value)
   }
 
-  def crosshair(value: Boolean): this.type = {
+  def crosshair(value: Boolean) = {
     append("crosshair", value)
   }
 
-  def dateTimeLabelFormats(values: (String, Any)*): this.type = {
+  def dateTimeLabelFormats(values: (String, Any)*) = {
     append("dateTimeLabelFormats", values.toMap)
   }
 
-  def endOnTick(value: Boolean): this.type = {
+  def endOnTick(value: Boolean) = {
     append("endOnTick", value)
   }
 
-  def events(values: (String, String)*): this.type = {
+  def events(values: (String, String)*) = {
     append("events", values.map {
       case (k, v) => k -> Code(v)
     })
   }
 
-  def floor(value: Int): this.type = {
-    append("ceiling", value)
+  def floor(value: Int) = {
+    append("floor", value)
   }
 
-  def gridLineColor(value: String): this.type = {
+  def gridLineColor(value: String) = {
     append("gridLineColor", value)
   }
 
-  def gridLineDashStyle(value: String): this.type = {
+  def gridLineDashStyle(value: String) = {
     expect(value, "dash", "dot", "solid")
     append("gridLineDashStyle", value)
   }
 
-  def gridLineWidth(value: Int): this.type = {
+  def gridLineWidth(value: Int) = {
     append("gridLineWidth", value)
   }
 
-  def gridZIndex(value: Int): this.type = {
+  def gridZIndex(value: Int) = {
     append("gridZIndex", value)
   }
 
-  def id(value: String): this.type = {
+  def id(value: String) = {
     append("id", value)
   }
 
-  def labels(values: (String, Any)*): this.type = {
+  def labels(values: (String, Any)*) = {
     append("labels", values.map{
       case ("formatter", v: String) =>
         "formatter" -> placeholdCode(v)
@@ -113,166 +110,166 @@ class Axis(text: String = "") extends BaseModel with PublicApply {
     }.toMap)
   }
 
-  def lineColor(value: String): this.type = {
+  def lineColor(value: String) = {
     append("lineColor", value)
   }
 
-  def lineWidth(value: Int): this.type = {
+  def lineWidth(value: Int) = {
     append("lineWidth", value)
   }
 
-  def linkedTo(value: Int): this.type = {
+  def linkedTo(value: Int) = {
     append("linkedTo", value)
   }
 
-  def max(value: Double): this.type = {
+  def max(value: Double) = {
     append("max", value)
   }
 
-  def maxPadding(value: Double): this.type = {
+  def maxPadding(value: Double) = {
     append("maxPadding", value)
   }
 
-  def maxZoom(value: Double): this.type = {
+  def maxZoom(value: Double) = {
     throw new Exception("using minRange instead, deprecated since Highcharts 2.2")
   }
 
-  def min(value: Double): this.type = {
+  def min(value: Double) = {
     append("min", value)
   }
 
-  def minPadding(value: Double): this.type = {
+  def minPadding(value: Double) = {
     append("minPadding", value)
   }
 
-  def minRange(value: Double): this.type = {
+  def minRange(value: Double) = {
     append("minRange", value)
   }
 
-  def minTickInterval(value: Double): this.type = {
+  def minTickInterval(value: Double) = {
     append("minTickInterval", value)
   }
 
-  def minorGridLineColor(value: String): this.type = {
+  def minorGridLineColor(value: String) = {
     append("minorGridLineColor", value)
   }
 
-  def minorGridLineDashStyle(value: String): this.type = {
+  def minorGridLineDashStyle(value: String) = {
     append("minorGridLineDashStyle", value)
   }
 
-  def minorGridLineWidth(value: Int): this.type = {
+  def minorGridLineWidth(value: Int) = {
     append("minorGridLineWidth", value)
   }
 
-  def minorTickColor(value: String): this.type = {
+  def minorTickColor(value: String) = {
     append("minorTickColor", value)
   }
 
-  def minorTickInterval(value: Double): this.type = {
+  def minorTickInterval(value: Double) = {
     append("minorTickInterval", value)
   }
 
-  def minorTickLength(value: Int): this.type = {
+  def minorTickLength(value: Int) = {
     append("minorTickLength", value)
   }
 
-  def minorTickPosition(value: String): this.type = {
+  def minorTickPosition(value: String) = {
     append("minorTickPosition", value)
   }
 
-  def minorTickWidth(value: String): this.type = {
+  def minorTickWidth(value: String) = {
     append("minorTickWidth", value)
   }
 
-  def offset(value: Int): this.type = {
+  def offset(value: Int) = {
     append("offset", value)
   }
 
-  def opposite(value: Boolean): this.type = {
+  def opposite(value: Boolean) = {
     append("opposite", value)
   }
 
-  def plotBands(values: Map[String, Any]*): this.type = {
+  def plotBands(values: Map[String, Any]*) = {
     append("plotBands", values.toList)
   }
 
   // plot ONE band
-  def plotBand(values: (String, Any)*): this.type = {
+  def plotBand(values: (String, Any)*) = {
     append("plotBands", List(values.toMap))
   }
 
-  def plotLines(values: Map[String, Any]*): this.type = {
+  def plotLines(values: Map[String, Any]*) = {
     append("plotLines", values.toList)
   }
 
   // plot ONE line
-  def plotLine(values: (String, Any)*): this.type = {
+  def plotLine(values: (String, Any)*) = {
     append("plotLines", List(values.toMap))
   }
 
-  def reversed(value: Boolean): this.type = {
+  def reversed(value: Boolean) = {
     append("reversed", value)
   }
 
-  def showEmpty(value: Boolean): this.type = {
+  def showEmpty(value: Boolean) = {
     append("showEmpty", value)
   }
 
-  def showFirstLabel(value: Boolean): this.type = {
+  def showFirstLabel(value: Boolean) = {
     append("showFirstLabel", value)
   }
 
-  def showLastLabel(value: String): this.type = {
+  def showLastLabel(value: String) = {
     append("showLastLabel", value)
   }
 
-  def startOfWeek(value: Int): this.type = {
+  def startOfWeek(value: Int) = {
     append("startOfWeek", value)
   }
 
-  def startOnTick(value: Boolean): this.type = {
+  def startOnTick(value: Boolean) = {
     append("startOnTick", value)
   }
 
-  def tickAmount(value: Int): this.type = {
+  def tickAmount(value: Int) = {
     append("tickAmount", value)
   }
 
-  def tickColor(value: String): this.type = {
+  def tickColor(value: String) = {
     append("tickColor", value)
   }
 
-  def tickInterval(value: Double): this.type = {
+  def tickInterval(value: Double) = {
     append("tickInterval", value)
   }
 
-  def tickLength(value: Int): this.type = {
+  def tickLength(value: Int) = {
     append("tickLength", value)
   }
 
-  def tickPixelInterval(value: Int): this.type = {
+  def tickPixelInterval(value: Int) = {
     append("tickPixelInterval", value)
   }
 
-  def tickPosition(value: String): this.type = {
+  def tickPosition(value: String) = {
     expect(value, "inside", "outside")
     append("tickPosition", value)
   }
 
-  def tickPositioner(code: String): this.type = {
+  def tickPositioner(code: String) = {
     append("tickPositioner", placeholdCode(code))
   }
 
-  def tickPositions(values: Int*): this.type = {
+  def tickPositions(values: Int*) = {
     append("tickPositions", values.toList)
   }
 
-  def tickWidth(value: Int): this.type = {
+  def tickWidth(value: Int) = {
     append("tickWidth", value)
   }
 
-  def tickmarkPlacement(value: String): this.type = {
+  def tickmarkPlacement(value: String) = {
     append("tickmarkPlacement", value)
   }
 
@@ -284,40 +281,38 @@ class Axis(text: String = "") extends BaseModel with PublicApply {
     *               List("second", List(1, 2, 5, 10, 15, 30))
     * @return this
     */
-  def units(values: List[Any]*): this.type = {
+  def units(values: List[Any]*) = {
     append("units", values.toList)
   }
 
-  def visible(value: Boolean): this.type = {
+  def visible(value: Boolean) = {
     append("units", value)
   }
-
 }
 
 class XAxis(text: String = "") extends Axis(text) {
-
   override def fieldName: String = "xAxis"
 }
 
 class YAxis(text: String = "") extends Axis(text) {
   override def fieldName: String = "yAxis"
 
-  def gridLineInterpolation(value: String): this.type = {
+  def gridLineInterpolation(value: String) = {
     append("gridLineInterpolation", value)
   }
 
-  def reversedStacks(value: Boolean): this.type = {
+  def reversedStacks(value: Boolean) = {
     append("reversedStacks", value)
   }
 
-  def stackLabels(values: (String, Any)*): this.type = {
+  def stackLabels(values: (String, Any)*) = {
     append("stackLabels", values.map{
       case ("formatter", v: String) => "formatter" -> Code(v)
       case (k, v) => k -> v
     }.toMap)
   }
 
-  def stops(values: List[Any]*): this.type = {
+  def stops(values: List[Any]*) = {
     append("stops", values.toList)
   }
 }

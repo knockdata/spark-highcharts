@@ -19,24 +19,24 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Credits(text: String) extends BaseModel with PublicApply{
+class Credits(text: String) extends BaseModel with PublicApply {
   override def fieldName: String = "credits"
 
   append("text", text)
 
-  def enabled(value: Boolean): this.type = {
+  def enabled(value: Boolean) = {
     append("enabled", value)
   }
 
-  def href(value: String): this.type = {
+  def href(value: String) = {
     append("href", value)
   }
 
-  def position(values: (String, Any)*): this.type = {
+  def position(values: (String, Any)*) = {
     append("position", values.toMap)
   }
 
-  def style(values: (String, Any)*): this.type = {
+  def style(values: (String, Any)*) = {
     append("style", values.toMap)
   }
 }

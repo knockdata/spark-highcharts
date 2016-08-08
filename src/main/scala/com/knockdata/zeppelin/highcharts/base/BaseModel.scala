@@ -124,7 +124,7 @@ abstract class BaseModel extends IModel {
   /**
     * append a JField, it's the main entry
     */
-  override protected def append(field: JField): this.type = {
+  override protected def append(field: JField) = {
     if (fieldsNames.contains(field.name)) {
       println("something is strange")
     }
@@ -133,7 +133,7 @@ abstract class BaseModel extends IModel {
     this
   }
 
-  protected def append(name: String, value: Any): this.type = {
+  protected def append(name: String, value: Any) = {
     // only append when value is NOT empty
     value match {
       case "" =>
@@ -147,7 +147,7 @@ abstract class BaseModel extends IModel {
     this
   }
 
-  protected def append(fieldName: String, subFieldName: String, subFieldValue: Any): this.type = {
+  protected def append(fieldName: String, subFieldName: String, subFieldValue: Any) = {
     val prev = subFields.getOrElse(fieldName, Nil)
 
     // only append when value is note empty

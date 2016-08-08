@@ -18,9 +18,9 @@
 package com.knockdata.zeppelin.highcharts.base
 
 trait Layout extends BaseModel {
-  def layout(value: String): this.type = append("layout", value)
+  def layout(value: String) = append("layout", value)
 
-  def align(value: String): this.type = append("align", value)
+  def align(value: String) = append("align", value)
 
-  def verticalAlign(value: String): this.type = append("verticalAlign", value)
+  def verticalAlign(value: String) = append("verticalAlign", value)
 }

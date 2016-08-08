@@ -23,23 +23,23 @@ import com.knockdata.zeppelin.highcharts.base._
 private[highcharts] class Bubble extends BasePlotOptions with PublicApply {
   def fieldName = "bubble"
 
-  def allowPointSelect(value: Boolean): this.type = {
+  def allowPointSelect(value: Boolean) = {
     append("allowPointSelect", value)
   }
 
-  def animation(value: Boolean): this.type = {
+  def animation(value: Boolean) = {
     append("animation", value)
   }
 
-  def color(value: String): this.type = {
+  def color(value: String) = {
     append("color", value)
   }
 
-  def cropThreshold(value: Boolean): this.type = {
+  def cropThreshold(value: Boolean) = {
     append("cropThreshold", value)
   }
 
-  def dashStyle(value: String): this.type = {
+  def dashStyle(value: String) = {
     expect(value, "Solid",
       "ShortDash",
       "ShortDot",
@@ -54,76 +54,76 @@ private[highcharts] class Bubble extends BasePlotOptions with PublicApply {
     append("dashStyle", value)
   }
 
-  def dataLabels(values: (String, Any)*): this.type = {
+  def dataLabels(values: (String, Any)*) = {
     append("dataLabels", values.toMap)
   }
 
-  def displayNegative(value: Boolean): this.type = {
+  def displayNegative(value: Boolean) = {
     append("displayNegative", value)
   }
 
-  def lineWidth(value: Int): this.type = {
+  def lineWidth(value: Int) = {
     append("lineWidth", value)
   }
 
-  def linkedTo(value: String): this.type = {
+  def linkedTo(value: String) = {
     append("linkedTo", value)
   }
 
-  def marker(values: (String, Any)*): this.type = {
+  def marker(values: (String, Any)*) = {
     append("marker", values.toMap)
   }
 
-  def maxSize(value: Int): this.type = {
+  def maxSize(value: Int) = {
     append("maxSize", value)
   }
 
-  def minSize(value: Int): this.type = {
+  def minSize(value: Int) = {
     append("minSize", value)
   }
 
-  def negativeColor(value: String): this.type = {
+  def negativeColor(value: String) = {
     append("negativeColor", value)
   }
 
-  def pointInterval(value: Int): this.type = {
+  def pointInterval(value: Int) = {
     append("pointInterval", value)
   }
 
-  def pointIntervalUnit(value: String): this.type = {
+  def pointIntervalUnit(value: String) = {
     append("pointIntervalUnit", value)
   }
 
-  def pointStart(value: Int): this.type = {
+  def pointStart(value: Int) = {
     append("pointStart", value)
   }
 
-  def shadow(value: Boolean): this.type = {
+  def shadow(value: Boolean) = {
     append("shadow", value)
   }
 
-  def showCheckbox(value: Boolean): this.type = {
+  def showCheckbox(value: Boolean) = {
     append("showCheckbox", value)
   }
 
-  def showInLegend(value: Boolean): this.type = {
+  def showInLegend(value: Boolean) = {
     append("showInLegend", value)
   }
 
-  def sizeBy(value: String): this.type = {
+  def sizeBy(value: String) = {
     append("sizeBy", value)
   }
 
-  def sizeByAbsoluteValue(value: Boolean): this.type = {
+  def sizeByAbsoluteValue(value: Boolean) = {
     append("sizeByAbsoluteValue", value)
   }
 
-  def softThreshold(value: Boolean): this.type = {
+  def softThreshold(value: Boolean) = {
     append("softThreshold", value)
   }
 
   // the value only have one item which is hover
-  def states(values: (String, Map[String, Any])*): this.type = {
+  def states(values: (String, Map[String, Any])*) = {
     val hover = values.collect {
       case ("hover", v) => v
     }.head
@@ -135,23 +135,23 @@ private[highcharts] class Bubble extends BasePlotOptions with PublicApply {
     * it is states.hover, since only hover in states
     * so just using one function without embedded structure
     */
-  def statesHover(values: (String, Any)*): this.type = {
+  def statesHover(values: (String, Any)*) = {
     append("states", "hover", values.toMap)
   }
 
-  def threshold(value: Int): this.type = {
+  def threshold(value: Int) = {
     append("threshold", value)
   }
 
-  def zMax(value: Int): this.type = {
+  def zMax(value: Int) = {
     append("zMax", value)
   }
 
-  def zMin(value: Int): this.type = {
+  def zMin(value: Int) = {
     append("zMin", value)
   }
 
-  def zThreshold(value: Int): this.type = {
+  def zThreshold(value: Int) = {
     append("zThreshold", value)
   }
 }
