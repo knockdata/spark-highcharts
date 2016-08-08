@@ -19,7 +19,7 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Navigation() extends BaseModel with PublicApply{
+class Navigation() extends BaseModel with PublicApply {
   override def fieldName: String = "navigation"
 
   def buttonOptions(values: (String, Any)*): this.type = {

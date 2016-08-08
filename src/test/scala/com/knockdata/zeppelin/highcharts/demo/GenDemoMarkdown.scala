@@ -27,7 +27,7 @@ import scala.collection.mutable.ListBuffer
 class GenDemoMarkdown {
 
   @Test
-  def genMarkdown: Unit = {
+  def genMarkdown(): Unit = {
 
     for (filename <- getDemoFiles) {
       println(s"generate mark down for $filename")

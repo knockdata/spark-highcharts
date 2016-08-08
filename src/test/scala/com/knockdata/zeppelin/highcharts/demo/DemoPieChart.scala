@@ -42,7 +42,7 @@ class DemoPieChart {
   // * data point order by age
   //
   @Test
-  def demoDonut: Unit = {
+  def demoDonut(): Unit = {
     import sqlContext.implicits._
     import org.apache.spark.sql.functions._
 
@@ -140,7 +140,7 @@ class DemoPieChart {
   // * y from $"consumption"
   //
   @Test
-  def demoStackedColumn: Unit = {
+  def demoStackedColumn(): Unit = {
     import sqlContext.implicits._
 
     val male = Seq(-2.2, -2.2, -2.3, -2.5, -2.7, -3.1, -3.2,

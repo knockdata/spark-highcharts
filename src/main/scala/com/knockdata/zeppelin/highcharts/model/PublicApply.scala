@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.model
 import com.knockdata.zeppelin.highcharts.base.IModel
 import net.liftweb.json._
 
-trait PublicApply extends IModel{
+trait PublicApply extends IModel {
 
   def apply(fieldName: String, fieldValue: String): this.type =
     append(fieldName, fieldValue)

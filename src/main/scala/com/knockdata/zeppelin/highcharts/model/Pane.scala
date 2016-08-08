@@ -19,7 +19,7 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Pane() extends BaseModel with PublicApply{
+class Pane() extends BaseModel with PublicApply {
   override def fieldName: String = "pane"
 
   def background(values: Map[String, Any]*): this.type = {

@@ -15,15 +15,15 @@
 * limitations under the License.
 */
 
-
 package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 import com.knockdata.zeppelin.highcharts.convert
 import org.apache.spark.sql.DataFrame
 
-class Series(val values: List[Any]) extends BaseModel with PublicApply{
+class Series(val values: List[Any]) extends BaseModel with PublicApply {
   override def fieldName: String = "series"
+
   var vs = values
 
   def id(value: String): this.type = {
@@ -60,19 +60,18 @@ class Series(val values: List[Any]) extends BaseModel with PublicApply{
 
   def dataLabels(values: (String, Any)*): this.type = {
     append("dataLabels",
-      values.map{
+      values.map {
         case ("formatter", v: String) =>
           "formatter" -> placeholdCode(v)
         case (k, v) =>
           k -> v
-    }.toMap)
+      }.toMap)
   }
 
   override def preProcessResult(): Unit = {
     append("data", vs)
     super.preProcessResult()
   }
-
 }
 
 object Series {

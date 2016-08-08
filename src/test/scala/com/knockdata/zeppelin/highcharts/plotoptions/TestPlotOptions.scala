@@ -23,7 +23,7 @@ import org.junit.Test
 
 class TestPlotOptions extends AbstractTestCase{
   @Test
-  def testCodeInPlot = {
+  def testCodeInPlot() = {
     val options = new Area()//.fillColor("linearGradient", Map("x1"->0,"y1"->0, "x2"->0, "y2"->1))
     .fillColorStops((0, "Highcharts.getOptions().colors[0]"),
         (1, "Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')"))

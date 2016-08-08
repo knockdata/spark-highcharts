@@ -35,11 +35,11 @@ object Assert {
   }
   def assertEqualJson(expected: String, actual: String): Unit = {
     val compareMode = JSONCompareMode.NON_EXTENSIBLE
-    val result = JSONCompare.compareJSON(expected, actual, compareMode);
+    val result = JSONCompare.compareJSON(expected, actual, compareMode)
     if(result.failed()) {
       val msg = s"actual \n$actual \n!= expected \n$expected"
       println(msg)
-      throw new AssertionError(result.getMessage());
+      throw new AssertionError(result.getMessage)
     }
     JSONAssert.assertEquals(expected, actual, false)
   }

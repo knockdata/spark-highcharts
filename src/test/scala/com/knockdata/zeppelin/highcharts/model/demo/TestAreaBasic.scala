@@ -27,7 +27,7 @@ import org.junit.Test
   */
 class TestAreaBasic extends AbstractTestCase{
   @Test
-  def testAreaBasic: Unit = {
+  def testAreaBasic(): Unit = {
     val title = new Title("US and USSR nuclear stockpiles")
 
     val subtitle = new Subtitle(

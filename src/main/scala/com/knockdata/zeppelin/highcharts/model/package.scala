@@ -15,9 +15,7 @@
 * limitations under the License.
 */
 
-
 package com.knockdata.zeppelin.highcharts
-
 
 import scala.language.implicitConversions
 
@@ -34,5 +32,4 @@ package object model {
   implicit def normalSeriesToHighcharts(normalSeries: Series): Highcharts = {
     new Highcharts(List(normalSeries))
   }
-
 }

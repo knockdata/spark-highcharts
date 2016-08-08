@@ -19,7 +19,7 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Drilldown(allDrilldownSeries: List[Series]) extends BaseModel with PublicApply{
+class Drilldown(allDrilldownSeries: List[Series]) extends BaseModel with PublicApply {
   override def fieldName: String = "drilldown"
 
   override def preProcessResult(): Unit = {

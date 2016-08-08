@@ -19,7 +19,7 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Subtitle(text: String = "") extends BaseModel with PublicApply{
+class Subtitle(text: String = "") extends BaseModel with PublicApply {
   override def fieldName: String = "subtitle"
 
   append("text", text)

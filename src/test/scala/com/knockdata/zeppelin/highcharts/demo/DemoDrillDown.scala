@@ -44,7 +44,7 @@ class DemoDrillDown {
   // * x axis data from column $"job"
   // * y axis aggregated the average balance
   @Test
-  def demoDrilldownBasic: Unit = {
+  def demoDrilldownBasic(): Unit = {
     highcharts(bank
       .series("name" -> "marital",
         "y" -> avg(col("balance")))
@@ -78,7 +78,7 @@ class DemoDrillDown {
   // size(marital) + size(marital) * size(balance)
   //   + size(marital) * size(balance) + size(education)
   @Test
-  def demoDrilldown2Level: Unit = {
+  def demoDrilldown2Level(): Unit = {
 
     highcharts(bank
       .series("name" -> "marital",
@@ -113,7 +113,7 @@ class DemoDrillDown {
   // size(marital) + size(marital) * size(balance)
   //   + size(marital) * size(balance) + size(education)
   @Test
-  def demoLineBasicDesc: Unit = {
+  def demoLineBasicDesc(): Unit = {
 
     highcharts(bank
       .seriesCol("marital")

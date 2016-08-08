@@ -46,7 +46,7 @@ class DemoAreaChart {
   // * data point order by age
   //
   @Test
-  def demoBasicArea: Unit = {
+  def demoBasicArea(): Unit = {
     import sqlContext.implicits._
     val USA = Seq(0, 0, 0, 0, 0, 6, 11, 32, 110, 235, 369, 640,
       1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,

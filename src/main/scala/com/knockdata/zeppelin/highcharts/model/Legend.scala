@@ -19,7 +19,7 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Legend extends BaseModel with PublicApply{
+class Legend extends BaseModel with PublicApply {
   override def fieldName: String = "legend"
 
   def align(value: String): this.type = {

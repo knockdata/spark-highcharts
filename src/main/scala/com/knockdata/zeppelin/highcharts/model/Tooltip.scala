@@ -19,7 +19,7 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Tooltip extends BaseModel with PublicApply{
+class Tooltip extends BaseModel with PublicApply {
   override def fieldName: String = "tooltip"
 
   def animation(value: Boolean): this.type = {

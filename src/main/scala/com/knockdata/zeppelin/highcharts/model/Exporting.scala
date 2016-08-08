@@ -19,7 +19,7 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Exporting() extends BaseModel with PublicApply{
+class Exporting() extends BaseModel with PublicApply {
   override def fieldName: String = "exporting"
 
   def enabled(value: Boolean): this.type = {

@@ -49,7 +49,7 @@ class ModelAnalyzer {
 
   val plotOptionsLines: List[String] = {
     lines.filter(_.startsWith("plotOptions-"))
-      .map(_.drop("plotOptions-".size))
+      .map(_.drop("plotOptions-".length))
   }
 
   val chartTypes = {
@@ -63,9 +63,9 @@ class ModelAnalyzer {
 
 
   val chartTypePlotOptions: List[(String, List[String])] = chartTypes.map {
-    case option =>
-      val len = option.size + 1
-      option -> plotOptionsLines.collect{
+    option =>
+      val len = option.length + 1
+      option -> plotOptionsLines.collect {
         case line if line.startsWith(option) => line.drop(len)
       }
   }
@@ -117,13 +117,13 @@ class ModelAnalyzer {
 
 
   @Test
-  def testCommonTop: Unit = {
+  def testCommonTop(): Unit = {
 
     println(commonTopPlotOptions.mkString("\n"))
   }
 
   @Test
-  def testCommonFunc: Unit = {
+  def testCommonFunc(): Unit = {
 
     val commonFunc = commonTopPlotOptions.map(_.replace("-", "")).sorted.map{
       name =>
@@ -139,7 +139,7 @@ class ModelAnalyzer {
 
 
   @Test
-  def testSpecialTop: Unit = {
+  def testSpecialTop(): Unit = {
     for ((chartType, options) <- topPlotOptionsMap) {
       val specialOptions = options diff commonTopPlotOptions
 
@@ -151,7 +151,7 @@ class ModelAnalyzer {
   }
 
   @Test
-  def testSpecialTopFunctions: Unit = {
+  def testSpecialTopFunctions(): Unit = {
     for ((chartType, options) <- topPlotOptionsMap) {
       val specialOptions = options diff commonTopPlotOptions
 
@@ -174,13 +174,13 @@ class ModelAnalyzer {
   }
 
   @Test
-  def testTopCombinations: Unit = {
+  def testTopCombinations(): Unit = {
 
     println(commonTopCombos.mkString("\n"))
   }
 
   @Test
-  def testTopLeafCombinations: Unit = {
+  def testTopLeafCombinations(): Unit = {
     val nums = commonTopCombosLeaf.map{case (k, v) => k -> v.size}
 
     println(nums.mkString("\n"))
@@ -188,7 +188,7 @@ class ModelAnalyzer {
   }
 
   @Test
-  def testTopLeafCombosSpecial: Unit = {
+  def testTopLeafCombosSpecial(): Unit = {
     val nums = commonTopCombosLeaf.map{case (k, v) => k -> v.size}
 
     println(nums.mkString("\n"))
@@ -199,7 +199,7 @@ class ModelAnalyzer {
 
 
   @Test
-  def testOptions: Unit = {
+  def testOptions(): Unit = {
 
 
 

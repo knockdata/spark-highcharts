@@ -74,33 +74,30 @@ object JsonConversion {
   }
 
   def listToJArray(vs: List[Any]): JArray = {
-    val ar = vs.map(
-      value => value match {
-
-        case v: JValue =>
-          v
-        case v: BaseModel =>
-          v.result
-        case v: (_, _) =>
-          listToJArray(v.productIterator.toList)
-        case v: List[_] =>
-          if (v.size == 1)
-            toJValue(v.head)
-          else
-            listToJArray(v)
-        case v: Seq[_] =>
-          if (v.size == 1)
-            toJValue(v.head)
-          else
-            listToJArray(v.toList)
-        case v: Map[String @unchecked, _] =>
-          mapToJObject(v)
-        case v: Array[_] =>
+    val ar = vs.map {
+      case v: JValue =>
+        v
+      case v: BaseModel =>
+        v.result
+      case v: (_, _) =>
+        listToJArray(v.productIterator.toList)
+      case v: List[_] =>
+        if (v.size == 1)
+          toJValue(v.head)
+        else
+          listToJArray(v)
+      case v: Seq[_] =>
+        if (v.size == 1)
+          toJValue(v.head)
+        else
           listToJArray(v.toList)
-        case _ =>
-          valueToJValue(value)
-      }
-    )
+      case v: Map[String@unchecked, _] =>
+        mapToJObject(v)
+      case v: Array[_] =>
+        listToJArray(v.toList)
+      case value =>
+        valueToJValue(value)
+    }
 
     JArray(ar)
   }

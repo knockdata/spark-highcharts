@@ -18,7 +18,6 @@
 package com.knockdata.zeppelin.highcharts
 
 import com.knockdata.zeppelin.highcharts.model._
-import org.apache.spark.sql.DataFrame
 
 import scala.collection.mutable
 
@@ -36,8 +35,4 @@ object highcharts {
 
     new Highcharts(normalSeriesBuffer.toList).drilldown(drilldownSeriesBuffer.toList)
   }
-
-//  def apply(dataFrame: DataFrame): HighchartsHolder = {
-//    new HighchartsHolder(dataFrame)
-//  }
 }

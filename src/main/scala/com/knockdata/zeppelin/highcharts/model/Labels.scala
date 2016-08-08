@@ -20,7 +20,7 @@ package com.knockdata.zeppelin.highcharts.model
 
 import com.knockdata.zeppelin.highcharts.base.BaseModel
 
-class Labels extends BaseModel with PublicApply{
+class Labels extends BaseModel with PublicApply {
   override def fieldName: String = "labels"
 
   def items(values: (String, Any)*): this.type = {

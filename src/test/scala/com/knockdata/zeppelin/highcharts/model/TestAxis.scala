@@ -23,7 +23,7 @@ import org.junit.Test
 class TestAxis extends AbstractTestCase {
 
   @Test
-  def testLabelStyleColor: Unit = {
+  def testLabelStyleColor(): Unit = {
     val yAxis = new YAxis("Average Balance").plotBands(
       Map("from" -> 0, "to" -> 1000, "color" -> "rgba(68, 170, 213, 0.1)",
         "label" -> Map(
