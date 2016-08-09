@@ -23,85 +23,15 @@ import org.apache.spark.sql.{Column, DataFrame, Row}
 import scala.collection.mutable
 
 import model._
-
-import scala.collection.mutable.ListBuffer
+import SeriesHolder.Defs
 
 object convert {
+  def getFieldColumnMap(defs: Defs, withDrilldownField: Boolean): List[(String, String)] = {
 
-  var seriesOptions = Set("chart.type")
-  val chartOptions = Set("xAxis")
-  val optionFields = Set("orderBy", "sortBy", "sample", "take") ++ chartOptions ++ seriesOptions
-
-  def setSeriesOptions(series: Series, colDefs: List[(String, Any)]): Series = {
-    val options = colDefs.collect {
-      case (name, value: String) if seriesOptions.contains(name) =>
-        (name, value)
-    }
-
-    (series /: options) ((s: Series, pair: (String, String)) => {
-      val (optionName, optionValue) = pair
-      optionName.split('.').toList match {
-        case fieldName :: Nil =>
-          s(fieldName, optionValue)
-        case fieldName :: subFieldName :: Nil =>
-          s(fieldName, subFieldName, optionValue)
-        case _ =>
-          throw new Exception("it can only have two levels option")
-      }
-    })
-  }
-
-  def excludeOptions(colDefs: List[(String, Any)]): List[(String, Any)] = {
-    colDefs.filter {
-      pair =>
-        !optionFields.contains(pair._1)
-    }
-  }
-
-  def getFieldColumnMap(colDefs: List[(String, Any)], withDrilldownField: Boolean): List[(String, String)] = {
-    val optionExcluded = excludeOptions(colDefs)
-
-    val providedMap = optionExcluded.map { case (fieldName, column) => fieldName -> column.toString }
     if (withDrilldownField)
-      ("drilldown" -> "drilldown") :: providedMap
+      ("drilldown" -> "drilldown") :: defs.allColsMap
     else
-      providedMap
-  }
-
-
-  def getWantedColumns(colDefs: List[(String, Any)]): List[String] = {
-    val optionExcluded = colDefs.filter {
-      pair =>
-        !optionFields.contains(pair._1)
-    }
-
-    optionExcluded.map { case (fieldName, column) => column.toString }
-  }
-
-  def partitionDefs(colDefs: List[(String, Any)]) = {
-
-
-    val nameDefBuffer = new ListBuffer[(String, String)]
-    val aggDefBuffer = new ListBuffer[(String, Column)]
-    val optionDefBuffer = new ListBuffer[(String, Any)]
-
-
-    for ((fieldName, theDef) <- colDefs) {
-      if (optionFields.contains(fieldName)) {
-        optionDefBuffer += fieldName -> theDef
-      }
-      else theDef match {
-        case s: String =>
-          nameDefBuffer += fieldName -> s
-        case _ =>
-          aggDefBuffer += fieldName -> theDef.asInstanceOf[Column]
-      }
-
-    }
-
-    (nameDefBuffer.result(),
-      aggDefBuffer.result(),
-      optionDefBuffer.result())
+      defs.allColsMap
   }
 
   /**
@@ -109,32 +39,26 @@ object convert {
     * using groupBy and agg
     *
     * @param dataFrame
-    * @param colDefs (jsonFieldName -> columnName) or
+    * @param defs (jsonFieldName -> columnName) or
     *                (jsonField -> Column) the Column is with agg function
     *                ("orderBy" -> Column)
     * @return (columns, rows)
     */
   private[zeppelin] def getRows(dataFrame: DataFrame,
                                 currentKeys: List[String],
-                                colDefs: List[(String, Any)],
-                                withDrilldownField: Boolean): (Array[String], Array[Row]) = {
-    val (colNameDefs, colAggDefs, optionDefs) = partitionDefs(colDefs)
-    val orderByDefs: List[Column] = optionDefs.collect { case ("orderBy", column: Column) => column }
-
-    val wantedCols = getWantedColumns(colDefs)
-
-
+                                defs: Defs,
+                                withDrilldownField: Boolean): Array[Row] = {
     val dfAgg =
-      if (colAggDefs.isEmpty || colNameDefs.isEmpty) {
+      if (defs.aggDefs.isEmpty || defs.nameDefs.isEmpty) {
         dataFrame
       }
       else {
-        val groupByCols = colNameDefs.map {
+        val groupByCols = defs.nameDefs.map {
           case (jsonFieldName, colName: String) =>
             col(colName)
         }
 
-        val aggCols = colAggDefs.map {
+        val aggCols = defs.aggDefs.map {
           case (jsonFieldName, aggCol: Column) =>
             aggCol
         }
@@ -144,36 +68,23 @@ object convert {
           .agg(aggCols.head, aggCols.tail: _*)
       }
 
-    val dfOrdered =
-      if (orderByDefs.isEmpty) {
-        dfAgg
-      } else {
-        dfAgg.orderBy(orderByDefs: _*)
-      }
-
-    val dfSelected = dfOrdered.select(wantedCols.head, wantedCols.tail: _*)
+    val dfCustomized: DataFrame = (dfAgg /: defs.df2dfDefs)((temp: DataFrame, df2df) => df2df(temp))
 
 
+    val wantedCols = defs.wantedCol
+    val dfSelected = dfCustomized.select(wantedCols.head, wantedCols.tail:_*)
 
     val dfDrill =
       if (withDrilldownField)
-        withDrilldown(currentKeys, colNameDefs, dfSelected)
+        withDrilldown(currentKeys, defs.nameDefs, dfSelected)
       else
         dfSelected
 
-    val rows: Array[Row] = if (optionDefs.exists(_._1 == "take")) {
-      val n = optionDefs.collect{case ("take", n: Int) => n}.head
-      dfDrill.take(n)
-    }
-    else if (optionDefs.exists(_._1 == "sample")) {
-      val fractions = optionDefs.collect{case ("sample", fractions: Double) => fractions}.head
-      dfDrill.sample(false, fractions).collect()
-    }
-    else {
-      dfDrill.collect()
-    }
+    val rows: Array[Row] = defs.getRows(dfDrill)
 
-    (dfDrill.columns, rows)
+    val rowsCustomized = (rows /: defs.ar2arDefs)((ar: Array[Row], ar2ar) => ar2ar(ar))
+
+    rowsCustomized
   }
 
   private[zeppelin] def withDrilldown(currentKeys: List[String],
@@ -255,8 +166,8 @@ object convert {
   }
 
   private case class Data(keys: List[String],
-                          colDefs: List[(String, String)],
-                          allDefs: List[(String, Any)],
+                          withDrilldownField: Boolean,
+                          defs: Defs,
                           rows: Array[Row]) {
     var _name: String = if (keys.isEmpty) "" else keys.last
 
@@ -273,7 +184,7 @@ object convert {
     * All drilldown data store in the buffer
     *
     * @param currentDataFrame
-    * @param drills      List(List(jsonFieldName, groupByColumnName/aggColumn))
+    * @param allDefs      List(List(jsonFieldName, groupByColumnName/aggColumn))
     *                    the number of left drills will decrease for each level drilldown
     *                    when it's empty, it does not need be drilldown any further
     * @param currentKeys Nil for root.
@@ -281,16 +192,15 @@ object convert {
     * @param buffer      to store the drilldown data
     */
   private def drilldown(currentDataFrame: DataFrame,
-                        drills: List[List[(String, Any)]],
+                        allDefs: List[Defs],
                         currentKeys: List[String],
                         buffer: mutable.ListBuffer[Data]): Unit = {
-    val currentDrilldown :: restDrills = drills
+    val currentDrilldown :: restDrills = allDefs
     val withDrilldownField = restDrills.nonEmpty
 
-    val (columns, rows) = getRows(currentDataFrame, currentKeys, currentDrilldown, withDrilldownField)
+    val rows = getRows(currentDataFrame, currentKeys, currentDrilldown, withDrilldownField)
 
-    val fieldColumnMap = getFieldColumnMap(currentDrilldown, withDrilldownField)
-    buffer += Data(currentKeys, fieldColumnMap, currentDrilldown, rows)
+    buffer += Data(currentKeys, withDrilldownField, currentDrilldown, rows)
 
     // drilldown if there are more levels
     if (restDrills.nonEmpty) {
@@ -298,10 +208,7 @@ object convert {
       //        .map(pair => (pair._1, pair._2.asInstanceOf[String]))
 
       // only collect if it's groupByColumnName
-      val drillColumns = excludeOptions(currentDrilldown).collect {
-        case (jsonFieldName, groupByColumnName: String) =>
-          (jsonFieldName, groupByColumnName)
-      }
+      val drillColumns = currentDrilldown.nameDefs
 
       // for each row, we need drilldown once (create one more data series)
       rows.foreach {
@@ -321,25 +228,12 @@ object convert {
     * create a drilldown highchart with the rootDataFrame
     *
     * @param rootDataFrame
-    * @param colDefs List((jsonFieldName, groupByColumnName/aggColumn))*
+    * @param allDefs List((jsonFieldName, groupByColumnName/aggColumn))*
     * @return highchart
     */
-//  def apply(rootDataFrame: DataFrame,
-//            colDefs: List[(String, Any)]): Series = {
-//    val buffer = mutable.ListBuffer[Data]()
-//
-//    drilldown(rootDataFrame, colDefs :: Nil, Nil, buffer)
-//
-//    // it only has one data
-//    val normalData = buffer.result().head
-//
-//    toSeries(normalData)
-//  }
-
   def apply(rootDataFrame: DataFrame,
-            allDefs: List[List[(String, Any)]]): (List[Series], List[Series]) = {
+            allDefs: List[Defs]): (List[Series], List[Series]) = {
     val buffer = mutable.ListBuffer[Data]()
-
 
     drilldown(rootDataFrame, allDefs, Nil, buffer)
 
@@ -358,30 +252,26 @@ object convert {
   }
 
   def getCategories(rootDataFrame: DataFrame,
-                    colDefs: List[(String, Any)]): List[(String, Map[String, Any])] = {
-
-    val (colNameDefs, colAggDefs, optionDefs) = partitionDefs(colDefs)
+                    defs: Defs): List[(String, Map[String, Any])] = {
 
     // if there is only one column, then no category needed
-    if ((colNameDefs.size + colAggDefs.size) == 1) {
+    if ((defs.nameDefs.size + defs.aggDefs.size) == 1) {
       Nil
     }
     else {
-      val orderByDefs: List[Column] = optionDefs.collect { case ("orderBy", column: Column) => column }
-
       val dfOrdered =
-        if (orderByDefs.isEmpty) {
+        if (defs.orderByCols.isEmpty) {
           rootDataFrame
         } else {
-          rootDataFrame.orderBy(orderByDefs: _*)
+          rootDataFrame.orderBy(defs.orderByCols: _*)
         }
 
-      val (categoryFieldName, categoryCol) = colNameDefs.head
+      val (categoryFieldName, categoryCol) = defs.nameDefs.head
 
       val rows = dfOrdered.selectExpr(categoryCol).distinct.collect.toList
 
 
-      val nulls: Map[String, Any] = (colNameDefs.tail ++ colAggDefs).map {
+      val nulls: Map[String, Any] = (defs.nameDefs.tail ++ defs.aggDefs).map {
         case (jsonFieldName, column) =>
           jsonFieldName -> null
       }.toMap
@@ -396,42 +286,9 @@ object convert {
     }
   }
 
-//  def apply(rootDataFrame: DataFrame,
-//            seriesCol: String,
-//            colDefs: List[(String, Any)]): List[Series] = {
-//
-//    val allSeriesValues = rootDataFrame.select(seriesCol).distinct.orderBy(col(seriesCol)).collect.map(_.get(0))
-//
-//    val categories = getCategories(rootDataFrame, colDefs)
-//
-//    val column = col(seriesCol)
-//    val wantedCols = rootDataFrame.columns.filter(_ != seriesCol)
-//
-//    val bufferNormalSeries = mutable.ListBuffer[Data]()
-//
-//    val drills = colDefs :: Nil
-//    for (aSeriesValue <- allSeriesValues) {
-//      val seriesDataFrame =
-//        rootDataFrame.filter(column === aSeriesValue).selectExpr(wantedCols: _*)
-//
-//      val keys = s"$seriesCol=${aSeriesValue.toString}" :: Nil
-//      val buffer = mutable.ListBuffer[Data]()
-//
-//      drilldown(seriesDataFrame, drills, keys, buffer)
-//
-//      val normalSeries = buffer.result().head
-//
-//      bufferNormalSeries += normalSeries.setName(aSeriesValue)
-//    }
-//
-//    val normalSeriesList = toSeriesList(bufferNormalSeries.result(), categories)
-//    normalSeriesList
-//  }
-
-
   def apply(rootDataFrame: DataFrame,
             seriesCol: String,
-            allDefs: List[List[(String, Any)]]): (List[Series], List[Series]) = {
+            allDefs: List[Defs]): (List[Series], List[Series]) = {
 
     val allSeriesValues = rootDataFrame.select(seriesCol).distinct.orderBy(col(seriesCol)).collect.map(_.get(0))
 
@@ -470,20 +327,27 @@ object convert {
 
 
   private def toSeries(data: Data): Series = {
+
+    val colsMap =
+      if (data.withDrilldownField)
+        "drilldown" -> "drilldown" :: data.defs.allColsMap
+      else
+        data.defs.allColsMap
+
     val mapData: Array[Map[String, Any]] = data.rows.map {
       row =>
-        data.colDefs.map {
+        colsMap.map {
           case (jsonFieldName, columnName) =>
             jsonFieldName -> row.getAs[Any](columnName)
         }.toMap
     }
 
-    setSeriesOptions(
+    val series =
       new Series(mapData.toList)
         .id(data.keys.mkString(","))
-        .name(data.name),
-      data.allDefs
-    )
+        .name(data.name)
+
+    (series /: data.defs.s2sDefs)((s: Series, s2s) => s2s(s))
   }
 
   def getNameRows(data: Data): Map[String, Row] = {
@@ -498,12 +362,18 @@ object convert {
 
     val nameRows = getNameRows(data)
 
+    val colsMap =
+      if (data.withDrilldownField)
+        "drilldown" -> "drilldown" :: data.defs.allColsMap
+      else
+        data.defs.allColsMap
+
     val mapData: List[Map[String, Any]] =
       categories.map {
         case (category, defaultValues) =>
           if (nameRows.contains(category)) {
             val row = nameRows(category)
-            data.colDefs.map {
+            colsMap.map {
               case (jsonFieldName, columnName) =>
                 jsonFieldName -> row.getAs[Any](columnName)
             }.toMap
@@ -514,12 +384,11 @@ object convert {
       }
 
 
-    setSeriesOptions(
-      new Series(mapData)
+    val series = new Series(mapData)
         .id(data.keys.mkString(","))
-        .name(data.name),
-      data.allDefs
-    )
+        .name(data.name)
+
+    (series /: data.defs.s2sDefs)((s: Series, s2s) => s2s(s))
   }
 
   /**

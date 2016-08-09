@@ -42,4 +42,7 @@ trait PublicApply extends IModel {
 
   def apply(fieldName: String, subFieldName: String, fieldValue: Any): this.type =
     append(fieldName, subFieldName, fieldValue)
+
+  def apply(fieldName: String, fieldValue: Any): this.type =
+    append(fieldName, fieldValue)
 }

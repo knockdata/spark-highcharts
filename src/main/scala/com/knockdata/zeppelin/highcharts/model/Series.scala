@@ -76,10 +76,10 @@ class Series(val values: List[Any]) extends BaseModel with PublicApply {
 
 object Series {
 
-  def apply(dataFrame: DataFrame, colDefs: (String, Any)*): Series = {
-    val (normalSeriesList, drilldownSeriesList) = convert(dataFrame, List(colDefs.toList))
-    normalSeriesList.head
-  }
+//  def apply(dataFrame: DataFrame, colDefs: (String, Any)*): Series = {
+//    val (normalSeriesList, drilldownSeriesList) = convert(dataFrame, List(colDefs.toList))
+//    normalSeriesList.head
+//  }
 
   def apply(values: Any*) = new Series(values.toList)
 }
