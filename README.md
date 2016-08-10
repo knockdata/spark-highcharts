@@ -19,7 +19,9 @@ Highcharts support in Apache Zeppelin
 
 > Edit the `artifact` with the correct jar file
 
-`com.knockdata:zeppelin-highcharts:0.3`
+`com.knockdata:zeppelin-highcharts:0.6.0-SNAPSHOT`
+
+`net.liftweb:lift-json_2.10:2.6.3`
 
 > Click `Save`
 
@@ -37,7 +39,7 @@ Paste the following code to a `Zeppelin` Paragraph and execute it
 	<script type="text/javascript">
 
 		$(function () {
-			if (Highcharts == null) {
+		    if (typeof Highcharts == "undefined") {
 				$.getScript("http://code.highcharts.com/highcharts.js")
 				  .done(function( script, textStatus ) {
 				    console.log( "load http://code.highcharts.com/highcharts.js " + textStatus );
@@ -63,13 +65,26 @@ Paste the following code and execute it
 	import com.knockdata.zeppelin.highcharts._
 	import com.knockdata.zeppelin.highcharts.model._
 
-	highcharts(bank)
+	highcharts(bank
 	  .series("x" -> "age", "y" -> avg(col("balance")))
-	  .orderBy(col("age")).plot()
+	  .orderBy(col("age"))).plot()
 
 You will get the following graph
 
 ![zeppelin-spark-basic-line-chart](docs/zeppelin-spark-basic-line-chart.png)
+
+### Working with Spark 2.0
+
+The default version before 0.6 support Spark 1.6. In order to use Spark 2.0, compile with 
+
+    mvn clean package -Pspark-2.0 -DskipTests
+
+
+The `artifact` in the spark interpreter need use jar file for zeppelin-highcharts. And the lift-json need use version for scala 2.11.
+
+`/home/rockiey/git/zeppelin-highcharts/target/zeppelin-highcharts-0.6.0-SNAPSHOT.jar`
+
+`net.liftweb:lift-json_2.11:2.6.3`
 
 [Select Data to Plot](docs/SelectDataToPlot.md)
 

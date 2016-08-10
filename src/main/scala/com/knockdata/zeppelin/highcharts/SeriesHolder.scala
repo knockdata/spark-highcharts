@@ -109,6 +109,7 @@ private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
 
   def orderBy(columns: Column*) = {
     orderByColBuffer ++= columns
+    df2dfBuffer += ((df: DataFrame) => df.orderBy(columns:_*))
     this
   }
 
