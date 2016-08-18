@@ -2,64 +2,32 @@
 
 # Zeppelin Highcharts
 
-Highcharts support in Apache Zeppelin
+Highcharts support in Apache Zeppelin. 
 
+Make Spark DataFrame visualization simple, flexible, and beautiful.
 
-### Add the binary to Zeppelin
+## Get Started
 
-> Goto Zeppelin -> `Interpreters`
+#### Run with docker
 
-> Scroll down to find `spark`
+[Install docker](https://docs.docker.com/engine/installation/) if you have not.
 
-> Click `Edit`
+    docker run -p 8080:8080 -d knockdata/zeppelin-highcharts
 
-![zeppelin-spark-interpreter-edit](docs/zeppelin-spark-interpreter-edit.png)
+If you wanna run on your existing zeppelin, follow [Use In Zeppelin](docs/UseInZeppelin.md). 
 
-> Scroll down to `Dependencies`
+#### Open browser
 
-> Edit the `artifact` with the correct jar file
+	http://localhost:8080
+	
+#### Load the bank DataFrame
 
-`com.knockdata:zeppelin-highcharts:0.6.0-SNAPSHOT`
+* Open and execute `Zeppelin Tutorial NoteBook`
 
-`net.liftweb:lift-json_2.10:2.6.3`
+#### Plot
 
-> Click `Save`
-
-![zeppelin-spark-interpreter-edit](docs/zeppelin-spark-interpreter-add-artifact.png)
-
-### Load Highcharts Javascript
-
-> **You need a valid license if you use Highcharts for commercial use**
-
-> Please contact [Highcharts](https://shop.highsoft.com/) for license related issues.
-
-Paste the following code to a `Zeppelin` Paragraph and execute it
-
-	%angular
-	<script type="text/javascript">
-
-		$(function () {
-		    if (typeof Highcharts == "undefined") {
-				$.getScript("http://code.highcharts.com/highcharts.js")
-				  .done(function( script, textStatus ) {
-				    console.log( "load http://code.highcharts.com/highcharts.js " + textStatus );
-				  })
-				  .fail(function(jqxhr, settings, exception ) {
-				     console.log("load http://code.highcharts.com/highcharts.js " + exception);
-				  });
-			} else {
-			    console.log("highcharts already loaded");
-			}
-		});
-	</script>
-
-### Load the bank DataFrame
-
-Just need execute `Zeppelin Tutorial NoteBook`
-(
-### Create your first chart with following code
-
-Paste the following code and execute it
+* Add a sub praragraph in `Zeppelin Tutorial NoteBook`
+* Paste the following code and execute it
 
 	%spark
 	import com.knockdata.zeppelin.highcharts._
@@ -95,3 +63,9 @@ The `artifact` in the spark interpreter need use jar file for zeppelin-highchart
 [Type Mapping between Scala and Highcharts](docs/TypeMapping.md)
 
 [Scaladocs](https://knockdata.github.io/zeppelin-highcharts/docs/scaladocs)
+
+## License
+
+zeppelin-highchart use Apache 2.0 License
+
+However, the Highcharts JavaScript library that is included in this package is not free for commercial use. Please contact [Highcharts](https://shop.highsoft.com/) for license related issues.
