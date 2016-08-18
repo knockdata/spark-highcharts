@@ -26,8 +26,9 @@ If you wanna run on your existing zeppelin, follow [Use In Zeppelin](docs/UseInZ
 
 #### Plot
 
-* Add a sub praragraph in `Zeppelin Tutorial NoteBook`
-* Paste the following code and execute it
+Add a sub praragraph in `Zeppelin Tutorial NoteBook`
+
+Paste the following code and execute it
 
 	%spark
 	import com.knockdata.zeppelin.highcharts._
