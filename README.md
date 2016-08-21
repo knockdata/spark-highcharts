@@ -14,7 +14,7 @@ Make Spark DataFrame visualization simple, flexible, and beautiful.
 
     docker run -p 8080:8080 -d knockdata/zeppelin-highcharts
 
-If you wanna run on your existing zeppelin, follow [Use In Zeppelin](docs/UseInZeppelin.md). 
+If you wanna run on your existing zeppelin, follow [Use In Zeppelin](https://github.com/knockdata/zeppelin-highcharts/blob/master/docs/UseInZeppelin.md). 
 
 #### Open browser
 
@@ -39,7 +39,7 @@ If you wanna run on your existing zeppelin, follow [Use In Zeppelin](docs/UseInZ
 
 You will get the following graph
 
-![zeppelin-spark-basic-line-chart](docs/zeppelin-spark-basic-line-chart.png)
+![zeppelin-spark-basic-line-chart](https://raw.githubusercontent.com/knockdata/zeppelin-highcharts/master/docs/zeppelin-spark-basic-line-chart.png)
 
 ### Working with Spark 2.0
 
@@ -54,13 +54,13 @@ The `artifact` in the spark interpreter need use jar file for zeppelin-highchart
 
 `net.liftweb:lift-json_2.11:2.6.3`
 
-[Select Data to Plot](docs/SelectDataToPlot.md)
+[Select Data to Plot](https://github.com/knockdata/zeppelin-highcharts/blob/master/docs/SelectDataToPlot.md)
 
-[Chart Options](docs/ChartOptions.md)
+[Chart Options](https://github.com/knockdata/zeppelin-highcharts/blob/master/docs/ChartOptions.md)
 
-[Demos](docs/demos.md)
+[Demos](https://github.com/knockdata/zeppelin-highcharts/blob/master/docs/demos.md)
 
-[Type Mapping between Scala and Highcharts](docs/TypeMapping.md)
+[Type Mapping between Scala and Highcharts](https://github.com/knockdata/zeppelin-highcharts/blob/master/docs/TypeMapping.md)
 
 [Scaladocs](https://knockdata.github.io/zeppelin-highcharts/docs/scaladocs)
 
