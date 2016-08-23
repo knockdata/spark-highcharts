@@ -12,7 +12,7 @@
 
 > Edit the `artifact` with the correct jar file
 
-`com.knockdata:zeppelin-highcharts:0.6.0-SNAPSHOT`
+`com.knockdata:zeppelin-highcharts:0.6.0`
 
 `net.liftweb:lift-json_2.10:2.6.3`
 
