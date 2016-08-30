@@ -1,4 +1,4 @@
-FROM java:8 
+FROM java:8
 
 ENV BRANCH  v0.6.0
 ENV ZEPPELIN_HOME /usr/zeppelin
@@ -13,6 +13,7 @@ RUN apt-get update \
   && cd /tmp/zeppelin \
   && git checkout $BRANCH \
   && sed -i 's/"angular":/"highcharts": "^4.2.6","angular":/' /tmp/zeppelin/zeppelin-web/bower.json \
+  && sed -i 's#"highlightjs": {#"highcharts": {"main": ["highcharts.js","highcharts-more.js","modules/exporting.js","modules/drilldown.js","modules/maps.js"]},"highlightjs": {#' /tmp/zeppelin/zeppelin-web/bower.json \
   && xmlstarlet ed -s /_:project/_:dependencies -t elem -n dependency -v zeppelin-highcharts /tmp/zeppelin/spark-dependencies/pom.xml > pom2.xml \
   && sed -i "s:zeppelin-highcharts:<groupId>com.knockdata</groupId><artifactId>zeppelin-highcharts</artifactId><version>$ZEPPELIN_HIGHCHART_VERSION</version>:" pom2.xml \
   && mv -f pom2.xml /tmp/zeppelin/spark-dependencies/pom.xml \

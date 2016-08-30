@@ -76,4 +76,10 @@ class DemoAreaChart {
       .plot()
   }
 
+  @Test
+  def testBank: Unit = {
+    highcharts(bank.series("x" -> "age", "y" -> avg(col("balance"))).orderBy(col("age"))).plot()
+
+  }
+
 }
