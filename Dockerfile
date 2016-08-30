@@ -17,7 +17,7 @@ RUN apt-get update \
   && sed -i "s:zeppelin-highcharts:<groupId>com.knockdata</groupId><artifactId>zeppelin-highcharts</artifactId><version>$ZEPPELIN_HIGHCHART_VERSION</version>:" pom2.xml \
   && mv -f pom2.xml /tmp/zeppelin/spark-dependencies/pom.xml \
   && cd /tmp/zeppelin \
-  && /tmp/apache-maven-3.3.9/bin/mvn package -Pbuild-distr -DskipTests \
+  && /tmp/apache-maven-3.3.9/bin/mvn package -Pbuild-distr -Ppyspark -DskipTests \
   && tar xvf /tmp/zeppelin/zeppelin-distribution/target/zeppelin*.tar.gz -C /usr/ \
   && mv /usr/zeppelin* $ZEPPELIN_HOME \
   && mkdir -p $ZEPPELIN_HOME/logs \
