@@ -5,7 +5,7 @@ ENV ZEPPELIN_HOME /usr/zeppelin
 ENV ZEPPELIN_HIGHCHART_VERSION 0.6.0
 
 RUN apt-get update \
-  && apt-get install -y git curl sed xmlstarlet \
+  && apt-get install -y git curl sed xmlstarlet python-tk \
   && curl -sL http://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz \
    | gunzip \
    | tar x -C /tmp/ \
