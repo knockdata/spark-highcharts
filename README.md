@@ -2,7 +2,7 @@
 
 # Zeppelin Highcharts
 
-Highcharts support in Apache Zeppelin. 
+Highcharts support in Apache Zeppelin.
 
 Make Spark DataFrame visualization simple, flexible, and beautiful.
 
@@ -14,12 +14,17 @@ Make Spark DataFrame visualization simple, flexible, and beautiful.
 
     docker run -p 8080:8080 -d knockdata/zeppelin-highcharts
 
-If you wanna run on your existing zeppelin, follow [Use In Zeppelin](https://github.com/knockdata/zeppelin-highcharts/blob/master/docs/UseInZeppelin.md). 
+> the docker image zeppelin-highcharts includes features
+
+> * highcharts
+> * pyspark, include panda
+
+If you wanna run on your existing zeppelin, follow [Use In Zeppelin](https://github.com/knockdata/zeppelin-highcharts/blob/master/docs/UseInZeppelin.md).
 
 #### Open browser
 
 	http://localhost:8080
-	
+
 #### Load the bank DataFrame
 
 * Open and execute `Zeppelin Tutorial NoteBook`
@@ -44,7 +49,7 @@ You will get the following graph
 
 ### Working with Spark 2.0
 
-The default version before 0.6 support Spark 1.6. In order to use Spark 2.0, compile with 
+The default version before 0.6 support Spark 1.6. In order to use Spark 2.0, compile with
 
     mvn clean package -Pspark-2.0 -DskipTests
 
