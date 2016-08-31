@@ -1,4 +1,4 @@
-FROM java:8
+FROM openjdk:8
 
 ENV BRANCH  v0.6.0
 ENV ZEPPELIN_HOME /usr/zeppelin
@@ -9,6 +9,8 @@ RUN apt-get update \
   && curl -sL http://archive.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz \
    | gunzip \
    | tar x -C /tmp/ \
+  && curl --silent --show-error --retry 5 https://bootstrap.pypa.io/get-pip.py | python \
+  && pip install pandas \
   && git clone https://github.com/apache/zeppelin.git /tmp/zeppelin \
   && cd /tmp/zeppelin \
   && git checkout $BRANCH \
