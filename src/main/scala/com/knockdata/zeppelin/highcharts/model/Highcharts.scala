@@ -17,6 +17,8 @@
 
 package com.knockdata.zeppelin.highcharts.model
 
+import java.io.FileWriter
+
 import com.knockdata.zeppelin.highcharts.base._
 import com.knockdata.zeppelin.highcharts._
 
@@ -102,6 +104,42 @@ class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with Pu
   private def appendOptions(options: BaseModel) = {
     optionsBuffer += options
     this
+  }
+
+  def htmlContent(data: String): String = {
+    val jq = "$"
+
+    val chartId = id
+
+      s"""|<html>
+          |<head>
+          |    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+          |    <script src="https://code.highcharts.com/highcharts.js"></script>
+          |</head>
+          |<body>
+          |    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+          |<script>
+          |    $jq(function () {
+          |    var data = $data
+          |    $jq('#container').highcharts(data);
+          |});
+          |</script>
+          |</body>
+          |</html>""".stripMargin
+
+  }
+
+  def html: Unit = {
+    val content = htmlContent(replaced)
+    val tmpFile = java.io.File.createTempFile("highcharts", ".html")
+//    tmpFile.deleteOnExit()
+    println(tmpFile)
+    val writer = new FileWriter(tmpFile)
+    writer.write(content)
+    writer.close()
+
+    java.awt.Desktop.getDesktop().browse(tmpFile.toURI)
+
   }
 
   def plot(): Unit = {
