@@ -1,0 +1,106 @@
+
+<head>
+    <link rel="stylesheet" href="highlight/styles/github.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/github-markdown.css">
+    <style>
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="container">
+    <article class="markdown-body">
+        <h1>SFSalaries</h1>
+<pre><code class="scala hljs">import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
+import sqlContext.implicits._
+
+
+val file = "src/test/resources/SF-Salaries.csv"
+val dataFrame = sqlContext.read
+  .format("com.databricks.spark.csv")
+  .option("header", "true") // Use first line of all files as header
+  .option("inferSchema", "true") // Automatically infer data types
+  .load(file)
+
+val chart = highcharts(dataFrame
+  .series("name" -> "JobTitle", "y" -> avg($"BasePay"))
+  .orderBy(avg($"BasePay").desc)
+  .take(10))
+  .chart(Chart.bar)
+
+chart.plot()
+</code></pre>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+ $(function () {
+   var data = {
+  "series":[{
+    "data":[{
+      "name":"Chief of Police",
+      "y":309767.68333333335
+    },{
+      "name":"Chief, Fire Department",
+      "y":304232.34
+    },{
+      "name":"Gen Mgr, Public Trnsp Dept",
+      "y":297769.41333333333
+    },{
+      "name":"CHIEF OF DEPARTMENT, (FIRE DEPARTMENT)",
+      "y":285262
+    },{
+      "name":"Dep Dir for Investments, Ret",
+      "y":276153.765
+    },{
+      "name":"Mayor",
+      "y":275852.52999999997
+    },{
+      "name":"Adm, SFGH Medical Center",
+      "y":265218.78
+    },{
+      "name":"EXECUTIVE CONTRACT EMPLOYEE",
+      "y":264452.52
+    },{
+      "name":"Controller",
+      "y":263588.75333333336
+    },{
+      "name":"Dept Head V",
+      "y":259590.71222222218
+    }]
+  }],
+  "chart":{
+    "type":"bar"
+  }
+}
+   $('#container').highcharts(data);
+ });
+
+ $(document).on("keydown", function(e) {
+            var code = e.which;
+            if (code == 37) { // left
+             window.location.href = 'demoLineBasic.html';
+            }
+            else if (code == 38) { // up
+            }
+            else if (code == 39) { // right
+               window.location.href = 'demoBasicArea.html';
+            } else if (code == 40) { // down
+
+            }
+        });
+</script>
+ </article>
+</div>
+</body>
+      

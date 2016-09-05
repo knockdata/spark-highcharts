@@ -17,9 +17,10 @@
 
 package com.knockdata.zeppelin.highcharts.demo
 
+import java.io.PrintWriter
+
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model.Chart
-
 import org.apache.spark.sql.functions._
 import org.junit.Test
 
@@ -45,13 +46,16 @@ class DemoDrillDown {
   // * y axis aggregated the average balance
   @Test
   def demoDrilldownBasic(): Unit = {
-    highcharts(bank
+    val chart = highcharts(bank
       .series("name" -> "marital",
         "y" -> avg(col("balance")))
       .drilldown("name" -> "job",
         "y" -> avg(col("balance"))))
       .chart(Chart.column)
-      .plot()
+
+    chart.plot()
+
+    new PrintWriter("target/demoDrilldownBasic.json") { write(chart.replaced); close }
   }
 
   // ## Drilldown 2 Levels
@@ -80,7 +84,7 @@ class DemoDrillDown {
   @Test
   def demoDrilldown2Level(): Unit = {
 
-    highcharts(bank
+    val chart = highcharts(bank
       .series("name" -> "marital",
         "y" -> avg(col("balance")))
       .drilldown("name" -> "job",
@@ -88,7 +92,10 @@ class DemoDrillDown {
       .drilldown("name" -> "education",
         "y" -> max(col("balance"))))
       .chart(Chart.column)
-      .plot()
+
+    chart.plot()
+
+    new PrintWriter("target/demoDrilldown2Level.json") { write(chart.replaced); close }
 
 
   }
@@ -115,13 +122,16 @@ class DemoDrillDown {
   @Test
   def demoLineBasicDesc(): Unit = {
 
-    highcharts(bank
+    val chart = highcharts(bank
       .seriesCol("marital")
       .series("name" -> "job",
         "y" -> avg(col("balance")))
       .drilldown("name" -> "education",
         "y" -> avg(col("balance"))))
-      .plot()
+
+    chart.plot()
+
+    new PrintWriter("target/demoLineBasicDesc.json") { write(chart.replaced); close }
   }
 
 }

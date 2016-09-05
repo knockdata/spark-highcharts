@@ -1,0 +1,191 @@
+
+<head>
+    <link rel="stylesheet" href="highlight/styles/github.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/github-markdown.css">
+    <style>
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="container">
+    <article class="markdown-body">
+        <h1>DrilldownBasic</h1>
+<pre><code class="scala hljs">import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
+import sqlContext.implicits._
+val chart = highcharts(bank
+  .series("name" -> "marital",
+    "y" -> avg(col("balance")))
+  .drilldown("name" -> "job",
+    "y" -> avg(col("balance"))))
+  .chart(Chart.column)
+
+chart.plot()
+</code></pre>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+ $(function () {
+   var data = {
+  "series":[{
+    "data":[{
+      "drilldown":"marital=divorced",
+      "name":"divorced",
+      "y":1569.7924528301887
+    },{
+      "drilldown":"marital=single",
+      "name":"single",
+      "y":1422.9928057553957
+    },{
+      "drilldown":"marital=married",
+      "name":"married",
+      "y":1459.4788273615636
+    }]
+  }],
+  "drilldown":{
+    "series":[{
+      "id":"marital=divorced",
+      "name":"marital=divorced",
+      "data":[{
+        "name":"unemployed",
+        "y":-249
+      },{
+        "name":"blue-collar",
+        "y":895.9
+      },{
+        "name":"services",
+        "y":867.75
+      },{
+        "name":"entrepreneur",
+        "y":-233
+      },{
+        "name":"self-employed",
+        "y":10924
+      },{
+        "name":"retired",
+        "y":2756.714285714286
+      },{
+        "name":"admin.",
+        "y":1477.4444444444443
+      },{
+        "name":"management",
+        "y":735.6363636363636
+      },{
+        "name":"technician",
+        "y":2872.4285714285716
+      }]
+    },{
+      "id":"marital=single",
+      "name":"marital=single",
+      "data":[{
+        "name":"unemployed",
+        "y":321
+      },{
+        "name":"blue-collar",
+        "y":733.5217391304348
+      },{
+        "name":"services",
+        "y":555.2142857142857
+      },{
+        "name":"unknown",
+        "y":1567
+      },{
+        "name":"entrepreneur",
+        "y":-352
+      },{
+        "name":"self-employed",
+        "y":2043
+      },{
+        "name":"retired",
+        "y":101
+      },{
+        "name":"admin.",
+        "y":1552.75
+      },{
+        "name":"management",
+        "y":1874.65625
+      },{
+        "name":"technician",
+        "y":1730.1612903225807
+      },{
+        "name":"student",
+        "y":2482.125
+      }]
+    },{
+      "id":"marital=married",
+      "name":"marital=married",
+      "data":[{
+        "name":"unemployed",
+        "y":1412.375
+      },{
+        "name":"services",
+        "y":1378.090909090909
+      },{
+        "name":"blue-collar",
+        "y":1219.0140845070423
+      },{
+        "name":"unknown",
+        "y":920.5
+      },{
+        "name":"housemaid",
+        "y":2536.090909090909
+      },{
+        "name":"entrepreneur",
+        "y":1493
+      },{
+        "name":"self-employed",
+        "y":1440.1052631578948
+      },{
+        "name":"retired",
+        "y":1866
+      },{
+        "name":"admin.",
+        "y":1492.939393939394
+      },{
+        "name":"management",
+        "y":1601.047619047619
+      },{
+        "name":"technician",
+        "y":1283.2608695652175
+      },{
+        "name":"student",
+        "y":260
+      }]
+    }]
+  },
+  "chart":{
+    "type":"column"
+  }
+}
+   $('#container').highcharts(data);
+ });
+
+ $(document).on("keydown", function(e) {
+            var code = e.which;
+            if (code == 37) { // left
+             window.location.href = 'demoTimeDataWithIrregularIntervals.html';
+            }
+            else if (code == 38) { // up
+            }
+            else if (code == 39) { // right
+               window.location.href = 'demoLineWithDataLabels.html';
+            } else if (code == 40) { // down
+
+            }
+        });
+</script>
+ </article>
+</div>
+</body>
+      

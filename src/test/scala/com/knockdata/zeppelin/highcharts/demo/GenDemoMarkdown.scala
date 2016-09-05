@@ -26,6 +26,52 @@ import scala.collection.mutable.ListBuffer
 
 class GenDemoMarkdown {
 
+  def genTalkHTML(data: String): String = {
+    val jq = "$"
+    val html =
+      s"""
+        |<head>
+        |    <link rel="stylesheet" href="highlight/styles/github.css">
+        |    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+        |    <link rel="stylesheet" href="github-markdown.css">
+        |    <style>
+        |    .markdown-body {
+        |        box-sizing: border-box;
+        |        min-width: 200px;
+        |        max-width: 980px;
+        |        margin: 0 auto;
+        |        padding: 45px;
+        |    }
+        |    </style>
+        |    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+        |    <script src="https://code.highcharts.com/highcharts.js"></script>
+        |    <script src="highlight/highlight.pack.js"></script>
+        |    <script>hljs.initHighlightingOnLoad();</script>
+        |</head>
+        |<body>
+        |<div class="container">
+        |    <article class="markdown-body">
+        |        <h1>Basic Area</h1>
+        |<pre><code class="scala hljs">
+        |import com.knockdata.zeppelin.highcharts._
+        |import com.knockdata.zeppelin.highcharts.model._
+        |</code></pre>
+        |
+        |<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        |<script>
+        | $jq(function () {
+        |   var data = $data
+        |   $jq('#container').highcharts(data);
+        | });
+        |</script>
+        |
+        | </article>
+        |</div>
+        |</body>
+      """.stripMargin
+    html
+  }
+
   @Test
   def genMarkdown(): Unit = {
 
@@ -93,6 +139,7 @@ class GenDemoMarkdown {
           append("")
           append("import com.knockdata.zeppelin.highcharts._")
           append("import com.knockdata.zeppelin.highcharts.model._")
+          append("import sqlContext.implicits._")
           append("")
 
         }
@@ -100,6 +147,9 @@ class GenDemoMarkdown {
           append("```")
           append("")
           inScope = false
+        }
+        else if (line.contains("new PrintWriter")) {
+          // doing nothing
         }
         else {
           if (inScope) {

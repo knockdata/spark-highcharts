@@ -1,0 +1,246 @@
+
+<head>
+    <link rel="stylesheet" href="highlight/styles/github.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/github-markdown.css">
+    <style>
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="container">
+    <article class="markdown-body">
+        <h1>LineZoomable</h1>
+<pre><code class="scala hljs">import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
+import sqlContext.implicits._
+
+val options = PlotOptions.area
+  .fillColorLinearGradient("x1" -> 0, "y1" -> 0, "x2" -> 0, "y2" -> 1)
+  .fillColorStops((0, "Highcharts.getOptions().colors[0]"),
+      (1, "Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')"))
+
+
+val chart = highcharts(bank.series("name" -> "age", "y" -> avg(col("balance")))
+  .orderBy(col("age")))
+  .chart(Chart.area.zoomType("x"))
+  .plotOptions(options)
+
+chart.plot()
+</code></pre>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+ $(function () {
+   var data = {
+  "series":[{
+    "data":[{
+      "name":20,
+      "y":502
+    },{
+      "name":21,
+      "y":2488
+    },{
+      "name":22,
+      "y":4111
+    },{
+      "name":23,
+      "y":3453
+    },{
+      "name":24,
+      "y":505
+    },{
+      "name":25,
+      "y":859.5714285714286
+    },{
+      "name":26,
+      "y":1536.6666666666667
+    },{
+      "name":27,
+      "y":936.8461538461538
+    },{
+      "name":28,
+      "y":461.57142857142856
+    },{
+      "name":29,
+      "y":622.4545454545455
+    },{
+      "name":30,
+      "y":1080.7857142857142
+    },{
+      "name":31,
+      "y":1267.8
+    },{
+      "name":32,
+      "y":1243.0714285714287
+    },{
+      "name":33,
+      "y":1398.388888888889
+    },{
+      "name":34,
+      "y":1196.76
+    },{
+      "name":35,
+      "y":1747.3478260869565
+    },{
+      "name":36,
+      "y":1064.7368421052631
+    },{
+      "name":37,
+      "y":1207.4166666666667
+    },{
+      "name":38,
+      "y":943.2631578947369
+    },{
+      "name":39,
+      "y":1910.9333333333334
+    },{
+      "name":40,
+      "y":1798.5
+    },{
+      "name":41,
+      "y":1039.4
+    },{
+      "name":42,
+      "y":1365.5263157894738
+    },{
+      "name":43,
+      "y":14.4
+    },{
+      "name":44,
+      "y":1067.4
+    },{
+      "name":45,
+      "y":1023.9333333333333
+    },{
+      "name":46,
+      "y":1801.125
+    },{
+      "name":47,
+      "y":1169.5714285714287
+    },{
+      "name":48,
+      "y":1778
+    },{
+      "name":49,
+      "y":1662.3333333333333
+    },{
+      "name":50,
+      "y":2186.5454545454545
+    },{
+      "name":51,
+      "y":1948.75
+    },{
+      "name":52,
+      "y":425.1666666666667
+    },{
+      "name":53,
+      "y":2239.3
+    },{
+      "name":54,
+      "y":1063
+    },{
+      "name":55,
+      "y":1026.8
+    },{
+      "name":56,
+      "y":2013.5625
+    },{
+      "name":57,
+      "y":4314.111111111111
+    },{
+      "name":58,
+      "y":1574.5
+    },{
+      "name":59,
+      "y":2062.2
+    },{
+      "name":60,
+      "y":2969
+    },{
+      "name":61,
+      "y":4618.5
+    },{
+      "name":62,
+      "y":816
+    },{
+      "name":63,
+      "y":749.5
+    },{
+      "name":64,
+      "y":2923
+    },{
+      "name":65,
+      "y":1840
+    },{
+      "name":66,
+      "y":2262
+    },{
+      "name":67,
+      "y":696
+    },{
+      "name":68,
+      "y":4189
+    },{
+      "name":70,
+      "y":4531
+    },{
+      "name":75,
+      "y":3790.5
+    },{
+      "name":77,
+      "y":6230.5
+    },{
+      "name":78,
+      "y":364
+    }]
+  }],
+  "chart":{
+    "type":"area",
+    "zoomType":"x"
+  },
+  "plotOptions":{
+    "area":{
+      "fillColor":{
+        "stops":[[0,Highcharts.getOptions().colors[0]],[1,Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]],
+        "linearGradient":{
+          "x1":0,
+          "y1":0,
+          "x2":0,
+          "y2":1
+        }
+      }
+    }
+  }
+}
+   $('#container').highcharts(data);
+ });
+
+ $(document).on("keydown", function(e) {
+            var code = e.which;
+            if (code == 37) { // left
+             window.location.href = 'demoHistogram.html';
+            }
+            else if (code == 38) { // up
+            }
+            else if (code == 39) { // right
+               window.location.href = 'thanks.html';
+            } else if (code == 40) { // down
+
+            }
+        });
+</script>
+ </article>
+</div>
+</body>
+      

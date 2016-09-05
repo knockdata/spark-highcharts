@@ -17,13 +17,23 @@ take top 10 payment job
 
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
-
 import sqlContext.implicits._
 
-highcharts(dataFrame
+
+
+val file = "src/test/resources/SF-Salaries.csv"
+val dataFrame = sqlContext.read
+  .format("com.databricks.spark.csv")
+  .option("header", "true") // Use first line of all files as header
+  .option("inferSchema", "true") // Automatically infer data types
+  .load(file)
+
+val chart = highcharts(dataFrame
   .series("name" -> "JobTitle", "y" -> avg($"BasePay"))
   .orderBy(avg($"BasePay").desc)
   .take(10))
   .chart(Chart.bar)
-  .plot()
+
+chart.plot()
+
 ```

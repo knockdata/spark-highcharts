@@ -17,6 +17,8 @@
 
 package com.knockdata.zeppelin.highcharts.demo
 
+import java.io.PrintWriter
+
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model.{Chart, XAxis}
 import org.apache.spark.sql.functions._
@@ -28,6 +30,7 @@ import org.junit.Test
 //
 class DemoColumnChart {
   val sqlContext = SparkEnv.sqlContext
+  import sqlContext.implicits._
 
   val bank = DataSet.dfBank
 
@@ -43,14 +46,17 @@ class DemoColumnChart {
   //
   @Test
   def demoHistogram(): Unit = {
-    highcharts(
+    val chart = highcharts(
       bank
         .series("x" -> "age", "y" -> count("*"))
         .orderBy(col("age"))
       )
       .chart(Chart.column)
       .plotOptions(PlotOptions.column.groupPadding(0).pointPadding(0).borderWidth(0))
-      .plot()
+
+    chart.plot()
+
+    new PrintWriter("target/demoHistogram.json") { write(chart.replaced); close }
   }
 
   // ## Stacked Column
@@ -64,7 +70,6 @@ class DemoColumnChart {
   //
   @Test
   def demoStackedColumn(): Unit = {
-    import sqlContext.implicits._
 
     val john = Seq(5, 3, 4, 7, 2).map(v => ("John", v))
     val jane = Seq(2, 2, 3, 2, 1).map(v => ("Jane", v))
@@ -72,13 +77,16 @@ class DemoColumnChart {
 
     val dataFrame = (john ++ jane ++ joe).toDF("name", "consumption")
 
-    highcharts(
+    val chart = highcharts(
       dataFrame
         .seriesCol("name")
         .series("y" -> "consumption"))
       .chart(Chart.column)
       .xAxis(XAxis("").categories("Apples", "Oranges", "Pears", "Grapes", "Bananas"))
       .plotOptions(PlotOptions.column.stacking("normal"))
-      .plot()
+
+    chart.plot()
+
+    new PrintWriter("target/demoStackedColumn.json") { write(chart.replaced); close }
   }
 }

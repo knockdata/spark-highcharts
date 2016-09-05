@@ -20,14 +20,17 @@ Then it drilldown to
 
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
+import sqlContext.implicits._
 
-highcharts(bank
+val chart = highcharts(bank
   .series("name" -> "marital",
     "y" -> avg(col("balance")))
   .drilldown("name" -> "job",
     "y" -> avg(col("balance"))))
   .chart(Chart.column)
-  .plot()
+
+chart.plot()
+
 ```
 
 ## Drilldown 2 Levels
@@ -58,9 +61,10 @@ size(marital) + size(marital) * size(balance)
 
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
+import sqlContext.implicits._
 
 
-highcharts(bank
+val chart = highcharts(bank
   .series("name" -> "marital",
     "y" -> avg(col("balance")))
   .drilldown("name" -> "job",
@@ -68,7 +72,9 @@ highcharts(bank
   .drilldown("name" -> "education",
     "y" -> max(col("balance"))))
   .chart(Chart.column)
-  .plot()
+
+chart.plot()
+
 
 
 ```
@@ -97,13 +103,16 @@ size(marital) + size(marital) * size(balance)
 
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model._
+import sqlContext.implicits._
 
 
-highcharts(bank
+val chart = highcharts(bank
   .seriesCol("marital")
   .series("name" -> "job",
     "y" -> avg(col("balance")))
   .drilldown("name" -> "education",
     "y" -> avg(col("balance"))))
-  .plot()
+
+chart.plot()
+
 ```

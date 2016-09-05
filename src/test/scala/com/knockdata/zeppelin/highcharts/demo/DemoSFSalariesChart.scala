@@ -17,6 +17,8 @@
 
 package com.knockdata.zeppelin.highcharts.demo
 
+import java.io.PrintWriter
+
 import com.knockdata.zeppelin.highcharts._
 import com.knockdata.zeppelin.highcharts.model.{Chart, XAxis}
 import org.apache.spark.sql.functions._
@@ -28,13 +30,9 @@ import org.junit.Test
 //
 class DemoSFSalariesChart {
   val sqlContext = SparkEnv.sqlContext
+  import sqlContext.implicits._
 
-  val file = "src/test/resources/SF-Salaries.csv"
-  val dataFrame = sqlContext.read
-    .format("com.databricks.spark.csv")
-    .option("header", "true") // Use first line of all files as header
-    .option("inferSchema", "true") // Automatically infer data types
-    .load(file)
+
 
   // ## SF salaries
   //
@@ -47,15 +45,25 @@ class DemoSFSalariesChart {
   // * data point order by avg base pay descending
   //
   @Test
-  def demoSFSalaries: Unit = {
-    import sqlContext.implicits._
+  def demoSFSalaries(): Unit = {
 
-    highcharts(dataFrame
+
+    val file = "src/test/resources/SF-Salaries.csv"
+    val dataFrame = sqlContext.read
+      .format("com.databricks.spark.csv")
+      .option("header", "true") // Use first line of all files as header
+      .option("inferSchema", "true") // Automatically infer data types
+      .load(file)
+
+    val chart = highcharts(dataFrame
       .series("name" -> "JobTitle", "y" -> avg($"BasePay"))
       .orderBy(avg($"BasePay").desc)
       .take(10))
       .chart(Chart.bar)
-      .plot()
+
+    chart.plot()
+
+    new PrintWriter("target/demoSFSalaries.json") { write(chart.replaced); close }
   }
 
 }

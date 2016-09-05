@@ -1,0 +1,539 @@
+
+<head>
+    <link rel="stylesheet" href="highlight/styles/github.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/github-markdown.css">
+    <style>
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="container">
+    <article class="markdown-body">
+        <h1>TimeDataWithIrregularIntervals</h1>
+<pre><code class="scala hljs">import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
+import sqlContext.implicits._
+val chart = highcharts(DataSet.dfSnowDepth.seriesCol("year")
+  .series("x" -> "time", "y" -> "depth"))
+  .chart(Chart.spline)
+  .title(new Title("Snow depth at Vikjafjellet, Norway"))
+  .subtitle(new Subtitle("Irregular time data in Highcharts JS"))
+  .xAxis(new XAxis("Date").typ("datetime").dateTimeLabelFormats(
+    "month" -> "%e. %b", "year" -> "%b"))
+  .yAxis(new YAxis("Snow depth (m)").min(0))
+  .tooltip(new Tooltip().headerFormat("<b>{series.name}</b><br>").pointFormat(
+    "{point.x:%e. %b}: {point.y:.2f} m"))
+  .plotOptions(PlotOptions.spline.marker("enabled" -> true))
+
+chart.plot()
+</code></pre>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+ $(function () {
+   var data = {
+  "series":[{
+    "id":"year=2012",
+    "name":"2012",
+    "data":[{
+      "x":32400000000,
+      "y":0.79
+    },{
+      "x":33696000000,
+      "y":0.72
+    },{
+      "y":null,
+      "x":32313600000
+    },{
+      "y":null,
+      "x":32918400000
+    },{
+      "y":null,
+      "x":33523200000
+    },{
+      "x":34387200000,
+      "y":1.02
+    },{
+      "x":35078400000,
+      "y":1.12
+    },{
+      "x":36288000000,
+      "y":1.2
+    },{
+      "y":null,
+      "x":35769600000
+    },{
+      "y":null,
+      "x":34473600000
+    },{
+      "y":null,
+      "x":35337600000
+    },{
+      "x":41904000000,
+      "y":1.85
+    },{
+      "x":42249600000,
+      "y":2.22
+    },{
+      "y":null,
+      "x":40867200000
+    },{
+      "y":null,
+      "x":41817600000
+    },{
+      "y":null,
+      "x":41644800000
+    },{
+      "y":null,
+      "x":42681600000
+    },{
+      "x":43459200000,
+      "y":1.15
+    },{
+      "x":44755200000,
+      "y":0
+    },{
+      "y":null,
+      "x":43027200000
+    },{
+      "y":null,
+      "x":43891200000
+    },{
+      "y":null,
+      "x":43113600000
+    },{
+      "y":null,
+      "x":43545600000
+    },{
+      "y":null,
+      "x":44928000000
+    },{
+      "x":28512000000,
+      "y":0.2
+    },{
+      "x":28944000000,
+      "y":0.28
+    },{
+      "y":null,
+      "x":28857600000
+    },{
+      "y":null,
+      "x":29289600000
+    },{
+      "x":31017600000,
+      "y":0.28
+    },{
+      "x":31276800000,
+      "y":0.47
+    },{
+      "y":null,
+      "x":31536000000
+    },{
+      "y":null,
+      "x":30499200000
+    },{
+      "y":null,
+      "x":30931200000
+    },{
+      "y":null,
+      "x":31795200000
+    },{
+      "x":37497600000,
+      "y":1.18
+    },{
+      "y":null,
+      "x":37065600000
+    },{
+      "y":null,
+      "x":37756800000
+    },{
+      "y":null,
+      "x":38620800000
+    },{
+      "x":40176000000,
+      "y":1.19
+    },{
+      "y":null,
+      "x":38707200000
+    },{
+      "y":null,
+      "x":39398400000
+    },{
+      "y":null,
+      "x":40262400000
+    },{
+      "y":null,
+      "x":45360000000
+    },{
+      "y":null,
+      "x":45792000000
+    },{
+      "y":null,
+      "x":46483200000
+    },{
+      "x":26524800000,
+      "y":0.28
+    },{
+      "x":26956800000,
+      "y":0.25
+    }]
+  },{
+    "id":"year=2013",
+    "name":"2013",
+    "data":[{
+      "y":null,
+      "x":32400000000
+    },{
+      "y":null,
+      "x":33696000000
+    },{
+      "x":32313600000,
+      "y":1.8
+    },{
+      "y":null,
+      "x":32918400000
+    },{
+      "y":null,
+      "x":33523200000
+    },{
+      "y":null,
+      "x":34387200000
+    },{
+      "y":null,
+      "x":35078400000
+    },{
+      "y":null,
+      "x":36288000000
+    },{
+      "x":35769600000,
+      "y":1.76
+    },{
+      "y":null,
+      "x":34473600000
+    },{
+      "y":null,
+      "x":35337600000
+    },{
+      "y":null,
+      "x":41904000000
+    },{
+      "y":null,
+      "x":42249600000
+    },{
+      "x":40867200000,
+      "y":2.41
+    },{
+      "x":41817600000,
+      "y":2.05
+    },{
+      "y":null,
+      "x":41644800000
+    },{
+      "y":null,
+      "x":42681600000
+    },{
+      "y":null,
+      "x":43459200000
+    },{
+      "y":null,
+      "x":44755200000
+    },{
+      "x":43027200000,
+      "y":1.7
+    },{
+      "x":43891200000,
+      "y":1.1
+    },{
+      "y":null,
+      "x":43113600000
+    },{
+      "y":null,
+      "x":43545600000
+    },{
+      "y":null,
+      "x":44928000000
+    },{
+      "y":null,
+      "x":28512000000
+    },{
+      "y":null,
+      "x":28944000000
+    },{
+      "x":28857600000,
+      "y":0.25
+    },{
+      "y":null,
+      "x":29289600000
+    },{
+      "y":null,
+      "x":31017600000
+    },{
+      "y":null,
+      "x":31276800000
+    },{
+      "x":31536000000,
+      "y":1.66
+    },{
+      "y":null,
+      "x":30499200000
+    },{
+      "y":null,
+      "x":30931200000
+    },{
+      "y":null,
+      "x":31795200000
+    },{
+      "y":null,
+      "x":37497600000
+    },{
+      "y":null,
+      "x":37065600000
+    },{
+      "y":null,
+      "x":37756800000
+    },{
+      "y":null,
+      "x":38620800000
+    },{
+      "y":null,
+      "x":40176000000
+    },{
+      "x":38707200000,
+      "y":2.62
+    },{
+      "y":null,
+      "x":39398400000
+    },{
+      "y":null,
+      "x":40262400000
+    },{
+      "x":45360000000,
+      "y":0
+    },{
+      "y":null,
+      "x":45792000000
+    },{
+      "y":null,
+      "x":46483200000
+    },{
+      "y":null,
+      "x":26524800000
+    },{
+      "x":26956800000,
+      "y":0.4
+    }]
+  },{
+    "id":"year=2014",
+    "name":"2014",
+    "data":[{
+      "y":null,
+      "x":32400000000
+    },{
+      "y":null,
+      "x":33696000000
+    },{
+      "y":null,
+      "x":32313600000
+    },{
+      "x":32918400000,
+      "y":2.55
+    },{
+      "x":33523200000,
+      "y":2.62
+    },{
+      "y":null,
+      "x":34387200000
+    },{
+      "y":null,
+      "x":35078400000
+    },{
+      "y":null,
+      "x":36288000000
+    },{
+      "y":null,
+      "x":35769600000
+    },{
+      "x":34473600000,
+      "y":2.5
+    },{
+      "x":35337600000,
+      "y":2.42
+    },{
+      "y":null,
+      "x":41904000000
+    },{
+      "x":42249600000,
+      "y":2.68
+    },{
+      "y":null,
+      "x":40867200000
+    },{
+      "y":null,
+      "x":41817600000
+    },{
+      "x":41644800000,
+      "y":2.77
+    },{
+      "x":42681600000,
+      "y":2.56
+    },{
+      "y":null,
+      "x":43459200000
+    },{
+      "y":null,
+      "x":44755200000
+    },{
+      "y":null,
+      "x":43027200000
+    },{
+      "y":null,
+      "x":43891200000
+    },{
+      "x":43113600000,
+      "y":2.39
+    },{
+      "x":43545600000,
+      "y":2.3
+    },{
+      "x":44928000000,
+      "y":2
+    },{
+      "y":null,
+      "x":28512000000
+    },{
+      "y":null,
+      "x":28944000000
+    },{
+      "y":null,
+      "x":28857600000
+    },{
+      "x":29289600000,
+      "y":0.25
+    },{
+      "y":null,
+      "x":31017600000
+    },{
+      "y":null,
+      "x":31276800000
+    },{
+      "y":null,
+      "x":31536000000
+    },{
+      "x":30499200000,
+      "y":1.41
+    },{
+      "x":30931200000,
+      "y":1.64
+    },{
+      "x":31795200000,
+      "y":1.6
+    },{
+      "y":null,
+      "x":37497600000
+    },{
+      "x":37065600000,
+      "y":2.74
+    },{
+      "x":37756800000,
+      "y":2.62
+    },{
+      "x":38620800000,
+      "y":2.6
+    },{
+      "y":null,
+      "x":40176000000
+    },{
+      "y":null,
+      "x":38707200000
+    },{
+      "x":39398400000,
+      "y":2.81
+    },{
+      "x":40262400000,
+      "y":2.63
+    },{
+      "x":45360000000,
+      "y":1.85
+    },{
+      "x":45792000000,
+      "y":1.49
+    },{
+      "x":46483200000,
+      "y":1.08
+    },{
+      "y":null,
+      "x":26524800000
+    },{
+      "y":null,
+      "x":26956800000
+    }]
+  }],
+  "subtitle":{
+    "text":"Irregular time data in Highcharts JS"
+  },
+  "yAxis":{
+    "min":0,
+    "title":{
+      "text":"Snow depth (m)"
+    }
+  },
+  "chart":{
+    "type":"spline"
+  },
+  "tooltip":{
+    "headerFormat":"<b>{series.name}</b><br>",
+    "pointFormat":"{point.x:%e. %b}: {point.y:.2f} m"
+  },
+  "title":{
+    "text":"Snow depth at Vikjafjellet, Norway"
+  },
+  "xAxis":{
+    "type":"datetime",
+    "dateTimeLabelFormats":{
+      "month":"%e. %b",
+      "year":"%b"
+    },
+    "title":{
+      "text":"Date"
+    }
+  },
+  "plotOptions":{
+    "spline":{
+      "marker":{
+        "enabled":true
+      }
+    }
+  }
+}
+   $('#container').highcharts(data);
+ });
+
+ $(document).on("keydown", function(e) {
+            var code = e.which;
+            if (code == 37) { // left
+             window.location.href = 'demoLineBasicMultipleSeriesWithoutOption.html';
+            }
+            else if (code == 38) { // up
+            }
+            else if (code == 39) { // right
+               window.location.href = 'demoDrilldownBasic.html';
+            } else if (code == 40) { // down
+
+            }
+        });
+</script>
+ </article>
+</div>
+</body>
+      

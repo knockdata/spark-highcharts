@@ -161,15 +161,15 @@ object Chart {
 
   def pie = new Chart("pie")
 
-  def polygon = new Chart("Polygon")
+  def polygon = new Chart("polygon")
 
-  def pyramid = new Chart("Pyramid")
+  def pyramid = new Chart("pyramid")
 
   def scatter = new Chart("scatter")
 
   def solidgauge = new Chart("solidgauge")
 
-  def spline = new Chart("Spline")
+  def spline = new Chart("spline")
 
   def treemap = new Chart("treemap")
 

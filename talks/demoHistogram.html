@@ -1,0 +1,235 @@
+
+<head>
+    <link rel="stylesheet" href="highlight/styles/github.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/github-markdown.css">
+    <style>
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="container">
+    <article class="markdown-body">
+        <h1>Histogram</h1>
+<pre><code class="scala hljs">import com.knockdata.zeppelin.highcharts._
+import com.knockdata.zeppelin.highcharts.model._
+import sqlContext.implicits._
+val chart = highcharts(
+  bank
+    .series("x" -> "age", "y" -> count("*"))
+    .orderBy(col("age"))
+  )
+  .chart(Chart.column)
+  .plotOptions(PlotOptions.column.groupPadding(0).pointPadding(0).borderWidth(0))
+
+chart.plot()
+</code></pre>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+ $(function () {
+   var data = {
+  "series":[{
+    "data":[{
+      "x":20,
+      "y":1
+    },{
+      "x":21,
+      "y":1
+    },{
+      "x":22,
+      "y":1
+    },{
+      "x":23,
+      "y":3
+    },{
+      "x":24,
+      "y":3
+    },{
+      "x":25,
+      "y":7
+    },{
+      "x":26,
+      "y":6
+    },{
+      "x":27,
+      "y":13
+    },{
+      "x":28,
+      "y":7
+    },{
+      "x":29,
+      "y":11
+    },{
+      "x":30,
+      "y":14
+    },{
+      "x":31,
+      "y":15
+    },{
+      "x":32,
+      "y":28
+    },{
+      "x":33,
+      "y":18
+    },{
+      "x":34,
+      "y":25
+    },{
+      "x":35,
+      "y":23
+    },{
+      "x":36,
+      "y":19
+    },{
+      "x":37,
+      "y":24
+    },{
+      "x":38,
+      "y":19
+    },{
+      "x":39,
+      "y":15
+    },{
+      "x":40,
+      "y":16
+    },{
+      "x":41,
+      "y":20
+    },{
+      "x":42,
+      "y":19
+    },{
+      "x":43,
+      "y":10
+    },{
+      "x":44,
+      "y":10
+    },{
+      "x":45,
+      "y":15
+    },{
+      "x":46,
+      "y":8
+    },{
+      "x":47,
+      "y":7
+    },{
+      "x":48,
+      "y":15
+    },{
+      "x":49,
+      "y":12
+    },{
+      "x":50,
+      "y":11
+    },{
+      "x":51,
+      "y":8
+    },{
+      "x":52,
+      "y":6
+    },{
+      "x":53,
+      "y":10
+    },{
+      "x":54,
+      "y":7
+    },{
+      "x":55,
+      "y":15
+    },{
+      "x":56,
+      "y":16
+    },{
+      "x":57,
+      "y":9
+    },{
+      "x":58,
+      "y":4
+    },{
+      "x":59,
+      "y":5
+    },{
+      "x":60,
+      "y":6
+    },{
+      "x":61,
+      "y":2
+    },{
+      "x":62,
+      "y":1
+    },{
+      "x":63,
+      "y":2
+    },{
+      "x":64,
+      "y":1
+    },{
+      "x":65,
+      "y":1
+    },{
+      "x":66,
+      "y":1
+    },{
+      "x":67,
+      "y":1
+    },{
+      "x":68,
+      "y":1
+    },{
+      "x":70,
+      "y":1
+    },{
+      "x":75,
+      "y":2
+    },{
+      "x":77,
+      "y":2
+    },{
+      "x":78,
+      "y":2
+    }]
+  }],
+  "chart":{
+    "type":"column"
+  },
+  "plotOptions":{
+    "column":{
+      "groupPadding":0,
+      "pointPadding":0,
+      "borderWidth":0
+    }
+  }
+}
+   $('#container').highcharts(data);
+ });
+
+ $(document).on("keydown", function(e) {
+            var code = e.which;
+            if (code == 37) { // left
+             window.location.href = 'demoLineWithDataLabels.html';
+            }
+            else if (code == 38) { // up
+            }
+            else if (code == 39) { // right
+               window.location.href = 'demoLineZoomable.html';
+            } else if (code == 40) { // down
+
+            }
+        });
+</script>
+ </article>
+</div>
+</body>
+      
