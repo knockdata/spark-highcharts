@@ -1,0 +1,121 @@
+
+<head>
+    <link rel="stylesheet" href="highlight/styles/github.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/github-markdown.css">
+    <style>
+    .markdown-body {
+        box-sizing: border-box;
+        min-width: 200px;
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 45px;
+    }
+    <!-- BODY {background:none transparent;}-->
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body>
+<div class="container">
+    <article class="markdown-body">
+        <h1>StackedColumn</h1>
+<pre><code class="scala hljs">val john = Seq(5, 3, 4, 7, 2).map(v => ("John", v))
+val jane = Seq(2, 2, 3, 2, 1).map(v => ("Jane", v))
+val joe = Seq(3, 4, 4, 2, 5).map(v => ("Jeo", v))
+
+val dataFrame = (john ++ jane ++ joe).toDF("name", "consumption")
+
+val chart = highcharts(
+  dataFrame
+    .seriesCol("name")
+    .series("y" -> "consumption")).
+  chart(Chart.column).
+  xAxis(XAxis("").categories("Apples", "Oranges", "Pears", "Grapes", "Bananas")).
+  plotOptions(PlotOptions.column.stacking("normal"))
+
+chart.html()
+</code></pre>
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<script>
+ $(function () {
+   var data = {
+  "series":[{
+    "id":"name=Jane",
+    "name":"Jane",
+    "data":[{
+      "y":2
+    },{
+      "y":2
+    },{
+      "y":3
+    },{
+      "y":2
+    },{
+      "y":1
+    }]
+  },{
+    "id":"name=Jeo",
+    "name":"Jeo",
+    "data":[{
+      "y":3
+    },{
+      "y":4
+    },{
+      "y":4
+    },{
+      "y":2
+    },{
+      "y":5
+    }]
+  },{
+    "id":"name=John",
+    "name":"John",
+    "data":[{
+      "y":5
+    },{
+      "y":3
+    },{
+      "y":4
+    },{
+      "y":7
+    },{
+      "y":2
+    }]
+  }],
+  "xAxis":{
+    "categories":["Apples","Oranges","Pears","Grapes","Bananas"]
+  },
+  "chart":{
+    "type":"column"
+  },
+  "plotOptions":{
+    "column":{
+      "stacking":"normal"
+    }
+  }
+}
+   $('#container').highcharts(data);
+ });
+
+ $(document).on("keydown", function(e) {
+            var code = e.which;
+            if (code == 37) { // left
+             window.location.href = 'demoLineBasicMultipleSeriesWithOption.html';
+            }
+            else if (code == 38) { // up
+            }
+            else if (code == 39) { // right
+               window.location.href = 'demoDrilldown2Level.html';
+            } else if (code == 40) { // down
+
+            }
+        });
+</script>
+ </article>
+</div>
+</body>

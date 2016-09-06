@@ -141,14 +141,14 @@ class DemoLineChart {
   // * data point order by age, descending order
   //
   @Test
-  def demoLineBasicMultipleSeriesWithoutOption(): Unit = {
+  def demoLineBasicMultipleSeries(): Unit = {
     val chart = highcharts(bank.seriesCol("marital")
       .series("name" -> "age", "y" -> avg(col("balance")))
       .orderBy(col("age")))
 
     chart.plot()
 
-    new PrintWriter("target/demoLineBasicMultipleSeriesWithoutOption.json") { write(chart.replaced); close }
+    new PrintWriter("target/demoLineBasicMultipleSeries.json") { write(chart.replaced); close }
   }
 
   // ## Line Chart Multiple Series, With Options
@@ -257,7 +257,6 @@ class DemoLineChart {
       .chart(Chart.spline.inverted(true))
 
     chart.plot()
-
     new PrintWriter("target/demoSplineInverted.json") { write(chart.replaced); close }
   }
 
@@ -302,7 +301,6 @@ class DemoLineChart {
       .yAxis(yAxis)
 
     chart.plot()
-
     new PrintWriter("target/demoSplineWithPlotBands.json") { write(chart.replaced); close }
   }
 
@@ -331,7 +329,6 @@ class DemoLineChart {
       .plotOptions(PlotOptions.spline.marker("enabled" -> true))
 
     chart.plot()
-
     new PrintWriter("target/demoTimeDataWithIrregularIntervals.json") { write(chart.replaced); close }
   }
 }

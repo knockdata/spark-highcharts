@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Better Visualization for Spark</title>
+
+    <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <link href="bower_components/impress.js/css/impress-demo.css" rel="stylesheet" />
+    <link href="css/impressConsole.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+
+
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+
+<body>
+
+<div id="impress" class="steps">
+</div>
+
+
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/handlebars/handlebars.js"></script>
+  <script src="bower_components/impress.js/js/impress.js"></script>
+  <script src="js/impressConsole.js"></script>
+  <script src="js/main.js"></script>
+
+  <script id="step-template" type="x-handlebars-template">
+    <div id="{{id}}" class="{{class}}"{{#step data}}{{uri}}{{/step}}>{{{file}}}</div>
+  </script> 
+
+  <script>
+  // First, get sorted slide list
+
+  $.getJSON('steps/list.json', function(data) {
+    // Append ordered slides
+    appendSlides(data);
+    impress().init();
+    impressConsole().init();
+  });
+  </script>
+
+
+</body>
+</html>

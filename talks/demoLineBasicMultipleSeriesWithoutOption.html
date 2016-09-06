@@ -11,20 +11,19 @@
         margin: 0 auto;
         padding: 45px;
     }
+    <!-- BODY {background:none transparent;}-->
     </style>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
     <script src="highlight/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
 <body>
 <div class="container">
     <article class="markdown-body">
-        <h1>LineBasicMultipleSeriesWithoutOption</h1>
-<pre><code class="scala hljs">import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
-import sqlContext.implicits._
-val chart = highcharts(bank.seriesCol("marital")
+        <h1>Line Basic Multiple Series Without Option</h1>
+<pre><code class="scala hljs">val chart = highcharts(bank.seriesCol("marital")
   .series("name" -> "age", "y" -> avg(col("balance")))
   .orderBy(col("age")))
 

@@ -70,7 +70,6 @@ class DemoColumnChart {
   //
   @Test
   def demoStackedColumn(): Unit = {
-
     val john = Seq(5, 3, 4, 7, 2).map(v => ("John", v))
     val jane = Seq(2, 2, 3, 2, 1).map(v => ("Jane", v))
     val joe = Seq(3, 4, 4, 2, 5).map(v => ("Jeo", v))
@@ -80,10 +79,10 @@ class DemoColumnChart {
     val chart = highcharts(
       dataFrame
         .seriesCol("name")
-        .series("y" -> "consumption"))
-      .chart(Chart.column)
-      .xAxis(XAxis("").categories("Apples", "Oranges", "Pears", "Grapes", "Bananas"))
-      .plotOptions(PlotOptions.column.stacking("normal"))
+        .series("y" -> "consumption")).
+      chart(Chart.column).
+      xAxis(XAxis("").categories("Apples", "Oranges", "Pears", "Grapes", "Bananas")).
+      plotOptions(PlotOptions.column.stacking("normal"))
 
     chart.plot()
 

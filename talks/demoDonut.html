@@ -11,9 +11,11 @@
         margin: 0 auto;
         padding: 45px;
     }
+    <!-- BODY {background:none transparent;}-->
     </style>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
     <script src="highlight/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 </head>
@@ -21,118 +23,180 @@
 <div class="container">
     <article class="markdown-body">
         <h1>Donut</h1>
-<pre><code class="scala hljs">import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
-import sqlContext.implicits._
-import sqlContext.implicits._
-import org.apache.spark.sql.functions._
-
+<pre><code class="scala hljs">
 val dataFrame = Seq(
-  ("Microsoft Internet Explorer", "v11.0", 24.13),
-  ("Microsoft Internet Explorer", "v10.0", 5.33),
-  ("Microsoft Internet Explorer", "v9.0", 8.11),
-  ("Microsoft Internet Explorer", "v8.0", 17.2),
-  ("Microsoft Internet Explorer", "v7.0", 0.5),
-  ("Microsoft Internet Explorer", "v6.0", 1.06),
-  ("Chrome", "v43.0", 1.45),
-  ("Chrome", "v42.0", 3.68),
-  ("Chrome", "v41.0", 4.32),
-  ("Chrome", "v40.0", 5.0),
-  ("Chrome", "v39.0", 2.96),
-  ("Chrome", "v38.0", 0.6),
-  ("Chrome", "v36.0", 2.53),
-  ("Chrome", "v37.0", 0.38),
-  ("Chrome", "v35.0", 0.85),
-  ("Chrome", "v34.0", 0.14),
-  ("Chrome", "v33.0", 0.19),
-  ("Chrome", "v32.0", 0.55),
-  ("Chrome", "v31.0", 1.24),
-  ("Chrome", "v30.0", 0.14),
-  ("Firefox", "v38.0", 1.02),
-  ("Firefox", "v37.0", 2.31),
-  ("Firefox", "v36.0", 2.32),
-  ("Firefox", "v35.0", 2.76),
-  ("Firefox", "v34.0", 1.27),
-  ("Firefox", "v33.0", 0.22),
-  ("Firefox", "v32.0", 0.15),
-  ("Firefox", "v31.0", 0.22),
-  ("Safari", "v8.0", 2.56),
-  ("Safari", "v7.1", 0.77),
-  ("Safari", "v7.0", 0.26),
-  ("Safari", "v6.2", 0.17),
-  ("Safari", "v6.1", 0.29),
-  ("Safari", "v5.1", 0.42),
-  ("Safari", "v5.0", 0.3),
-  ("Opera", "v29", 0.16),
-  ("Opera", "v28", 0.24),
-  ("Opera", "v27", 0.17),
-  ("Opera", "v12.x", 0.34)
-).map{
-  case (b, v, s) => (b, b + " " + v, s)
-}.toDF("browser", "version", "share")
+  (95.0, 95.0, 13.8, "BE", "Belgium" ),
+  (86.5, 102.9, 14.7, "DE", "Germany" ),
+  (80.8, 91.5, 15.8, "FI", "Finland" ),
+  (80.4, 102.5, 12.0, "NL", "Netherlands" ),
+  (80.3, 86.1, 11.8, "SE", "Sweden" ),
+  (78.4, 70.1, 16.6, "ES", "Spain" ),
+  (74.2, 68.5, 14.5, "FR", "France" ),
+  (73.5, 83.1, 10.0, "NO", "Norway" ),
+  (71.0, 93.2, 24.7, "UK", "United Kingdom" ),
+  (69.2, 57.6, 10.4, "IT", "Italy" ),
+  (68.6, 20.0, 16.0, "RU", "Russia" ),
+  (65.5, 126.4, 35.3, "US", "United States" ),
+  (65.4, 50.8, 28.5, "HU", "Hungary" ),
+  (63.4, 51.8, 15.4, "PT", "Portugal" ),
+  (64.0, 82.9, 31.3, "NZ", "New Zealand")
+).toDF("fat intake", "sugar intake", "obesity", "country code", "country")
 
-val seriesBrowser = Series(dataFrame,
-  "name" -> "browser",
-  "y" -> sum(col("share")),
-  "orderBy" -> col("browser"))
-  .size("60%")
-  .dataLabels(
-    "distance" -> -30,
-    "formatter" ->
-      """
-function() {
-  return this.y > 1 ? this.point.name : null;
-}
-      """.stripMargin)
 
-val seriesVersion = Series(dataFrame,
-  "name" -> "version",
-  "y" -> "share",
-  "orderBy" -> col("browser"))
-  .size("80%")
-  .innerSize("60%")
-  .dataLabels("formatter" ->
-    """
-function() {
-  return this.y > 1 ? this.point.name : null;
-}
-    """.stripMargin)
+val chart = highcharts(dataFrame
+  .series(
+    "x" -> "fat intake",
+    "y" -> "sugar intake",
+    "z" -> "obesity",
+    "name" -> "country code",
+    "country" -> "country"))
+  .chart(Chart.bubble)
+  .plotOptions(PlotOptions.bubble.dataLabels("enabled" -> true, "format" -> "{point.name}"))
+  .xAxis(XAxis("fat intake daily"))
+  .yAxis(YAxis("sugar intake daily")
+    .plotLine(
+      "dashStyle" -> "dot",
+      "color" -> "black",
+      "value" -> 50,
+      "width" -> 3,
+      "label" -> Map("text" -> "Safe sugar intake 50g/day", "align" -> "right"),
+      "zIndex" -> 3)
+  )
+  .tooltip(new Tooltip().pointFormat("{point.country}"))
 
-val chart = new Highcharts(List(seriesBrowser, seriesVersion))
-  .chart(Chart.pie)
-
-chart.plot()
-</code></pre>
+chart.plot()</code></pre>
 
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <script>
  $(function () {
    var data = {
   "series":[{
-    "size":"60%",
-    "dataLabels":{
-      "distance":-30,
-      "formatter":
-function() {
-  return this.y > 1 ? this.point.name : null;
-}
-          
-    },
-    "data":["[browser: string, version: string, share: double]",["name","browser"],["y","sum(share)"],["orderBy","browser"]]
-  },{
-    "size":"80%",
-    "innerSize":"60%",
-    "dataLabels":{
-      "formatter":
-function() {
-  return this.y > 1 ? this.point.name : null;
-}
-        
-    },
-    "data":["[browser: string, version: string, share: double]",["name","version"],["y","share"],["orderBy","browser"]]
+    "data":[{
+      "x":95,
+      "name":"BE",
+      "y":95,
+      "country":"Belgium",
+      "z":13.8
+    },{
+      "x":86.5,
+      "name":"DE",
+      "y":102.9,
+      "country":"Germany",
+      "z":14.7
+    },{
+      "x":80.8,
+      "name":"FI",
+      "y":91.5,
+      "country":"Finland",
+      "z":15.8
+    },{
+      "x":80.4,
+      "name":"NL",
+      "y":102.5,
+      "country":"Netherlands",
+      "z":12
+    },{
+      "x":80.3,
+      "name":"SE",
+      "y":86.1,
+      "country":"Sweden",
+      "z":11.8
+    },{
+      "x":78.4,
+      "name":"ES",
+      "y":70.1,
+      "country":"Spain",
+      "z":16.6
+    },{
+      "x":74.2,
+      "name":"FR",
+      "y":68.5,
+      "country":"France",
+      "z":14.5
+    },{
+      "x":73.5,
+      "name":"NO",
+      "y":83.1,
+      "country":"Norway",
+      "z":10
+    },{
+      "x":71,
+      "name":"UK",
+      "y":93.2,
+      "country":"United Kingdom",
+      "z":24.7
+    },{
+      "x":69.2,
+      "name":"IT",
+      "y":57.6,
+      "country":"Italy",
+      "z":10.4
+    },{
+      "x":68.6,
+      "name":"RU",
+      "y":20,
+      "country":"Russia",
+      "z":16
+    },{
+      "x":65.5,
+      "name":"US",
+      "y":126.4,
+      "country":"United States",
+      "z":35.3
+    },{
+      "x":65.4,
+      "name":"HU",
+      "y":50.8,
+      "country":"Hungary",
+      "z":28.5
+    },{
+      "x":63.4,
+      "name":"PT",
+      "y":51.8,
+      "country":"Portugal",
+      "z":15.4
+    },{
+      "x":64,
+      "name":"NZ",
+      "y":82.9,
+      "country":"New Zealand",
+      "z":31.3
+    }]
   }],
+  "xAxis":{
+    "title":{
+      "text":"fat intake daily"
+    }
+  },
+  "tooltip":{
+    "pointFormat":"{point.country}"
+  },
+  "yAxis":{
+    "plotLines":[{
+      "label":{
+        "text":"Safe sugar intake 50g/day",
+        "align":"right"
+      },
+      "color":"black",
+      "dashStyle":"dot",
+      "zIndex":3,
+      "width":3,
+      "value":50
+    }],
+    "title":{
+      "text":"sugar intake daily"
+    }
+  },
   "chart":{
-    "type":"pie"
+    "type":"bubble"
+  },
+  "plotOptions":{
+    "bubble":{
+      "dataLabels":{
+        "enabled":true,
+        "format":"{point.name}"
+      }
+    }
   }
 }
    $('#container').highcharts(data);

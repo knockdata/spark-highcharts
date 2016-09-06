@@ -1,31 +1,37 @@
+# Axis
 
-area            x,y
-arearange       x,low,high
-areaspline      x,low,high
-areasplinerange x,y
-bar             x,y
-boxplot         x,low,q1,medium,q3,high
-bubble          x,y,z
-column          x,y
-errorbar        x,low,high
-funnel          y
-heatmap         x,y,value
-line            x,y
-pie             y
-polygon         x,y
-pyramid         y
-scatter         x,y
-solidgauge      y
-spline          x,y
-treemap         value
-waterfall       x,y
+| chart | axis |
+|-------|------|
+|area            |x,y
+|arearange       |x,low,high
+|areaspline      |x,low,high
+|areasplinerange |x,y
+|bar             |x,y
+|boxplot         |x,low,q1,medium,q3,high
+|bubble          |x,y,z
+|column          |x,y
+|errorbar        |x,low,high
+|funnel          |y
+|heatmap         |x,y,value
+|line            |x,y
+|pie             |y
+|polygon         |x,y
+|pyramid         |y
+|scatter         |x,y
+|solidgauge      |y
+|spline          |x,y
+|treemap         |value
+|waterfall       |x,y
 
 y
+
     funnel
     pie
     pyramid
     solidgauge
+    
 x,y
+
     area
     bar
     column
@@ -34,17 +40,24 @@ x,y
     scatter
     spline
     waterfall
+    
 x,y,z
+
     bubble
+    
 x,low,high
+
     arearange
     areasplinerange
     columnrange
     errorbar
+    
 x,y,value
+
     heatmap
 
 x,low,q1,medium,q3,high
+
     boxplot
 
 # 1D

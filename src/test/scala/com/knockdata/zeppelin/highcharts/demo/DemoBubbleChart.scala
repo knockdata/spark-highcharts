@@ -43,8 +43,9 @@ class DemoBubbleChart {
 //  // * y axis number of record for age
 //  // * data point order by age
 //  //
+
 //  @Test
-//  def demoDonut(): Unit = {
+//  def demoBubble(): Unit = {
 //
 //    val dataFrame = Seq(
 //      (95.0, 95.0, 13.8, "BE", "Belgium" ),
@@ -76,20 +77,17 @@ class DemoBubbleChart {
 //      .plotOptions(PlotOptions.bubble.dataLabels("enabled" -> true, "format" -> "{point.name}"))
 //      .xAxis(XAxis("fat intake daily"))
 //      .yAxis(YAxis("sugar intake daily")
-//          .plotLine(
-//            "dashStyle" -> "dot",
-//            "color" -> "black",
-//            "value" -> 50,
-//            "width" -> 3,
-//            "label" -> Map("text" -> "Safe sugar intake 50g/day", "align" -> "right"),
-//            "zIndex" -> 3)
+//        .plotLine(
+//          "dashStyle" -> "dot",
+//          "color" -> "black",
+//          "value" -> 50,
+//          "width" -> 3,
+//          "label" -> Map("text" -> "Safe sugar intake 50g/day", "align" -> "right"),
+//          "zIndex" -> 3)
 //      )
 //      .tooltip(new Tooltip().pointFormat("{point.country}"))
 //
 //    chart.plot()
-//
-//    new PrintWriter("target/demoDonut.json") { write(chart.replaced); close }
-//
-//
+//    new PrintWriter("target/demoBubble.json") { write(chart.replaced); close }
 //  }
 }

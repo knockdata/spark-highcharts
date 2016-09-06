@@ -71,6 +71,11 @@ class GenTalkHTML {
       """.stripMargin
   }
 
+  val camel = "(?<=[A-Z])(?=[A-Z][a-z])|(?<=[^A-Z])(?=[A-Z])|(?<=[A-Za-z])(?=[^A-Za-z])"
+  def camel2Readable(s: String): String = {
+    s.replaceAll(camel, " ")
+  }
+
   def thanks(previous: String): String = {
       s"""
         |<head>
@@ -117,7 +122,7 @@ class GenTalkHTML {
   }
   def genTalkHTML(code: String, data: String, name: String, previous: String, next: String): String = {
 
-    val header = name.drop("demo".length)
+    val header = camel2Readable(name.drop("demo".length))
     val html =
       s"""
         |<head>
@@ -132,9 +137,11 @@ class GenTalkHTML {
         |        margin: 0 auto;
         |        padding: 45px;
         |    }
+        |    <!-- BODY {background:none transparent;}-->
         |    </style>
         |    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
         |    <script src="https://code.highcharts.com/highcharts.js"></script>
+        |    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
         |    <script src="highlight/highlight.pack.js"></script>
         |    <script>hljs.initHighlightingOnLoad();</script>
         |</head>
@@ -142,10 +149,7 @@ class GenTalkHTML {
         |<div class="container">
         |    <article class="markdown-body">
         |        <h1>$header</h1>
-        |<pre><code class="scala hljs">import com.knockdata.zeppelin.highcharts._
-        |import com.knockdata.zeppelin.highcharts.model._
-        |import sqlContext.implicits._
-        |$code</code></pre>
+        |<pre><code class="scala hljs">$code</code></pre>
         |
         |<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         |<script>
@@ -206,7 +210,7 @@ class GenTalkHTML {
     val writer = new FileWriter(s"talks/$name.html")
     try {
       val index = toc.indexOf(name)
-      val previous = if (index == 0) 0 else index - 1
+      val previous = if (index <= 0) 0 else index - 1
       val next = if (index == toc.length - 1) toc.length - 1 else index + 1
       val html = genTalkHTML(
         codes.mkString("\n"),
@@ -226,7 +230,7 @@ class GenTalkHTML {
     "demoBarHistogram",				"demoLineBasic",				"demoSFSalaries",
   "demoBasicArea",				"demoLineBasicAsc",				"demoSplineInverted",
   "demoBasicLine",				"demoLineBasicDesc",				"demoSplineWithPlotBands",
-  "demoDonut",					"demoLineBasicMultipleSeriesWithOption",	"demoStackedColumn",
+  "demoDonut",					"demoLineBasicMultipleSeries",	"demoStackedColumn",
   "demoDrilldown2Level",			"demoLineBasicMultipleSeriesWithoutOption",	"demoTimeDataWithIrregularIntervals",
   "demoDrilldownBasic",				"demoLineWithDataLabels",
   "demoHistogram",				"demoLineZoomable",
