@@ -17,7 +17,11 @@ Make Spark DataFrame visualization simple, flexible, and beautiful.
 > the docker image zeppelin-highcharts includes features
 
 > * highcharts
-> * pyspark, include panda
+> * pyspark, include
+> * git, git lfs, vim
+
+0.6.0: Spark 1.6, Scala 2.10, Zeppelin 0.6.0
+0.6.1: Spark 2.0, Scala 2.11, Zeppelin 0.6.1
 
 If you wanna run on your existing zeppelin, follow [Use In Zeppelin](https://github.com/knockdata/zeppelin-highcharts/blob/master/docs/UseInZeppelin.md).
 

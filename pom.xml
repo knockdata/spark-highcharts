@@ -30,9 +30,9 @@
 
   <properties>
 
-    <spark.version>1.6.1</spark.version>
-    <scala.version>2.10.4</scala.version>
-    <scala.binary.version>2.10</scala.binary.version>
+    <spark.version>2.0.0</spark.version>
+    <scala.version>2.11.8</scala.version>
+    <scala.binary.version>2.11</scala.binary.version>
 
     <dependency.locations.enabled>false</dependency.locations.enabled>
     <!--<scala.version>2.11.8</scala.version>-->
@@ -318,9 +318,6 @@
   <profiles>
     <profile>
       <id>spark-1.6</id>
-      <activation>
-        <activeByDefault>true</activeByDefault>
-      </activation>
       <properties>
         <spark.version>1.6.1</spark.version>
         <scala.version>2.10.4</scala.version>
@@ -329,6 +326,9 @@
     </profile>
     <profile>
       <id>spark-2.0</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
       <properties>
         <spark.version>2.0.0</spark.version>
         <scala.version>2.11.8</scala.version>

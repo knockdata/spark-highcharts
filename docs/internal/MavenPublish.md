@@ -5,7 +5,7 @@
 
 mvn clean deploy
 
-mvn versions:set -DnewVersion=0.6.0
+mvn versions:set -DnewVersion=0.6.1
 
 mvn deploy -P release
 
