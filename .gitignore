@@ -12,6 +12,7 @@ target/
 cache/*
 metastore_db
 pom.xml.versionsBackup
+highchart*.html
 
 lib_managed/
 src_managed/

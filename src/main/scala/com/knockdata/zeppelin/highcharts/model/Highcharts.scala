@@ -129,17 +129,19 @@ class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with Pu
 
   }
 
-  def html: Unit = {
+  def html(path: String = ".", filename: String = id, open: Boolean = true): String = {
     val content = htmlContent(replaced)
-    val tmpFile = java.io.File.createTempFile("highcharts", ".html")
+    val file = new java.io.File(s"$path/highcharts_$filename.html")
 //    tmpFile.deleteOnExit()
-    println(tmpFile)
-    val writer = new FileWriter(tmpFile)
+    println(file)
+    val writer = new FileWriter(file)
     writer.write(content)
     writer.close()
 
-    java.awt.Desktop.getDesktop().browse(tmpFile.toURI)
+    if (open)
+      java.awt.Desktop.getDesktop().browse(file.toURI)
 
+    file.getAbsolutePath
   }
 
   def plot(): Unit = {
