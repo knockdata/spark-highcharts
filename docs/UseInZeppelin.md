@@ -12,9 +12,9 @@
 
 > Edit the `artifact` with the correct jar file
 
-`com.knockdata:zeppelin-highcharts:0.6.0`
+`com.knockdata:spark-highcharts:0.6.1`
 
-`net.liftweb:lift-json_2.10:2.6.3`
+`net.liftweb:lift-json_2.11:2.6.3`
 
 > Click `Save`
 
@@ -44,6 +44,6 @@ Paste the following code to a `Zeppelin` Paragraph and execute it
 
 ## License
 
-zeppelin-highchart use Apache 2.0 License
+spark-highcharts use Apache 2.0 License
 
 However, the Highcharts JavaScript library that is included in this package is not free for commercial use. Please contact [Highcharts](https://shop.highsoft.com/) for license related issues.

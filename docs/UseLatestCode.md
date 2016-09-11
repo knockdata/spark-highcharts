@@ -1,9 +1,9 @@
 # Use latest code
- 
+
 ### Build the binary
 
-    git clone https://github.com/knockdata/zeppelin-highcharts.git
-    cd zeppelin-highcharts
+    git clone https://github.com/knockdata/spark-highcharts.git
+    cd spark-highcharts
     mvn clean package -DskipTests
 
 ### Add the binary to Zeppelin

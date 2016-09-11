@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.knockdata</groupId>
-  <artifactId>zeppelin-highcharts</artifactId>
+  <artifactId>spark-highcharts</artifactId>
   <version>0.6.1</version>
   <inceptionYear>2016</inceptionYear>
-  <name>Zeppelin Highcharts POM</name>
-  <description>Provide Highcharts Support in Zeppelin</description>
+  <name>Spark Highcharts POM</name>
+  <description>Provide Highcharts Support for Spark either in Zepplin or spark-shell</description>
   <url>http://knockdata.com/</url>
   <licenses>
     <license>
@@ -15,9 +15,9 @@
     </license>
   </licenses>
   <scm>
-    <connection>scm:git:git@github.com:knockdata/zeppelin-highcharts.git</connection>
-    <url>scm:git:git@github.com:knockdata/zeppelin-highcharts</url>
-    <tag>zeppelin-highcharts-0.6.0</tag>
+    <connection>scm:git:git@github.com:knockdata/spark-highcharts.git</connection>
+    <url>scm:git:git@github.com:knockdata/spark-highcharts</url>
+    <tag>spark-highcharts-0.6.1</tag>
   </scm>
   <developers>
     <developer>

@@ -29,7 +29,7 @@ y
     pie
     pyramid
     solidgauge
-    
+
 x,y
 
     area
@@ -40,18 +40,18 @@ x,y
     scatter
     spline
     waterfall
-    
+
 x,y,z
 
     bubble
-    
+
 x,low,high
 
     arearange
     areasplinerange
     columnrange
     errorbar
-    
+
 x,y,value
 
     heatmap
@@ -104,7 +104,7 @@ represent 3D, x,y and color
 
 > In this case, the interval for point can be different
 >
-> It is more general so it is chosen for zeppelin-highchart
+> It is more general so it is chosen for spark-highchart
 >
 
 
