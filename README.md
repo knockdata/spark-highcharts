@@ -39,8 +39,8 @@ Add a sub praragraph in `Zeppelin Tutorial NoteBook`
 
 Paste the following code and execute it.
 
-	import com.knockdata.zeppelin.highcharts._
-	import com.knockdata.zeppelin.highcharts.model._
+	import com.knockdata.spark.highcharts._
+	import com.knockdata.spark.highcharts.model._
 
 	highcharts(bank
 	  .series("x" -> "age", "y" -> avg(col("balance")))
