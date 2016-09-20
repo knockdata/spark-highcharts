@@ -39,7 +39,7 @@ class DemoHighchart extends AbstractTestCase{
       DataSet.dfBank.series("name" -> "marital",
         "y" -> avg(col("balance"))))
 
-    assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/1ColumnWithAgg.json", chart)
+    assertEqual("src/test/scala/com/knockdata/spark/highcharts/1ColumnWithAgg.json", chart)
   }
 
   @Test
@@ -52,7 +52,7 @@ class DemoHighchart extends AbstractTestCase{
           "name" -> "job",
             "y" -> avg(col("balance"))))
 
-    assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/Drilldown1Level.json", chart)
+    assertEqual("src/test/scala/com/knockdata/spark/highcharts/Drilldown1Level.json", chart)
   }
 
   @Test
@@ -62,7 +62,7 @@ class DemoHighchart extends AbstractTestCase{
       DataSet.dfBank.series("x" -> "marital", "y" -> "job",
         "value" -> avg(col("balance"))))
 
-    assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/2ColumnWithAgg.json", chart)
+    assertEqual("src/test/scala/com/knockdata/spark/highcharts/2ColumnWithAgg.json", chart)
   }
 
   @Test
@@ -79,7 +79,7 @@ class DemoHighchart extends AbstractTestCase{
           .drilldown("name" -> "education",
         "y" -> avg(col("balance"))))
 
-    assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/Drilldown2Level.json", chart)
+    assertEqual("src/test/scala/com/knockdata/spark/highcharts/Drilldown2Level.json", chart)
   }
 
   @Test
@@ -91,7 +91,7 @@ class DemoHighchart extends AbstractTestCase{
         "y" -> avg(col("balance"))).drilldown("name" -> "education",
         "y" -> avg(col("balance"))))
 
-    assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/2ColumnDrilldown1Level.json", chart)
+    assertEqual("src/test/scala/com/knockdata/spark/highcharts/2ColumnDrilldown1Level.json", chart)
 
   }
 
@@ -100,7 +100,7 @@ class DemoHighchart extends AbstractTestCase{
     val chart: Highcharts = highcharts(DataSet.dfBank.seriesCol("marital").series("name" -> "job",
         "y" -> avg(col("balance"))))
 
-    assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/SeriesWithAgg.json", chart)
+    assertEqual("src/test/scala/com/knockdata/spark/highcharts/SeriesWithAgg.json", chart)
   }
 
   @Test
@@ -112,6 +112,6 @@ class DemoHighchart extends AbstractTestCase{
         "y" -> avg(col("balance"))).drilldown("name" -> "education",
         "y" -> avg(col("balance"))))
 
-    assertEqual("src/test/scala/com/knockdata/zeppelin/highcharts/SeriesDrilldown1Level.json", chart)
+    assertEqual("src/test/scala/com/knockdata/spark/highcharts/SeriesDrilldown1Level.json", chart)
   }
 }

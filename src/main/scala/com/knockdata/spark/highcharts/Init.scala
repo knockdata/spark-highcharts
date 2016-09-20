@@ -40,6 +40,7 @@ object Init {
     "http://code.highcharts.com/maps/modules/map.js",
     "http://code.highcharts.com/mapdata/countries/us/us-all.js")
 
+  // from name to url, name like "map", "us-all"
   val highchartName2Url = allHighchartUrls.map {
     url =>
       val name = url.stripSuffix(".js").split("/").last
@@ -47,6 +48,11 @@ object Init {
   }.toMap
 
 
+  /**
+    * add one or few Highchart modules to the Zeppelin notebook
+    *
+    * if no parameters provided, then add all modules
+    */
   def init(highcharts: String*): Unit = {
 
     val highchartUrls =
@@ -56,10 +62,13 @@ object Init {
         highcharts.map(name => highchartName2Url(name))
       }
 
+    val jq = "$"
+
+    // load js modules
     val loaders = highchartUrls.map {
       url =>
         s"""
-           |$$.getScript("$url")
+           |$jq.getScript("$url")
            |  .done(function( script, textStatus ) {
            |    console.log( "load $url " + textStatus );
            |  })
@@ -68,12 +77,14 @@ object Init {
            |  });
            | """.stripMargin
     }
+
+    // wrap everything in %angular
     val template =
       s"""
         |%angular
         |<script type="text/javascript">
         |
-        |$$(function () {
+        |$jq(function () {
         |
         |${loaders.mkString("\n")}
         |

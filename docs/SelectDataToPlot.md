@@ -4,8 +4,8 @@
 
 The first thing to is import packages
 
-	import com.knockdata.zeppelin.highcharts._
-	import com.knockdata.zeppelin.highcharts.model._
+	import com.knockdata.spark.highcharts._
+	import com.knockdata.spark.highcharts.model._
 
 ## Select Data Source
 

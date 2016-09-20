@@ -15,8 +15,8 @@ take top 10 payment job
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 

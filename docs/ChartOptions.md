@@ -24,7 +24,7 @@ Companion object are provided if it is a default property, e.g. title `text` for
 
 ### plotOptions
 
-Each charts has it's own plotOption class defined. The plotOptions classes are defined in package `com.knockdata.zeppelin.highchart.plotOptions`. Use cooresponding plotOption class to contol the chart.
+Each charts has it's own plotOption class defined. The plotOptions classes are defined in package `com.knockdata.spark.highchart.plotOptions`. Use cooresponding plotOption class to contol the chart.
 
 
 ### Series and Drilldown

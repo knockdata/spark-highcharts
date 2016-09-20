@@ -107,11 +107,15 @@ class DemoAreaChart {
 
     val dataFrame = (USA ++ USSR).toDF("country", "stockpile", "year")
 
-    highcharts(dataFrame
+    val chart = highcharts(dataFrame
       .seriesCol("country")
       .series("x" -> "year", "y" -> "stockpile")
       .orderBy(col("year")))
-      .chart(Chart.area).html()
+      .chart(Chart.area)
+
+    chart.html(open = false)
+
+    new PrintWriter(s"target/demoBasicAreaPlot.json") { write(chart.replaced); close }
   }
 
   @Test

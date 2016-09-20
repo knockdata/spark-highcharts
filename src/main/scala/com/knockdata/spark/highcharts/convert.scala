@@ -25,7 +25,7 @@ import scala.collection.mutable
 import model._
 import SeriesHolder.Defs
 
-object convert {
+private [highcharts] object convert {
   def getFieldColumnMap(defs: Defs, withDrilldownField: Boolean): List[(String, String)] = {
 
     if (withDrilldownField)

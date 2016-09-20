@@ -53,8 +53,8 @@ class GenDemoMarkdown {
         |    <article class="markdown-body">
         |        <h1>Basic Area</h1>
         |<pre><code class="scala hljs">
-        |import com.knockdata.zeppelin.highcharts._
-        |import com.knockdata.zeppelin.highcharts.model._
+        |import com.knockdata.spark.highcharts._
+        |import com.knockdata.spark.highcharts.model._
         |</code></pre>
         |
         |<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
@@ -82,7 +82,7 @@ class GenDemoMarkdown {
     }
   }
 
-  val path = "src/test/scala/com/knockdata/zeppelin/highcharts/demo/"
+  val path = "src/test/scala/com/knockdata/spark/highcharts/demo/"
 
 
   def writeMD(md: List[String], filename: String): Unit = {
@@ -137,8 +137,8 @@ class GenDemoMarkdown {
           append("")
           append("```scala")
           append("")
-          append("import com.knockdata.zeppelin.highcharts._")
-          append("import com.knockdata.zeppelin.highcharts.model._")
+          append("import com.knockdata.spark.highcharts._")
+          append("import com.knockdata.spark.highcharts.model._")
           append("import sqlContext.implicits._")
           append("")
 

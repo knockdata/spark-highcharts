@@ -25,7 +25,7 @@ import scala.collection.mutable.ListBuffer
 import scala.reflect.ClassTag
 
 
-object SeriesHolder {
+private[highcharts] object SeriesHolder {
   type Series2Series = Series => Series
   type DataFrame2DataFrame = DataFrame => DataFrame
   type DataFrame2ArrayRow = DataFrame => Array[Row]

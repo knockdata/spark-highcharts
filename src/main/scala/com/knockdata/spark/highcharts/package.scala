@@ -25,11 +25,15 @@ import org.apache.spark.sql.DataFrame
 import scala.language.implicitConversions
 
 package object highcharts {
-  def md5(data: String) =
+
+  // generate md5 string from data
+  private [highcharts] def md5(data: String) =
     MessageDigest.getInstance("MD5").digest(data.getBytes)
       .map("%02X".format(_)).mkString
 
-  def id = UUID.randomUUID.toString
+  // generate id
+  private [highcharts] def id = UUID.randomUUID.toString
 
+  // implicit converter from DataFrame to SeriesHolder
   implicit def dataFrame2SeriesHolder(dataFrame: DataFrame): SeriesHolder = new SeriesHolder(dataFrame)
 }

@@ -20,7 +20,7 @@ object SparkEnv {
     val conf = new SparkConf()
       .setAppName("Simple Application")
       .setMaster(master)
-//      .setJars(Seq("/Users/rockieyang/git/zeppelin-highcharts/target/zeppelin-highcharts-0.1-SNAPSHOT.jar"))
+//      .setJars(Seq("/Users/rockieyang/git/spark-highcharts/target/spark-highcharts-0.6.1.jar"))
     new SparkContext(conf)
 
 

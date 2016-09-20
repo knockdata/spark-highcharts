@@ -192,8 +192,9 @@ class GenTalkHTML {
       thanksWriter.close()
     }
     catch {
-      case ex =>
+      case ex: Throwable =>
         println(ex)
+        throw ex
     }
 
     for (filename <- getDemoFiles) {
@@ -203,7 +204,7 @@ class GenTalkHTML {
     }
   }
 
-  val path = "src/test/scala/com/knockdata/zeppelin/highcharts/demo/"
+  val path = "src/test/scala/com/knockdata/spark/highcharts/demo/"
 
 
   def writeHTML(codes: List[String], data: List[String], name: String): Unit = {

@@ -5,8 +5,8 @@ Based on [Line Chart Demo](http://www.highcharts.com/demo/line-basic)
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 val Tokyo = Seq(7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6)
@@ -43,8 +43,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 val chart = highcharts(bank
@@ -69,8 +69,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 
@@ -96,8 +96,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 
@@ -126,8 +126,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 val chart = highcharts(bank.seriesCol("marital")
@@ -152,8 +152,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 val chart = highcharts(bank.seriesCol("marital")
@@ -187,8 +187,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 val chart = highcharts(bank.series("name" -> "job", "y" -> avg(col("balance")))
@@ -219,8 +219,8 @@ linearGradient is not described in [Highcharts API](http://api.highcharts.com/hi
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 
@@ -252,8 +252,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 val chart = highcharts(bank.series("x" -> "age", "y" -> avg(col("balance")))
@@ -261,7 +261,6 @@ val chart = highcharts(bank.series("x" -> "age", "y" -> avg(col("balance")))
   .chart(Chart.spline.inverted(true))
 
 chart.plot()
-
 ```
 
 @Test
@@ -281,8 +280,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 val yAxis = new YAxis("Average Balance").plotBands(
@@ -309,7 +308,6 @@ val chart = highcharts(bank.series("x" -> "age", "y" -> avg(col("balance")))
   .yAxis(yAxis)
 
 chart.plot()
-
 ```
 
 ## Time Data With Irregular Intervals
@@ -325,8 +323,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 val chart = highcharts(DataSet.dfSnowDepth.seriesCol("year")
@@ -342,5 +340,4 @@ val chart = highcharts(DataSet.dfSnowDepth.seriesCol("year")
   .plotOptions(PlotOptions.spline.marker("enabled" -> true))
 
 chart.plot()
-
 ```

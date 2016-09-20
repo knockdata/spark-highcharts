@@ -13,7 +13,7 @@ Based on [Pie Chart Demo](http://www.highcharts.com/demo/pie-basic)
 // * data point order by age
 //
 @Test
-def demoDonut(): Unit = {
+def demoBubble(): Unit = {
 
 val dataFrame = Seq(
 (95.0, 95.0, 13.8, "BE", "Belgium" ),
@@ -56,8 +56,5 @@ val chart = highcharts(dataFrame
 .tooltip(new Tooltip().pointFormat("{point.country}"))
 
 chart.plot()
-
-new PrintWriter("target/demoDonut.json") { write(chart.replaced); close }
-
-
+new PrintWriter("target/demoBubble.json") { write(chart.replaced); close }
 }

@@ -15,8 +15,8 @@ an line chart with
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
 
 val chart = highcharts(
@@ -43,10 +43,9 @@ Column are stacked, each stack is one series which is person
 
 ```scala
 
-import com.knockdata.zeppelin.highcharts._
-import com.knockdata.zeppelin.highcharts.model._
+import com.knockdata.spark.highcharts._
+import com.knockdata.spark.highcharts.model._
 import sqlContext.implicits._
-
 
 val john = Seq(5, 3, 4, 7, 2).map(v => ("John", v))
 val jane = Seq(2, 2, 3, 2, 1).map(v => ("Jane", v))
@@ -57,10 +56,10 @@ val dataFrame = (john ++ jane ++ joe).toDF("name", "consumption")
 val chart = highcharts(
   dataFrame
     .seriesCol("name")
-    .series("y" -> "consumption"))
-  .chart(Chart.column)
-  .xAxis(XAxis("").categories("Apples", "Oranges", "Pears", "Grapes", "Bananas"))
-  .plotOptions(PlotOptions.column.stacking("normal"))
+    .series("y" -> "consumption")).
+  chart(Chart.column).
+  xAxis(XAxis("").categories("Apples", "Oranges", "Pears", "Grapes", "Bananas")).
+  plotOptions(PlotOptions.column.stacking("normal"))
 
 chart.plot()
 
