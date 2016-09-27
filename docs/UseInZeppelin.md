@@ -14,11 +14,19 @@
 
 `com.knockdata:spark-highcharts:0.6.1`
 
-`net.liftweb:lift-json_2.11:2.6.3`
-
 > Click `Save`
 
 ![zeppelin-spark-interpreter-edit](zeppelin-spark-interpreter-add-artifact.png)
+
+### Compile Dependencies
+
+This will load the following jars due to the current compile dependency tree:
+* spark-highcharts-0.6.1.jar
+* spark-csv_2.11-1.4.0.jar
+* commons-csv-1.1.jar
+* lift-json_2.11-2.6.3.jar
+* univocity-parsers-1.5.1.jar
+* paranamer-2.4.1.jar
 
 ### Load Highcharts Javascript
 
