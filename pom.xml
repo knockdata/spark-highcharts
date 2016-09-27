@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.knockdata</groupId>
   <artifactId>spark-highcharts</artifactId>
-  <version>0.6.1</version>
+  <version>0.6.2-SNAPSHOT</version>
   <inceptionYear>2016</inceptionYear>
   <name>Spark Highcharts POM</name>
   <description>Provide Highcharts Support for Spark either in Zepplin or spark-shell</description>
@@ -93,12 +93,7 @@
       <groupId>com.databricks</groupId>
       <artifactId>spark-csv_${scala.binary.version}</artifactId>
       <version>1.4.0</version>
-      <exclusions>
-          <exclusion>
-              <groupId>org.scala-lang</groupId>
-              <artifactId>scala-library</artifactId>
-          </exclusion>
-      </exclusions>
+      <scope>test</scope>
     </dependency>
     <!--<dependency>-->
       <!--<groupId>net.sf.saxon</groupId>-->
