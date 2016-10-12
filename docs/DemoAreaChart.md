@@ -79,11 +79,14 @@ val USSR = Seq(0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 
 val dataFrame = (USA ++ USSR).toDF("country", "stockpile", "year")
 
-highcharts(dataFrame
+val chart = highcharts(dataFrame
   .seriesCol("country")
   .series("x" -> "year", "y" -> "stockpile")
   .orderBy(col("year")))
-  .chart(Chart.area).html()
+  .chart(Chart.area)
+
+chart.html(open = false)
+
 ```
 
 ```
