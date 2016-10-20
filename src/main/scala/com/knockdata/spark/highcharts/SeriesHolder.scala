@@ -54,10 +54,12 @@ private[highcharts] object SeriesHolder {
 
 }
 
-private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
-
-
+private[highcharts] class SeriesHolder(data: DataFrame) {
   import SeriesHolder._
+
+  var dataFrame: DataFrame = data
+
+  val chartId: String = id
 
   private var nameDefBuffer = new ListBuffer[(String, String)]
   private var aggDefBuffer = new ListBuffer[(String, Column)]
@@ -70,34 +72,34 @@ private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
 
   var _seriesCol: Option[String] = None
 
-  def seriesCol(columnName: String) = {
+  def seriesCol(columnName: String): this.type = {
     _seriesCol = Some(columnName)
     this
   }
 
   private val defsBuffer = mutable.Buffer[Defs]()
 
-  def set(name: String, value: Any) = {
+  def set(name: String, value: Any): this.type = {
      s2sBuffer += ((s: Series) => s(name, value))
     this
   }
 
-  def set(name: String, subName: String, value: Any) = {
+  def set(name: String, subName: String, value: Any): this.type = {
      s2sBuffer += ((s: Series) => s(name, subName, value))
     this
   }
 
-  def ops(ops: (DataFrame => DataFrame)*) = {
+  def ops(ops: (DataFrame => DataFrame)*): this.type = {
      df2dfBuffer ++= ops
     this
   }
 
-  def ops[X: ClassTag](ops: (Array[Row] => Array[Row])*) = {
+  def ops[X: ClassTag](ops: (Array[Row] => Array[Row])*): this.type = {
      ar2arBuffer ++= ops
     this
   }
 
-  def series(defs: (String, Any)*) = {
+  def series(defs: (String, Any)*): this.type = {
     defs.foreach{
       case (jsonFieldName: String, columnName: String) =>
          nameDefBuffer += jsonFieldName -> columnName
@@ -107,7 +109,7 @@ private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
     this
   }
 
-  def orderBy(columns: Column*) = {
+  def orderBy(columns: Column*): this.type = {
     orderByColBuffer ++= columns
     df2dfBuffer += ((df: DataFrame) => df.orderBy(columns:_*))
     this
@@ -115,13 +117,13 @@ private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
 
   // always using without replacement, can not specify seed
   // https://www.ma.utexas.edu/users/parker/sampling/repl.htm
-  def sample(fractions: Double) = {
+  def sample(fractions: Double): this.type = {
      df2dfBuffer += ((df: DataFrame) => df.sample(false, fractions))
 
     this
   }
 
-  def take(n: Int) = {
+  def take(n: Int): this.type = {
     df2arBuffer += ((df: DataFrame) => df.take(n))
 
     this
@@ -145,7 +147,7 @@ private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
       ar2arBuffer.toList)
   }
 
-  def drilldown(defs: (String, Any)*) = {
+  def drilldown(defs: (String, Any)*): this.type = {
     defsBuffer += getDef()
 
 
@@ -179,3 +181,11 @@ private[highcharts] class SeriesHolder(dataFrame: DataFrame) {
     }
   }
 }
+
+//class SeriesHolder(df: DataFrame) extends AbstractSeriesHolder {
+//  def dataFrame: DataFrame = df
+//}
+//
+//class StreamingSeriesHolder(df: DataFrame) extends AbstractSeriesHolder {
+//  var dataFrame: DataFrame = df
+//}

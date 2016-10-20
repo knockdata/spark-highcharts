@@ -15,20 +15,10 @@
 * limitations under the License.
 */
 
-package com.knockdata.spark.highcharts.demo
+package com.knockdata.spark.highcharts
 
-import java.io.PrintWriter
-
-import com.knockdata.spark.highcharts._
-import com.knockdata.spark.highcharts.model.Chart
-import org.apache.spark.sql.{DataFrame, SQLContext}
-import org.apache.spark.sql.execution.streaming.{MemoryStream, Sink}
-import org.apache.spark.sql.functions._
-import org.apache.spark.sql.sources.StreamSinkProvider
-import org.apache.spark.sql.streaming.{OutputMode, ProcessingTime}
-import org.junit.Test
-import org.junit.Before
-import org.scalatest.FunSuite
+import org.apache.spark.sql.execution.streaming.MemoryStream
+import org.junit.{Before, Test}
 
 
 
@@ -37,6 +27,8 @@ import org.scalatest.FunSuite
 // Based on [Bar Basic Demo](http://www.highcharts.com/demo/bar-basic)
 //
 class DemoStructureStreaming {
+
+
 
   @Before
   def before: Unit ={
@@ -57,6 +49,7 @@ class DemoStructureStreaming {
     input.addData("hi")
     val query = doubled.writeStream
       .format(classOf[CustomSinkProvider].getCanonicalName)
+        .option("test", "value")
       .start()
 
 

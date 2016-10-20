@@ -18,21 +18,34 @@
 package com.knockdata.spark.highcharts
 
 import com.knockdata.spark.highcharts.model._
+import org.apache.zeppelin.interpreter.InterpreterContext
+import org.apache.zeppelin.spark.ZeppelinContext
 
 import scala.collection.mutable
 
 object highcharts {
+
+  def apply(seriesHolder: SeriesHolder, z: ZeppelinContext): StreamingChart = {
+    val currentParagraphId = z.getInterpreterContext.getParagraphId
+    val paragraphIds = z.listParagraphs.toArray
+    val currentIndex = paragraphIds.indexOf(currentParagraphId)
+    val nextParagraphId: String = paragraphIds(currentIndex + 1).toString
+
+
+    new StreamingChart(CustomOutputMode(seriesHolder, z, nextParagraphId))
+  }
+
   def apply(seriesHolders: SeriesHolder*): Highcharts = {
     val normalSeriesBuffer = mutable.Buffer[Series]()
     val drilldownSeriesBuffer = mutable.Buffer[Series]()
+      for (holder <- seriesHolders) {
+          val (normalSeriesList, drilldownSeriesList) = holder.result
 
-    for (holder <- seriesHolders) {
-      val (normalSeriesList, drilldownSeriesList) = holder.result
+          normalSeriesBuffer ++= normalSeriesList
+          drilldownSeriesBuffer ++= drilldownSeriesList
+      }
 
-      normalSeriesBuffer ++= normalSeriesList
-      drilldownSeriesBuffer ++= drilldownSeriesList
-    }
+      new Highcharts(normalSeriesBuffer.toList).drilldown(drilldownSeriesBuffer.toList)
 
-    new Highcharts(normalSeriesBuffer.toList).drilldown(drilldownSeriesBuffer.toList)
   }
 }

@@ -32,8 +32,14 @@ package object highcharts {
       .map("%02X".format(_)).mkString
 
   // generate id
-  private [highcharts] def id = UUID.randomUUID.toString
+  private [highcharts] def id = UUID.randomUUID.toString.replace('-', '_')
 
   // implicit converter from DataFrame to SeriesHolder
-  implicit def dataFrame2SeriesHolder(dataFrame: DataFrame): SeriesHolder = new SeriesHolder(dataFrame)
+  implicit def dataFrame2SeriesHolder(dataFrame: DataFrame): SeriesHolder =
+    new SeriesHolder(dataFrame)
+//
+//  implicit def dataFrame2StreamingSeriesHolder(dataFrame: DataFrame): StreamingSeriesHolder =
+//    new StreamingSeriesHolder(dataFrame)
+
 }
+

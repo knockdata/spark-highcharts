@@ -21,10 +21,11 @@ import java.io.FileWriter
 
 import com.knockdata.spark.highcharts.base._
 import com.knockdata.spark.highcharts._
+import org.apache.zeppelin.interpreter.InterpreterContext
 
 import scala.collection.mutable
 
-class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with PublicApply {
+class Highcharts(seriesList: List[Series], val chartId: String = id) extends BaseModel with Margin with PublicApply {
   override def fieldName: String = "highcharts"
 
   def this(series: Series*) = this(series.toList)
@@ -109,8 +110,6 @@ class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with Pu
   def htmlContent(data: String): String = {
     val jq = "$"
 
-    val chartId = id
-
       s"""|<html>
           |<head>
           |    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
@@ -144,26 +143,66 @@ class Highcharts(seriesList: List[Series]) extends BaseModel with Margin with Pu
     file.getAbsolutePath
   }
 
-  def plot(): Unit = {
+  def debug(context: InterpreterContext): Unit = {
+    InterpreterContext.set(context)
+    println("%angular <h3>angular asynchronous</h3>")
+//    val data = replaced
+//
+//    val jq = "$"
+//
+//    val code =
+//      s"""|
+//          |<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+//          |
+//          |<script type="text/javascript">
+//          |$jq(function () {
+//          |var data = $data
+//          |
+//          |$jq("#highcharts_$chartId").highcharts(data)
+//          |});
+//          |</script>""".stripMargin
+//
+//    println(code)
+  }
+
+  def plotData: String = {
+    val jq = "$"
     val data = replaced
 
-    val jq = "$"
+          s"""|%angular \n
+              |
+              |<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+              |
+              |<script type="text/javascript">
+              |$jq(function () {
+              |var data = $data
+              |
+              |$jq("#highcharts_$chartId").highcharts(data)
+              |});
+              |</script>""".stripMargin
+  }
 
-    val chartId = id
-    val code =
-      s"""|%angular
-          |
-          |<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-          |
-          |<script type="text/javascript">
-          |$jq(function () {
-          |var data = $data
-          |
-          |$jq("#highcharts_$chartId").highcharts(data)
-          |});
-          |</script>""".stripMargin
+  def plot(): Unit = {
+    println("%angular <h3>angular asynchronous</h3>")
 
-    println(code)
+//    val data = replaced
+//
+//    val jq = "$"
+//
+//    val code =
+//      s"""|%angular \n
+//          |
+//          |<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+//          |
+//          |<script type="text/javascript">
+//          |$jq(function () {
+//          |var data = $data
+//          |
+//          |$jq("#highcharts_$chartId").highcharts(data)
+//          |});
+//          |</script>""".stripMargin
+//
+//    println(code)
   }
 
   def options(opts: BaseModel*): this.type = {
