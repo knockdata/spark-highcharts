@@ -15,22 +15,30 @@ class CustomSinkProvider extends StreamSinkProvider {
     new Sink {
       override def addBatch(batchId: Long, data: DataFrame): Unit = {
 
-        val customOutputMode = outputMode.asInstanceOf[CustomOutputMode]
+        val chartId = parameters("chartId")
+        val chartParagraphId = parameters("chartParagraphId")
 
-        val z = customOutputMode.z
+        println(s"batchId: $batchId, chartId: $chartId, chartParagraphId: $chartParagraphId")
+//        data.show(3)
 
-        println(customOutputMode.chartParagraphId)
-
-        val seriesHolder = customOutputMode.seriesHolder
+        val z = Registry.get(s"$chartId-z").asInstanceOf[ZeppelinContextHolder]
+        val seriesHolder = Registry.get(s"$chartId-seriesHolder").asInstanceOf[SeriesHolder]
+        val outputMode = Registry.get(s"$chartId-outputMode").asInstanceOf[CustomOutputMode]
 
         seriesHolder.dataFrame = data
-        val (normalSeriesList, drilldownSeriesList) = seriesHolder.result
+
+        val result = seriesHolder.result
+        val (normalSeriesList, drilldownSeriesList) = outputMode.result(result._1, result._2)
+
         val chart = new Highcharts(normalSeriesList, seriesHolder.chartId)
           .drilldown(drilldownSeriesList)
 
-        z.put(customOutputMode.chartParagraphId, chart.plotData)
-        z.run(customOutputMode.chartParagraphId)
-
+        val plotData = chart.plotData
+        val escaped = plotData.replace("%angular", "")
+        println(s" put $chartParagraphId $escaped")
+        z.put(chartParagraphId, plotData)
+        println(s"run $chartParagraphId")
+        z.run(chartParagraphId)
       }
     }
   }

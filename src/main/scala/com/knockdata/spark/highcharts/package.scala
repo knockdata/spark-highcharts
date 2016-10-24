@@ -37,6 +37,8 @@ package object highcharts {
   // implicit converter from DataFrame to SeriesHolder
   implicit def dataFrame2SeriesHolder(dataFrame: DataFrame): SeriesHolder =
     new SeriesHolder(dataFrame)
+
+
 //
 //  implicit def dataFrame2StreamingSeriesHolder(dataFrame: DataFrame): StreamingSeriesHolder =
 //    new StreamingSeriesHolder(dataFrame)

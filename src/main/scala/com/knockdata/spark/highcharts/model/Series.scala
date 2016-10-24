@@ -26,7 +26,12 @@ class Series(val values: List[Any]) extends BaseModel with PublicApply {
 
   var vs = values
 
+  var id_ = ""
+
+  def id: String = id_
+
   def id(value: String): this.type = {
+    id_ = value
     append("id", value)
   }
 

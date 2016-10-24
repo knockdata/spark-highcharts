@@ -1,31 +1,38 @@
 package com.knockdata.spark.highcharts
 
-import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.streaming._
 import org.apache.zeppelin.interpreter.InterpreterContext
 import org.apache.zeppelin.spark.ZeppelinContext
 
-object StreamingChart{
+object StreamingChart {
   def apply(z: ZeppelinContext): Unit = {
     println(z.get(InterpreterContext.get().getParagraphId))
   }
 }
 
-class StreamingChart(outputMode: CustomOutputMode) extends StreamingQuery{
-//  HolderRegistry.put(seriesHolder.chartId, seriesHolder)
+class StreamingChart(dataFrame: DataFrame,
+                     chartId: String,
+                     nextParagraphId: String,
+                     outputMode: String = null) extends StreamingQuery {
+  //  HolderRegistry.put(seriesHolder.chartId, seriesHolder)
   var query: StreamingQuery = null
 
-    val stream = outputMode.seriesHolder.dataFrame.writeStream
-      .format(classOf[CustomSinkProvider].getCanonicalName)
-      .outputMode(outputMode)
+  val s = dataFrame.writeStream
+    .format(classOf[CustomSinkProvider].getCanonicalName)
+    .option("chartId", chartId)
+    .option("nextParagraphId", nextParagraphId)
 
-  def start: Unit = {
+  val stream = if (outputMode == null) s else s.outputMode(outputMode)
+
+  def start: this.type = {
     query = stream.start()
+    this
   }
 
   def stop: Unit = {
     query.stop
-//    HolderRegistry.remove(seriesHolder.chartId)
+    //    HolderRegistry.remove(seriesHolder.chartId)
   }
 
   override def name: String = query.name

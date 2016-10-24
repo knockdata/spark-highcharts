@@ -170,14 +170,21 @@ private[highcharts] class SeriesHolder(data: DataFrame) {
     this
   }
 
+  var defs: List[Defs] = null
+
   def result: (List[Series], List[Series]) = {
-    defsBuffer += getDef()
+    // the defs shall only calculated once
+    // even if the result is invoked many times
+    if (defs == null) {
+      defsBuffer += getDef()
+      defs = defsBuffer.toList
+    }
 
     _seriesCol match {
       case None =>
-        convert(dataFrame, defsBuffer.toList)
+        convert(dataFrame, defs)
       case Some(seriesCol) =>
-        convert(dataFrame, seriesCol, defsBuffer.toList)
+        convert(dataFrame, seriesCol, defs)
     }
   }
 }
