@@ -24,15 +24,19 @@ import org.apache.zeppelin.spark.ZeppelinContext
 import scala.collection.mutable
 
 object highcharts {
-
-  def apply(seriesHolder: SeriesHolder, z: ZeppelinContext): StreamingChart = {
+  private def nextParagraphId(z: ZeppelinContext): String = {
     val currentParagraphId = z.getInterpreterContext.getParagraphId
     val paragraphIds = z.listParagraphs.toArray
     val currentIndex = paragraphIds.indexOf(currentParagraphId)
-    val nextParagraphId: String = paragraphIds(currentIndex + 1).toString
+    paragraphIds(currentIndex + 1).toString
+  }
 
+  def apply(seriesHolder: SeriesHolder, z: ZeppelinContext): StreamingChart = {
+    new StreamingChart(new ZeppelinAppendOutputMode(seriesHolder, z, nextParagraphId(z)))
+  }
 
-    new StreamingChart(CustomOutputMode(seriesHolder, z, nextParagraphId))
+  def apply(seriesHolder: SeriesHolder, z: ZeppelinContext, complete: Boolean): StreamingChart = {
+    new StreamingChart(new ZeppelinCompleteOutputMode(seriesHolder, z, nextParagraphId(z)))
   }
 
   def apply(seriesHolders: SeriesHolder*): Highcharts = {
@@ -46,6 +50,5 @@ object highcharts {
       }
 
       new Highcharts(normalSeriesBuffer.toList).drilldown(drilldownSeriesBuffer.toList)
-
   }
 }

@@ -16,21 +16,16 @@ class CustomSinkProvider extends StreamSinkProvider {
       override def addBatch(batchId: Long, data: DataFrame): Unit = {
 
         val customOutputMode = outputMode.asInstanceOf[CustomOutputMode]
-
-        val z = customOutputMode.z
-
-        println(customOutputMode.chartParagraphId)
-
         val seriesHolder = customOutputMode.seriesHolder
-
         seriesHolder.dataFrame = data
-        val (normalSeriesList, drilldownSeriesList) = seriesHolder.result
+
+        val result = seriesHolder.result
+        val (normalSeriesList, drilldownSeriesList) = customOutputMode.result(result._1, result._2)
+
         val chart = new Highcharts(normalSeriesList, seriesHolder.chartId)
           .drilldown(drilldownSeriesList)
 
-        z.put(customOutputMode.chartParagraphId, chart.plotData)
-        z.run(customOutputMode.chartParagraphId)
-
+        customOutputMode.onFinish(chart.plotData)
       }
     }
   }
