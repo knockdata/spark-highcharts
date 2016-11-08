@@ -6,7 +6,7 @@ import scala.concurrent.ExecutionContext.Implicits._
 
 class ZeppelinContextHolder(z: ZeppelinContext) {
   def put(name: String, value: AnyRef) = z.put(name, value)
-  def run(paragraphId: String) = {
+  def run(paragraphId: String): Unit = {
     Future(z.run(paragraphId))
   }
 }
