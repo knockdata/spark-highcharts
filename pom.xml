@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.knockdata</groupId>
   <artifactId>spark-highcharts</artifactId>
-  <version>0.6.3-SNAPSHOT</version>
+  <version>0.6.3</version>
   <inceptionYear>2016</inceptionYear>
   <name>Spark Highcharts POM</name>
   <description>Provide Highcharts Support for Spark either in Zepplin or spark-shell</description>
