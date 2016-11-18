@@ -47,6 +47,23 @@ Paste the following code to a `Zeppelin` Paragraph and execute it
 		});
 	</script>
 
+If wanna use drilldown function, paste the following code to `Zeppelin` Paragraph and execute it
+
+
+	%angular
+	<script type="text/javascript">
+
+		$(function () {
+				$.getScript("https://code.highcharts.com/modules/drilldown.js")
+				  .done(function( script, textStatus ) {
+				    console.log( "load https://code.highcharts.com/modules/drilldown.js " + textStatus );
+				  })
+				  .fail(function(jqxhr, settings, exception ) {
+				     console.log("load https://code.highcharts.com/modules/drilldown.js " + exception);
+				  });
+		});
+	</script>
+	
 ## License
 
 spark-highcharts use Apache 2.0 License
