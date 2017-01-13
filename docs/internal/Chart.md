@@ -4,8 +4,8 @@
 |-------|------|
 |area            |x,y
 |arearange       |x,low,high
-|areaspline      |x,low,high
-|areasplinerange |x,y
+|areaspline      |x,y
+|areasplinerange |x,low,high
 |bar             |x,y
 |boxplot         |x,low,q1,medium,q3,high
 |bubble          |x,y,z

@@ -107,12 +107,14 @@ class DemoAreaChart {
 
     val dataFrame = (USA ++ USSR).toDF("country", "stockpile", "year")
 
+    val title = new Title("Monthly Average Temperature").x(-20)
     val chart = highcharts(dataFrame
       .seriesCol("country")
       .series("x" -> "year", "y" -> "stockpile")
       .orderBy(col("year")))
-      .chart(Chart.area)
+      .chart(Chart.area).title(new Title("hello"))
 
+    println(chart.plotData)
     chart.html(open = false)
 
     new PrintWriter(s"target/demoBasicAreaPlot.json") { write(chart.replaced); close }

@@ -68,6 +68,7 @@ class TestLineBasic extends AbstractTestCase{
       tooltip,
       legend)
 
+    println(chart.plotData)
     chart.plot()
 
     assertEqualJson(expected, chart)

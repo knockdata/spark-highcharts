@@ -65,8 +65,8 @@ object highcharts {
 
   def apply(seriesHolder: SeriesHolder,
             z: ZeppelinContext,
-            chartParagraph: String,
-            outputMode: String): StreamingQuery = {
+            outputMode: String,
+            chartParagraph: String): StreamingQuery = {
     streamingChart(seriesHolder, new ZeppelinContextHolder(z), chartParagraph, outputMode)
   }
 

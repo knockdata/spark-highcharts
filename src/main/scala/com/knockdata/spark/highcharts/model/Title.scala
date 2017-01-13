@@ -64,5 +64,5 @@ class Title(text: String = "") extends BaseModel {
 }
 
 object Title {
-  def apply(text: String): Title = new Title()
+  def apply(text: String): Title = new Title(text)
 }
