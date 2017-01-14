@@ -79,6 +79,7 @@ class DemoStreamingAreaChart {
 
     val dataFrame = input.toDF
 
+//    dataFrame.groupBy("year").count().writeStream.
     val seriesHolder = dataFrame
       .seriesCol("country")
       .series("x" -> "year", "y" -> "stockpile")
