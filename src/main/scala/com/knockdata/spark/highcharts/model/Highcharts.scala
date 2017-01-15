@@ -143,35 +143,12 @@ class Highcharts(seriesList: List[Series], val chartId: String = id) extends Bas
     file.getAbsolutePath
   }
 
-  def debug(context: InterpreterContext): Unit = {
-    InterpreterContext.set(context)
-    println("%angular <h3>angular asynchronous</h3>")
-//    val data = replaced
-//
-//    val jq = "$"
-//
-//    val code =
-//      s"""|
-//          |<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-//          |
-//          |<script type="text/javascript">
-//          |$jq(function () {
-//          |var data = $data
-//          |
-//          |$jq("#highcharts_$chartId").highcharts(data)
-//          |});
-//          |</script>""".stripMargin
-//
-//    println(code)
-  }
 
   def plotData: String = {
     val jq = "$"
     val data = replaced
 
-          s"""|%angular \n
-              |
-              |<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+          s"""|<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
               |
               |<script type="text/javascript">
               |$jq(function () {
@@ -183,26 +160,7 @@ class Highcharts(seriesList: List[Series], val chartId: String = id) extends Bas
   }
 
   def plot(): Unit = {
-    println("%angular <h3>angular asynchronous</h3>")
-
-//    val data = replaced
-//
-//    val jq = "$"
-//
-//    val code =
-//      s"""|%angular \n
-//          |
-//          |<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-//          |
-//          |<script type="text/javascript">
-//          |$jq(function () {
-//          |var data = $data
-//          |
-//          |$jq("#highcharts_$chartId").highcharts(data)
-//          |});
-//          |</script>""".stripMargin
-//
-//    println(code)
+    println("%angular \n" + plotData)
   }
 
   def options(opts: BaseModel*): this.type = {
