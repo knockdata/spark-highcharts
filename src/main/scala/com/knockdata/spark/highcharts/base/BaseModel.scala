@@ -201,4 +201,12 @@ abstract class BaseModel extends IModel {
       (result, item) => result.replaceAllLiterally(s""""${item._1}"""", item._2)
     }
   }
+
+  lazy val compactReplaced: String = {
+    val beforeFunctionReplace: String = compactJson
+
+    (beforeFunctionReplace /: codes) {
+      (result, item) => result.replaceAllLiterally(s""""${item._1}"""", item._2)
+    }
+  }
 }

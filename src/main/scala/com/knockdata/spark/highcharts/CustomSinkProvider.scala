@@ -34,8 +34,8 @@ class CustomSinkProvider extends StreamSinkProvider {
           .drilldown(drilldownSeriesList)
 
         val plotData = chart.plotData
-        val escaped = plotData.replace("%angular", "")
-        println(s" put $chartParagraphId $escaped")
+//        val escaped = plotData.replace("%angular", "")
+//        println(s" put $chartParagraphId $escaped")
         z.put(chartParagraphId, plotData)
         println(s"run $chartParagraphId")
         z.run(chartParagraphId)
