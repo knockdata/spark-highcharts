@@ -60,7 +60,7 @@ The default version before 0.6 support Spark 1.6. In order to use Spark 2.0, com
 
 The `artifact` in the spark interpreter need use jar file for spark-highcharts. And the lift-json need use version for scala 2.11.
 
-`/home/rockiey/git/spark-highcharts/target/spark-highcharts-0.6.1.jar`
+`/home/rockiey/git/spark-highcharts/target/spark-highcharts-0.6.4.jar`
 
 `net.liftweb:lift-json_2.11:2.6.3`
 
@@ -80,10 +80,11 @@ download spark-highcharts and lift-json jar file.
 
 add following line to spark-defaults.conf
 
-    spark.jars spark-highcharts-0.6.1.jar,lift-json_2.10-2.6.3.jar
+    spark.jars spark-highcharts-0.6.4.jar,lift-json_2.10-2.6.3.jar
 
 ## License
 
 spark-highchart use Apache 2.0 License
 
-However, the Highcharts JavaScript library that is included in this package is not free for commercial use. Please contact [Highcharts](https://shop.highsoft.com/) for license related issues.
+However, the Highcharts JavaScript library that is included in this package is not free for commercial use.
+Please contact [Highcharts](https://shop.highsoft.com/) for license related issues.

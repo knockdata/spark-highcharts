@@ -12,7 +12,7 @@
 
 > Edit the `artifact` with the correct jar file
 
-`com.knockdata:spark-highcharts:0.6.1`
+`com.knockdata:spark-highcharts:0.6.4`
 
 > Click `Save`
 
@@ -21,7 +21,7 @@
 ### Compile Dependencies
 
 This will load the following jars due to the current compile dependency tree:
-* spark-highcharts-0.6.1.jar
+* spark-highcharts-0.6.4.jar
 * lift-json_2.11-2.6.3.jar
 * paranamer-2.4.1.jar
 
@@ -63,7 +63,7 @@ If wanna use drilldown function, paste the following code to `Zeppelin` Paragrap
 				  });
 		});
 	</script>
-	
+
 ## License
 
 spark-highcharts use Apache 2.0 License
