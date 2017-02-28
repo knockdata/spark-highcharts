@@ -7,7 +7,7 @@ import org.apache.zeppelin.spark.ZeppelinContext
 
 object StreamingChart {
   def apply(z: ZeppelinContext): Unit = {
-    println(z.get(InterpreterContext.get().getParagraphId))
+    println("%angular \n" + z.get(InterpreterContext.get().getParagraphId))
   }
 }
 
