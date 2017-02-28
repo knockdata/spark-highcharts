@@ -1,19 +1,19 @@
 # Stucture Streaming
 
-For structure streaming plot,there are 3 steps. 
+For structure streaming plot,there are 3 steps.
 
-* __Define Chart__ in a seperate paragraph. It is used to define how the chart want to be aggregated and plotted. The Spark Structure Streaming will be started. 
+* __Define Chart__ in a seperate paragraph. It is used to define how the chart want to be aggregated and plotted. The Spark Structure Streaming will be started.
 * __Chart Paragraph__ in a dedicated paragraph to host the chart. It will be updated each time when new streaming data come.
 * __Stop Plot__ in a seperate paragraph. Stop the spark streaming when no new plot wanted.
- 
+
 
 ## Define Chart
 
 For a `structuredDataFrame` after aggregation, with the following code in one Zeppelin paragraph. The [OutputMode](http://spark.apache.org/docs/latest/structured-streaming-programming-guide.html#output-modes) can be either `append` or `complete` depends how the structureDataFrame is aggregated.
- 
+
 ### Plot the chart in the next paragraph in zeppelin
 
-`spark-highcharts` will assume the __Plot Paragraph__ is the next paragraph if no plot __Plot Paragraph__ provided. 
+`spark-highcharts` will assume the __Plot Paragraph__ is the next paragraph if no plot __Plot Paragraph__ provided.
 
     import com.knockdata.spark.highcharts._
     import com.knockdata.spark.highcharts.model._
@@ -25,7 +25,7 @@ For a `structuredDataFrame` after aggregation, with the following code in one Ze
 
 ### Plot the chart in the specified paragraph in zeppelin
 
-__Plot Paragraph__ can be provided to specify which Zeppelin paragraph want to be used as plot paragraph. Paragraph id is generated automatically when a new paragraph added. We can get the paragraph id by click ![Option](option.png) on the top right corner of the paragraph. 
+__Plot Paragraph__ can be provided to specify which Zeppelin paragraph want to be used as plot paragraph. Paragraph id is generated automatically when a new paragraph added. We can get the paragraph id by click ![Option](option.png) on the top right corner of the paragraph.
 
     import com.knockdata.spark.highcharts._
     import com.knockdata.spark.highcharts.model._
@@ -56,6 +56,10 @@ Run following code to stop plot chart .
 Here is the example generate structureDataFrame.
 
 ### Sample Data
+
+    import sqlContext.implicits._
+    val input = MemoryStream[NuclearStockpile]
+
     spark.conf.set("spark.sql.streaming.checkpointLocation","/usr/zeppelin/checkpoint")
 
     case class NuclearStockpile(country: String, stockpile: Int, year: Int)
