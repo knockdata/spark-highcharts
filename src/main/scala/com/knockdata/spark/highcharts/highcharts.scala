@@ -18,7 +18,6 @@
 package com.knockdata.spark.highcharts
 
 import com.knockdata.spark.highcharts.model._
-import org.apache.spark.sql.streaming.StreamingQuery
 import org.apache.zeppelin.spark.ZeppelinContext
 
 import scala.collection.mutable
@@ -33,32 +32,14 @@ object highcharts {
 
   def streamingChart(seriesHolder: SeriesHolder,
                      zHolder: ZeppelinContextHolder,
-                     chartParagraphId: String, outputMode: String="append"): StreamingQuery = {
-    val chartId = seriesHolder.chartId
-    Registry.put(s"$chartId-seriesHolder", seriesHolder)
-    Registry.put(s"$chartId-z", zHolder)
-
-    val writeStream = seriesHolder.dataFrame.writeStream
-      .format(classOf[CustomSinkProvider].getCanonicalName)
-      .option("chartId", chartId)
-      .option("chartParagraphId", chartParagraphId)
-
-    outputMode match {
-      case "complete" =>
-        Registry.put (s"$chartId-outputMode", new CompleteOutputMode())
-        writeStream.outputMode("complete").start()
-      case "append" =>
-        Registry.put (s"$chartId-outputMode", new AppendOutputMode(200))
-        writeStream.outputMode("append").start()
-      case _ =>
-        throw new Exception("outputMode must be either append or complete")
-    }
+                     chartParagraphId: String, outputMode: String="append"): HighchartsHolder = {
+    new HighchartsHolder(seriesHolder, zHolder, chartParagraphId, outputMode)
 
   }
 
   def apply(seriesHolder: SeriesHolder,
             z: ZeppelinContext,
-            outputMode: String = null): StreamingQuery = {
+            outputMode: String = null): HighchartsHolder = {
     val chartParagraph = nextParagraphId(z)
     streamingChart(seriesHolder, new ZeppelinContextHolder(z), chartParagraph, outputMode)
   }
@@ -66,9 +47,10 @@ object highcharts {
   def apply(seriesHolder: SeriesHolder,
             z: ZeppelinContext,
             outputMode: String,
-            chartParagraph: String): StreamingQuery = {
+            chartParagraph: String): HighchartsHolder = {
     streamingChart(seriesHolder, new ZeppelinContextHolder(z), chartParagraph, outputMode)
   }
+
 
 
   def apply(seriesHolders: SeriesHolder*): Highcharts = {

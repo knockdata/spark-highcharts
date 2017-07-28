@@ -23,6 +23,26 @@
 |treemap         |value
 |waterfall       |x,y
 
+| chart | axis |
+|-------|------|
+|area, areaspline,line            |x,y
+|arearange, areasplinerange       |x,low,high
+|bar             |x,y
+|boxplot         |x,low,q1,medium,q3,high
+|bubble          |x,y,z
+|column          |x,y
+|errorbar        |x,low,high
+|funnel          |y
+|heatmap         |x,y,value
+|pie             |y
+|polygon         |x,y
+|pyramid         |y
+|scatter         |x,y
+|solidgauge      |y
+|spline          |x,y
+|treemap         |value
+|waterfall       |x,y
+
 y
 
     funnel

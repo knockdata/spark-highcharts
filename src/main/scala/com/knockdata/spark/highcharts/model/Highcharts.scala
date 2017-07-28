@@ -51,6 +51,9 @@ class Highcharts(seriesList: List[Series], val chartId: String = id) extends Bas
   def chart(chart: Chart) =
     appendOptions(chart)
 
+  def colorAxis(colorAxis: ColorAxis) =
+    appendOptions(colorAxis)
+
   def credits(credits: Credits) =
     appendOptions(credits)
 
@@ -102,7 +105,7 @@ class Highcharts(seriesList: List[Series], val chartId: String = id) extends Bas
   def yAxis(yAxis: Axis) =
     appendOptions(yAxis)
 
-  private def appendOptions(options: BaseModel) = {
+  def appendOptions(options: BaseModel) = {
     optionsBuffer += options
     this
   }
@@ -159,9 +162,30 @@ class Highcharts(seriesList: List[Series], val chartId: String = id) extends Bas
               |</script>""".stripMargin
   }
 
+  def compactPlotData: String = {
+    val jq = "$"
+    val data = compactReplaced
+
+    s"""|<div id="highcharts_$chartId" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+        |
+              |<script type="text/javascript">
+        |$jq(function () {
+        |var data = $data
+        |
+              |$jq("#highcharts_$chartId").highcharts(data)
+        |});
+        |</script>""".stripMargin
+  }
+
+
   def plot(): Unit = {
     println("%angular \n" + plotData)
   }
+
+  def compactPlot(): Unit = {
+    println("%angular \n" + compactPlotData)
+  }
+
 
   def options(opts: BaseModel*): this.type = {
     options(opts.toList)

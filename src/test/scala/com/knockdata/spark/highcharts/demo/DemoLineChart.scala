@@ -177,6 +177,7 @@ class DemoLineChart {
       .tooltip(new Tooltip().valueSuffix("¥"))
       .legend(new Legend().layout("vertical").align("right")
         .verticalAlign("middle").borderWidth(0))
+      .plotOptions(PlotOptions.series.threshold(3000))
 
     chart.plot()
 
@@ -234,7 +235,7 @@ class DemoLineChart {
     val chart = highcharts(bank.series("name" -> "age", "y" -> avg(col("balance")))
       .orderBy(col("age")))
       .chart(Chart.area.zoomType("x"))
-      .plotOptions(options)
+      .plotOptions(options).plot()
 
     chart.plot()
 
