@@ -26,6 +26,8 @@ import org.apache.zeppelin.interpreter.InterpreterContext
 import scala.collection.mutable
 
 class Highcharts(seriesList: List[Series], val chartId: String = id) extends BaseModel with Margin with PublicApply {
+
+
   override def fieldName: String = "highcharts"
 
   def this(series: Series*) = this(series.toList)
