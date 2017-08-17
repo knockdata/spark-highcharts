@@ -70,7 +70,6 @@ object highcharts {
     streamingChart(seriesHolder, new ZeppelinContextHolder(z), chartParagraph, outputMode)
   }
 
-
   def apply(seriesHolders: SeriesHolder*): Highcharts = {
     val normalSeriesBuffer = mutable.Buffer[Series]()
     val drilldownSeriesBuffer = mutable.Buffer[Series]()

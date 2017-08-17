@@ -87,7 +87,7 @@ class DemoStreamingAreaChart {
 
     val zHolder = new MockZeppelinContextHolder()
     val query = highcharts.streamingChart(seriesHolder, zHolder, "mockChartParagraph", "append")
-
+//    val query = chartHolder.start
     query.processAllAvailable()
 
     println(zHolder.values.mkString("\n"))
@@ -132,7 +132,7 @@ class DemoStreamingAreaChart {
 
     val zHolder = new MockZeppelinContextHolder()
     val query = highcharts.streamingChart(seriesHolder, zHolder, "mockChartParagraph", "complete")
-
+//    val query = chartHolder.start
     query.processAllAvailable()
 
     println(zHolder.values.mkString("\n"))

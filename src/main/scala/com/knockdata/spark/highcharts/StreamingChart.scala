@@ -2,6 +2,7 @@ package com.knockdata.spark.highcharts
 
 import java.util.UUID
 
+//import com.knockdata.spark.highcharts.model.HighchartsHolder
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.streaming._
 import org.apache.zeppelin.interpreter.InterpreterContext

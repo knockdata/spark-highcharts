@@ -177,6 +177,7 @@ class DemoLineChart {
       .tooltip(new Tooltip().valueSuffix("¥"))
       .legend(new Legend().layout("vertical").align("right")
         .verticalAlign("middle").borderWidth(0))
+      .plotOptions(PlotOptions.series.threshold(3000))
 
     chart.plot()
 

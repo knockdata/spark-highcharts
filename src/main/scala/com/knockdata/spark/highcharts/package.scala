@@ -20,6 +20,7 @@ package com.knockdata.spark
 import java.security.MessageDigest
 import java.util.UUID
 
+//import com.knockdata.spark.highcharts.model.HighchartsHolder
 import org.apache.spark.sql.DataFrame
 
 import scala.language.implicitConversions
@@ -38,6 +39,8 @@ package object highcharts {
   implicit def dataFrame2SeriesHolder(dataFrame: DataFrame): SeriesHolder =
     new SeriesHolder(dataFrame)
 
+//  implicit def seriesHolder2ChartHolder(seriesHolder: SeriesHolder): HighchartsHolder =
+//    new HighchartsHolder(seriesHolder)
 
 //
 //  implicit def dataFrame2StreamingSeriesHolder(dataFrame: DataFrame): StreamingSeriesHolder =
