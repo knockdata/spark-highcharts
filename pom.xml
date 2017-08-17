@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.knockdata</groupId>
   <artifactId>spark-highcharts</artifactId>
-  <version>0.6.4_2.1</version>
+  <version>0.6.5</version>
   <inceptionYear>2016</inceptionYear>
   <name>Spark Highcharts POM</name>
   <description>Provide Highcharts Support for Spark either in Zepplin or spark-shell</description>
@@ -32,11 +32,8 @@
     <spark.version>2.1.0</spark.version>
     <scala.version>2.11.8</scala.version>
     <scala.binary.version>2.11</scala.binary.version>
-
+    <zeppelin.version>0.7.2</zeppelin.version>
     <dependency.locations.enabled>false</dependency.locations.enabled>
-    <!--<scala.version>2.11.8</scala.version>-->
-    <!--<scala.binary.version>2.11</scala.binary.version>-->
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <skip.surefire.tests>${skipTests}</skip.surefire.tests>
   </properties>
@@ -135,12 +132,12 @@
     <dependency>
       <groupId>org.apache.zeppelin</groupId>
       <artifactId>zeppelin-interpreter</artifactId>
-      <version>0.6.2</version>
+      <version>${zeppelin.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.zeppelin</groupId>
-      <artifactId>zeppelin-spark_2.11</artifactId>
-      <version>0.6.2</version>
+      <artifactId>zeppelin-spark_${scala.binary.version}</artifactId>
+      <version>${zeppelin.version}</version>
     </dependency>
   </dependencies>
   <distributionManagement>
@@ -378,6 +375,9 @@
           <plugin>
             <artifactId>maven-gpg-plugin</artifactId>
             <version>1.6</version>
+            <configuration>
+              <skip>${skip.gpg}</skip>
+            </configuration>
             <executions>
               <execution>
                 <id>sign-artifacts</id>
