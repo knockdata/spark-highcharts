@@ -21,7 +21,7 @@ import com.knockdata.spark.highcharts.{CustomSinkProvider, _}
 import org.apache.spark.sql.execution.streaming.MemoryStream
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.streaming.StreamingQueryListener
-import org.apache.spark.sql.streaming.StreamingQueryListener.{QueryProgress, QueryStarted, QueryTerminated}
+import org.apache.spark.sql.streaming.StreamingQueryListener.{QueryProgressEvent, QueryStartedEvent, QueryTerminatedEvent}
 import org.junit.{Before, Test}
 
 
@@ -39,19 +39,11 @@ class StreamingQueryName {
   def before: Unit = {
     SparkEnv.clearCheckpointDir
     val listener = new StreamingQueryListener {
-      override def onQueryStarted(queryStarted: QueryStarted): Unit = {
-        println(queryStarted.toString)
-//        sqlContext.table(queryStarted.queryInfo.name).show()
-      }
+      override def onQueryStarted(event: QueryStartedEvent): Unit = println(event.toString)
 
-      override def onQueryTerminated(queryTerminated: QueryTerminated): Unit = {
-        println(queryTerminated.toString)
-      }
+      override def onQueryTerminated(event: QueryTerminatedEvent): Unit = println(event.toString)
 
-      override def onQueryProgress(queryProgress: QueryProgress): Unit = {
-        println(queryProgress.toString)
-        sqlContext.table(queryProgress.queryInfo.name).show(100)
-      }
+      override def onQueryProgress(event: QueryProgressEvent): Unit = println(event.toString)
     }
     SparkEnv.spark.streams.addListener(listener)
   }

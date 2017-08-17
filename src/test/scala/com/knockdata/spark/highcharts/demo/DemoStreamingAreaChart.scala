@@ -17,12 +17,12 @@
 
 package com.knockdata.spark.highcharts.demo
 
+
 import com.knockdata.spark.highcharts.{CustomSinkProvider, _}
 import org.apache.spark.sql.execution.streaming.MemoryStream
 import org.apache.spark.sql.functions._
-import org.apache.spark.sql.streaming.StreamingQueryListener
-import org.apache.spark.sql.streaming.StreamingQueryListener.{QueryProgress, QueryStarted, QueryTerminated}
 import org.junit.{Before, Test}
+
 
 
 

@@ -1,5 +1,7 @@
 package com.knockdata.spark.highcharts
 
+import java.util.UUID
+
 import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.apache.spark.sql.streaming._
 import org.apache.zeppelin.interpreter.InterpreterContext
@@ -43,8 +45,6 @@ class StreamingChart(dataFrame: DataFrame,
 
   override def processAllAvailable(): Unit = query.processAllAvailable()
 
-  override def sinkStatus: SinkStatus = query.sinkStatus
-
   override def isActive: Boolean = query.isActive
 
   override def explain(): Unit = query.explain
@@ -53,10 +53,16 @@ class StreamingChart(dataFrame: DataFrame,
 
   override def sparkSession: SparkSession = query.sparkSession
 
-  override def sourceStatuses: Array[SourceStatus] = query.sourceStatuses
-
   override def exception: Option[StreamingQueryException] = query.exception
 
-  override def id: Long = query.id
+  override def id = query.id
+
+  override def runId: UUID = query.runId
+
+  override def lastProgress: StreamingQueryProgress = query.lastProgress
+
+  override def recentProgress: Array[StreamingQueryProgress] = query.recentProgress
+
+  override def status: StreamingQueryStatus = query.status
 }
 
