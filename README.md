@@ -72,7 +72,7 @@ The `artifact` in the spark interpreter need use jar file for spark-highcharts. 
 
 [Type Mapping between Scala and Highcharts](https://github.com/knockdata/spark-highcharts/blob/master/docs/TypeMapping.md)
 
-[Scaladocs](https://knockdata.github.io/spark-highcharts/docs/scaladocs)
+[Scaladocs](https://knockdata.github.io/spark-highcharts/scaladocs)
 
 ## Use it in spark-shell
 
