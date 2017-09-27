@@ -57,12 +57,18 @@ Here is the example generate structureDataFrame.
 
 ### Sample Data
 
+    import com.knockdata.spark.highcharts._
+    import com.knockdata.spark.highcharts.model._
+    import org.apache.spark.sql.execution.streaming._
+    
     import sqlContext.implicits._
+    implicit val sqlC = sqlContext
+    
+    case class NuclearStockpile(country: String, stockpile: Int, year: Int)
+    
     val input = MemoryStream[NuclearStockpile]
 
     spark.conf.set("spark.sql.streaming.checkpointLocation","/usr/zeppelin/checkpoint")
-
-    case class NuclearStockpile(country: String, stockpile: Int, year: Int)
 
     val USA = Seq(0, 0, 0, 0, 0, 6, 11, 32, 110, 235, 369, 640,
       1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,
